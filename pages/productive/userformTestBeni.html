@@ -32,6 +32,13 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<?php
+            $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
+            $insert = "INSERT INTO 'tbl_login' ('ID', 'ID_users', 'pw', 'role', 'imgURL') VALUES ('', 'probst', 'test', 'rolle', '');
+            $writing = mysqli_query ($db, $insert) or die(mysqli_error($db));
+            $mysqli_close($db);
+            echo "Daten gespeichert";
+        ?>
 <div class="wrapper">
 
     <header class="main-header">
@@ -293,14 +300,6 @@
                 <li class="active">Benutzer erfassen</li>
             </ol>
         </section>
-
-        <?php
-            $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
-            $insert = "INSERT INTO 'tbl_login' ('ID', 'ID_users', 'pw', 'role', 'imgURL') VALUES ('', 'probst', 'test', 'rolle', '');
-            $writing = mysqli_query ($db, $insert) or die(mysqli_error($db));
-            $mysqli_close($db);
-            echo "Daten gespeichert";
-        ?>
 
         <!-- Main content -->
         <section class="content">
