@@ -8,5 +8,5 @@
 
 echo "Daten gespeichert";
 $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
-$insert = "INSERT INTO `tbl_login` (`ID`, `ID_users`, `pw`, `role`, `imgURL`) VALUES (NULL, \'234\', \'test\', \'User\', \'dist/img/login/user-dummy.png\')";
+$insert = "INSERT INTO `tbl_login` (`ID`, `ID_users`, `pw`, `role`, `imgURL`) VALUES (NULL, '234', 'test', 'User', 'dist/img/login/user-dummy.png')";
 mysqli_query ($db, $insert);
