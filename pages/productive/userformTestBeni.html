@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <?php
             $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
-            $insert = "INSERT INTO 'tbl_login' ('ID', 'ID_users', 'pw', 'role', 'imgURL') VALUES ('', 'probst', 'test', 'rolle', '');
+            $insert = "INSERT INTO `tbl_login` (`ID`, `ID_users`, `pw`, `role`) VALUES ('1', 'benjamin', 'test', 'test');";
             $writing = mysqli_query ($db, $insert) or die(mysqli_error($db));
             $mysqli_close($db);
             echo "Daten gespeichert";
