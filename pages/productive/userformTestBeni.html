@@ -297,6 +297,9 @@
         <?php
             $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
             $insert = "INSERT INTO 'tbl_login' ('ID', 'ID_users', 'pw', 'role', 'imgURL') VALUES ('', 'probst', 'test', 'rolle', '');
+            $writing = mysqli_query ($db, $insert) or die(mysqli_error($db));
+            $mysqli_close($db);
+            echo "Daten gespeichert";
         ?>
 
         <!-- Main content -->
