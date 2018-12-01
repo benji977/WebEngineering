@@ -285,12 +285,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Benutzer erfassen
+                Prüfung erfassen
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Benutzer</a></li>
-                <li class="active">Benutzer erfassen</li>
+                <li><a href="#">Prüfungen</a></li>
+                <li class="active">Prüfung erfassen</li>
             </ol>
         </section>
 
@@ -302,48 +302,53 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Persönliche Angaben</h3>
+                            <h3 class="box-title">Prüfungsinformationen</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email Adresse</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                    <label>Prüfungsname</label>
+                                    <input type="text" class="form-control" id="Prüfungsname" placeholder="Prüfungsname">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Passwort</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
+                                    <label>Datum</label>
+                                    <input type="text" class="form-control" id="Datum" placeholder="Datum">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Vorname</label>
-                                    <input type="text" class="form-control" id="Vorname" placeholder="Vorname">
+                                    <label>Startzeitpunkt</label>
+                                    <input type="text" class="form-control" id="Startzeitpunkt" placeholder="Startzeitpunkt">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Nachname</label>
-                                    <input type="text" class="form-control" id="Nachname" placeholder="Nachname">
+                                    <label>Endzeitpunkt</label>
+                                    <input type="text" class="form-control" id="Endzeitpunkt" placeholder="Endzeitpunkt">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Arbeitsort</label>
-                                    <input type="text" class="form-control" id="Arbeitsort" placeholder="Arbeitsort">
+                                    <label>Prüfungstyp</label>
+                                    <input type="text" class="form-control" id="Prüfungstyp" placeholder="Prüfungstyp">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <input type="file" id="exampleInputFile">
-
-                                    <p class="help-block">Example block-level help text here.</p>
+                                    <label>Teilnehmer</label>
+                                    <input type="text" class="form-control" id="Teilnehmer" placeholder="Teilnehmer">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <div class="form-group">
+                                    <label>Raum</label>
+                                    <input type="text" class="form-control" id="Raum" placeholder="Raum">
+                                </div>
+                                <div class="form-group">
+                                    <label>Geräte</label>
+                                    <input type="text" class="form-control" id="Geräte" placeholder="Geräte">
+                                </div>
+                                <div class="form-group">
+                                    <label>Verantwortlicher</label>
+                                    <input type="text" class="form-control" id="Verantwortlicher" placeholder="Verantwortlicher">
                                 </div>
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Speichern</button>
                             </div>
                         </form>
                     </div>
