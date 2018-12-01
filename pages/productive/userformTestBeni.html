@@ -32,13 +32,7 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<?php
-            echo "Daten gespeichert";
-            $db = mysqli_connect ("localhost", "root", "WebEng2018", "aaa_inventar");
-            $insert = "INSERT INTO `aaa_inventar`.`tbl_login` (`ID`, `ID_users`, `pw`, `role`) VALUES ('1', 'benjamin', 'test', 'test')";
-            $writing = mysqli_query ($db, $insert) or die(mysqli_error($db));
-            $mysqli_close($db);
-        ?>
+
 <div class="wrapper">
 
     <header class="main-header">
@@ -313,7 +307,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="userform.php" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email Adresse</label>
