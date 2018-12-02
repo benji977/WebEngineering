@@ -1,0 +1,54 @@
+<?PHP
+$mail=$_POST['mail'];
+$password=$_POST['password'];
+$benutzer = "root";
+$passwort = "WebEng2018";
+$dbname = "webengineering";
+
+
+$link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
+mysqli_select_db($link, $dbname);
+$select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$mail'";
+$db = mysqli_query($link, "$select") or die(mysqli_error($link));
+
+
+
+$row = mysqli_fetch_assoc($db);
+$sum = $row['sum'];
+
+echo $sum;
+
+
+if($sum == 0) {
+    ?>
+    <script>alert("Nutzer nicht registriert");</script>
+    <?php
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.html\">";
+
+    }
+
+
+if($sum > 0){
+
+    $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
+
+
+
+    if(password_verify($password, $passworddb)){
+        ?>
+        <script>alert("Login erfolgreich");</script>
+        <?php
+
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL=userform.html\">";
+    }else{
+
+    }
+
+}
+
+
+mysqli_close($link);
+
+
+
+?>

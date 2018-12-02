@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Benutzer erfassen</title>
+    <title>Benutzer bearbeiten</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -285,12 +285,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Benutzer erfassen
+                Benutzer bearbeiten
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Benutzer</a></li>
-                <li class="active">Benutzer erfassen</li>
+                <li class="active">Benutzer bearbeiten</li>
             </ol>
         </section>
 
@@ -306,72 +306,97 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="userform.php"
+
+                        <?PHP
+                        $userid = $_POST['bearbeiten'];
+                        $benutzer = "root";
+                        $passwort = "WebEng2018";
+                        $dbname = "webengineering";
+                        $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
+                        mysqli_select_db($link, $dbname);
+                        $abfrage = "select surname, lastname, mail, id from user";
+                        $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                        $mailquery = $link->query("SELECT mail FROM user WHERE id = $userid")->fetch_object()->mail;
+                        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $userid")->fetch_object()->surname;
+                        $lastnamequery =$link->query("SELECT lastname FROM user WHERE id = $userid")->fetch_object()->lastname;
+                        $placequery = $link->query("SELECT place FROM user WHERE id = $userid")->fetch_object()->place;
+
+
+                        ?>
+
+                        <form role="form" action="changeuserdb.php"
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="email">Email Adresse</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="hidden" class="form-control" name="id" id="id" value=<?php echo $userid; ?>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Passwort</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Passwort">
+                                    <label for="email">Email Adresse</label>
+                                    <input type="email" class="form-control" name="email" id="email" value=<?php echo $mailquery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label>Vorname</label>
-                                    <input type="surname" class="form-control" name="surname" id="surname" placeholder="Vorname">
+                                    <input type="surname" class="form-control" name="surname" id="surname" value=<?php echo $surnamequery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label>Nachname</label>
-                                    <input type="text" class="form-control" name="lastname"id="Nachname" placeholder="Nachname">
+                                    <input type="text" class="form-control" name="lastname"id="Nachname" value=<?php echo $lastnamequery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label>Arbeitsort</label>
-                                    <input type="text" class="form-control" name="place" id="Arbeitsort" placeholder="Arbeitsort">
+                                    <input type="text" class="form-control" name="place" id="Arbeitsort" value=<?php echo $placequery; ?>>
                                 </div>
                             </div>
+
+
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Speichern</button>
+                                <button type="submit" name ="option" value = "change" class="btn btn-primary">Speichern</button>
+                                <button type="submit" name = "option" value= "delete" class="btn btn-primary">Löschen</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-                    <!-- /.box -->
+
+            <?PHP
+            mysqli_close($link);
+            ?>
+            <!-- /.box -->
 
 
-    <!-- ./wrapper -->
+            <!-- ./wrapper -->
 
-    <!-- jQuery 3 -->
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-        $(function () {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging'      : true,
-                'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false
-            })
-        })
-    </script>
+            <!-- jQuery 3 -->
+            <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- DataTables -->
+            <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../../dist/js/adminlte.min.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="../../dist/js/demo.js"></script>
+            <!-- page script -->
+            <script>
+                $(function () {
+                    $('#example1').DataTable()
+                    $('#example2').DataTable({
+                        'paging'      : true,
+                        'lengthChange': false,
+                        'searching'   : false,
+                        'ordering'    : true,
+                        'info'        : true,
+                        'autoWidth'   : false
+                    })
+                })
+            </script>
 </body>
 </html>

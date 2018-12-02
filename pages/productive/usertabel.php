@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Benutzer erfassen</title>
+    <title>Benutzerübersicht</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -205,8 +205,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
-                        <li class="active"><a href="userform.html"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
+                        <li  class="active"><a href="usertable.html"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
+                        <li><a href="userform.html"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
 
                     </ul>
                 </li>
@@ -280,67 +280,97 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Benutzer erfassen
+                Benutzerübersicht
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Benutzer</a></li>
-                <li class="active">Benutzer erfassen</li>
+                <li class="active">Benutzerübersicht</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <!-- left column -->
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Persönliche Angaben</h3>
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
                         </div>
                         <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" action="userform.php"
-                              method="post">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="email">Email Adresse</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Passwort</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Passwort">
-                                </div>
-                                <div class="form-group">
-                                    <label>Vorname</label>
-                                    <input type="surname" class="form-control" name="surname" id="surname" placeholder="Vorname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Nachname</label>
-                                    <input type="text" class="form-control" name="lastname"id="Nachname" placeholder="Nachname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Arbeitsort</label>
-                                    <input type="text" class="form-control" name="place" id="Arbeitsort" placeholder="Arbeitsort">
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
+                        <div class="box-body">
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Speichern</button>
-                            </div>
-                        </form>
+                            <?PHP
+                            echo "<form role=\"form\" action=\"userchange.php\"
+                              method=\"post\">";
+                            ?>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Vorname</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Option</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?PHP
+                                $benutzer = "root";
+                                $passwort = "WebEng2018";
+                                $dbname = "webengineering";
+                                $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
+                                mysqli_select_db($link, $dbname);
+                                $abfrage = "select surname, lastname, mail, id from user";
+                                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                while ($zeile=mysqli_fetch_array($ergebnis, MYSQLI_ASSOC))
+
+                                {
+                                    echo "<tr>";
+                                    while (list($schluessel, $wert)=each($zeile))
+                                    { if ( filter_var($wert, FILTER_VALIDATE_INT) === false ) {
+                                        echo "<td>".$wert."</td>";
+                                        }else {
+
+                                       echo "<td><button type='submit' name='bearbeiten' value='".$wert."' class='btn btn-primary'>Bearbeiten</button>";
+                                    }
+                                    }
+                                    echo "</tr>";
+                                }
+                                mysqli_close($link);
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Vorname</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Option</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                            <?PHP
+                            echo "</form>"
+                            ?>
+
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                </div>
-            </div>
                     <!-- /.box -->
-
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer
+    </footer>
 
     <!-- ./wrapper -->
 
