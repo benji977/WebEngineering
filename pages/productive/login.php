@@ -31,7 +31,6 @@ if($sum > 0){
     $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
 
 
-
     if(password_verify($password, $passworddb)){
         ?>
         <script>alert("Login erfolgreich");</script>
