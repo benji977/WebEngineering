@@ -1,4 +1,6 @@
 <?PHP
+session_start();
+
 $mail=$_POST['mail'];
 $password=$_POST['password'];
 $benutzer = "root";
@@ -22,7 +24,6 @@ if($sum == 0) {
     <script>alert("Nutzer nicht registriert");</script>
     <?php
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.html\">";
-
     }
 
 
@@ -32,11 +33,8 @@ if($sum > 0){
 
 
     if(password_verify($password, $passworddb)){
-        ?>
-        <script>alert("Login erfolgreich");</script>
-        <?php
-
-        echo "<meta http-equiv=\"refresh\" content=\"0; URL=userform.html\">";
+        $_SESSION['usermail'] = $mail;
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
     }else{
         ?>
         <script>alert("Passwort falsch");</script>
