@@ -1,13 +1,11 @@
 <?PHP
 session_start();
 
-$usermail = $_SESSION['usermail'];
-$usersurname = $_SESSION['usersurname'];
-$userlastname = $_SESSION['userlastname'];
-
-if(empty($usermail)){
+if(empty($_SESSION['usermail'])){
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
 }ELSE {
+    $usersurname = $_SESSION['usersurname'];
+    $userlastname = $_SESSION['userlastname'];
 
 
     $mail = $_POST['mail'];
