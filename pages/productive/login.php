@@ -16,8 +16,6 @@ $db = mysqli_query($link, "$select") or die(mysqli_error($link));
 $row = mysqli_fetch_assoc($db);
 $sum = $row['sum'];
 
-echo $sum;
-
 
 if($sum == 0) {
     ?>
@@ -41,7 +39,11 @@ if($sum > 0){
 
         echo "<meta http-equiv=\"refresh\" content=\"0; URL=userform.html\">";
     }else{
+        ?>
+        <script>alert("Passwort falsch");</script>
+        <?php
 
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.html\">";
     }
 
 }
