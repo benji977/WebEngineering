@@ -2,7 +2,7 @@
 
 session_start();
 
-if(empty($_SESSION['usermail'])){
+if(empty($_POST['email'])){
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
 }ELSE {
     $usersurname = $_SESSION['usersurname'];
