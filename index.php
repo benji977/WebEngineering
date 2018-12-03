@@ -2,10 +2,13 @@
 session_start();
 
 $usermail = $_SESSION['usermail'];
+$usersurname = $_SESSION['usersurname'];
+$userlastname = $_SESSION['userlastname'];
 
 if(empty($usermail)){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=pages/productive/login.php\">";
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=pages/productive/login.html\">";
 }ELSE {
+
 
     ?>
 
@@ -169,7 +172,7 @@ if(empty($usermail)){
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"><?php echo $usersurname," ", $userlastname?></span>
                             </a>
                             <ul class="dropdown-menu">
 
@@ -234,7 +237,7 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/usertabel.php"><i class="fa fa-circle-o"></i>
+                            <li><a href="pages/productive/usertable.php"><i class="fa fa-circle-o"></i>
                                     Benutzerübersicht</a></li>
                             <li><a href="pages/productive/userform.html"><i class="fa fa-circle-o"></i> Benutzer
                                     erfassen</a></li>

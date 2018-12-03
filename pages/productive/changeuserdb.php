@@ -41,6 +41,6 @@ if ($type != "delete") {
 
 }
 
-echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertabel.php\">";
+echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
 
 ?>
