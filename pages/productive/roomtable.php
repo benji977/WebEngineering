@@ -1,9 +1,23 @@
+<?php
+session_start();
+
+$usermail = $_SESSION['usermail'];
+$usersurname = $_SESSION['usersurname'];
+$userlastname = $_SESSION['userlastname'];
+
+if(empty($usermail)){
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
+}ELSE {
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Benutzerübersicht</title>
+    <title>Raumübersicht</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -161,6 +175,7 @@
             </div>
         </nav>
     </header>
+</div>
 
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -189,14 +204,14 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="examtable.html"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
-                        <li><a href="examform.html"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
+                        <li><a href="examtable.php"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
+                        <li><a href="examform.php"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
 
                     </ul>
                 </li>
 
 
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-users"></i>
                         <span>Benutzer</span>
@@ -205,8 +220,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li  class="active"><a href="usertable.html"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
-                        <li><a href="userform.html"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
+                        <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
+                        <li><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
 
                     </ul>
                 </li>
@@ -221,15 +236,15 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="devicetable.html"><i class="fa fa-circle-o"></i> Gerätübersicht</a></li>
-                        <li><a href="deviceform.html"><i class="fa fa-circle-o"></i> Gerät erfassen</a></li>
+                        <li><a href="devicetable.php"><i class="fa fa-circle-o"></i> Gerätübersicht</a></li>
+                        <li><a href="deviceform.php"><i class="fa fa-circle-o"></i> Gerät erfassen</a></li>
 
 
                     </ul>
                 </li>
 
 
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-mortar-board "></i>
                         <span>Räume</span>
@@ -238,8 +253,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="roomtable.html"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
-                        <li><a href="roomform.html"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
+                        <li class="active"><a href="roomtable.php"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
+                        <li><a href="roomform.php"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
 
                     </ul>
                 </li>
@@ -254,8 +269,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="contacttable.html"><i class="fa fa-circle-o"></i> Kontaktübersicht</a></li>
-                        <li><a href="contactform.html"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
+                        <li><a href="contacttable.php"><i class="fa fa-circle-o"></i> Kontaktübersicht</a></li>
+                        <li><a href="contactform.php"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
 
                     </ul>
                 </li>
@@ -269,7 +284,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="charts.html"><i class="fa fa-circle-o"></i> Statistiken</a></li>
+                        <li><a href="charts.php"><i class="fa fa-circle-o"></i> Statistiken</a></li>
 
                     </ul>
                 </li>
@@ -284,12 +299,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Benutzerübersicht
+                Raumübersicht
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Benutzer</a></li>
-                <li class="active">Benutzerübersicht</li>
+                <li><a href="#">Räume</a></li>
+                <li class="active">Raumübersicht</li>
             </ol>
         </section>
 
@@ -746,36 +761,40 @@
     <footer
     </footer>
 
-<!-- ./wrapper -->
+    <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-    $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
+    <!-- jQuery 3 -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
         })
-    })
-</script>
+    </script>
 </body>
 </html>
+
+    <?php
+}
+?>

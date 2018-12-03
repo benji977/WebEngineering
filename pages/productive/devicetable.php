@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+$usermail = $_SESSION['usermail'];
+$usersurname = $_SESSION['usersurname'];
+$userlastname = $_SESSION['userlastname'];
+
+if(empty($usermail)){
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
+}ELSE {
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,6 +175,7 @@
             </div>
         </nav>
     </header>
+</div>
 
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -189,8 +204,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="examtable.html"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
-                        <li><a href="examform.html"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
+                        <li><a href="examtable.php"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
+                        <li><a href="examform.php"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
 
                     </ul>
                 </li>
@@ -206,13 +221,13 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
-                        <li><a href="userform.html"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
+                        <li><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
 
                     </ul>
                 </li>
 
 
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
                         <span>Hardware</span>
@@ -221,8 +236,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="devicetable.html"><i class="fa fa-circle-o"></i> Gerätübersicht</a></li>
-                        <li><a href="deviceform.html"><i class="fa fa-circle-o"></i> Gerät erfassen</a></li>
+                        <li class="active"><a href="devicetable.php"><i class="fa fa-circle-o"></i> Gerätübersicht</a></li>
+                        <li><a href="deviceform.php"><i class="fa fa-circle-o"></i> Gerät erfassen</a></li>
 
 
                     </ul>
@@ -238,14 +253,14 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="roomtable.html"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
-                        <li><a href="roomform.html"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
+                        <li><a href="roomtable.php"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
+                        <li><a href="roomform.php"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
 
                     </ul>
                 </li>
 
 
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-suitcase"></i>
                         <span>Kontakte</span>
@@ -254,8 +269,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="contacttable.html"><i class="fa fa-circle-o"></i> Kontaktübersicht</a></li>
-                        <li><a href="contactform.html"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
+                        <li><a href="contacttable.php"><i class="fa fa-circle-o"></i> Kontaktübersicht</a></li>
+                        <li><a href="contactform.php"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
 
                     </ul>
                 </li>
@@ -269,7 +284,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="charts.html"><i class="fa fa-circle-o"></i> Statistiken</a></li>
+                        <li><a href="charts.php"><i class="fa fa-circle-o"></i> Statistiken</a></li>
 
                     </ul>
                 </li>
@@ -284,12 +299,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Kontaktübersicht
+                Geräteübersicht
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Kontakte</a></li>
-                <li class="active">Kontaktübersicht</li>
+                <li><a href="#">Geräte</a></li>
+                <li class="active">Gerateübersicht</li>
             </ol>
         </section>
 
@@ -779,3 +794,7 @@
     </script>
 </body>
 </html>
+
+    <?php
+}
+?>

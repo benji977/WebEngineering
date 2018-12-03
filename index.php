@@ -6,7 +6,7 @@ $usersurname = $_SESSION['usersurname'];
 $userlastname = $_SESSION['userlastname'];
 
 if(empty($usermail)){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=pages/productive/login.html\">";
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=pages/productive/login.php\">";
 }ELSE {
 
 
@@ -219,9 +219,9 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/examtable.html"><i class="fa fa-circle-o"></i>
+                            <li><a href="pages/productive/examtable.php"><i class="fa fa-circle-o"></i>
                                     Prüfungsübersicht</a></li>
-                            <li><a href="pages/productive/examform.html"><i class="fa fa-circle-o"></i> Prüfung erfassen</a>
+                            <li><a href="pages/productive/examform.php"><i class="fa fa-circle-o"></i> Prüfung erfassen</a>
                             </li>
 
                         </ul>
@@ -239,7 +239,7 @@ if(empty($usermail)){
                         <ul class="treeview-menu">
                             <li><a href="pages/productive/usertable.php"><i class="fa fa-circle-o"></i>
                                     Benutzerübersicht</a></li>
-                            <li><a href="pages/productive/userform.html"><i class="fa fa-circle-o"></i> Benutzer
+                            <li><a href="pages/productive/userform.php"><i class="fa fa-circle-o"></i> Benutzer
                                     erfassen</a></li>
 
                         </ul>
@@ -255,9 +255,9 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/devicetable.html"><i class="fa fa-circle-o"></i>
+                            <li><a href="pages/productive/devicetable.php"><i class="fa fa-circle-o"></i>
                                     Gerätübersicht</a></li>
-                            <li><a href="pages/productive/deviceform.html"><i class="fa fa-circle-o"></i> Gerät erfassen</a>
+                            <li><a href="pages/productive/deviceform.php"><i class="fa fa-circle-o"></i> Gerät erfassen</a>
                             </li>
 
 
@@ -274,9 +274,9 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/roomtable.html"><i class="fa fa-circle-o"></i>
+                            <li><a href="pages/productive/roomtable.php"><i class="fa fa-circle-o"></i>
                                     Raumübersicht</a></li>
-                            <li><a href="pages/productive/roomform.html"><i class="fa fa-circle-o"></i> Raum
+                            <li><a href="pages/productive/roomform.php"><i class="fa fa-circle-o"></i> Raum
                                     erfassen</a></li>
 
                         </ul>
@@ -292,9 +292,9 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/contacttable.html"><i class="fa fa-circle-o"></i>
+                            <li><a href="pages/productive/contacttable.php"><i class="fa fa-circle-o"></i>
                                     Kontaktübersicht</a></li>
-                            <li><a href="pages/productive/contactform.html"><i class="fa fa-circle-o"></i> Kontakt
+                            <li><a href="pages/productive/contactform.php"><i class="fa fa-circle-o"></i> Kontakt
                                     erfassen</a></li>
 
                         </ul>
@@ -309,7 +309,7 @@ if(empty($usermail)){
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/productive/charts.html"><i class="fa fa-circle-o"></i> Statistiken</a>
+                            <li><a href="pages/productive/charts.php"><i class="fa fa-circle-o"></i> Statistiken</a>
                             </li>
 
                         </ul>
