@@ -65,6 +65,9 @@ if(empty($usermail)){
                 <span class="logo-lg"><b>PRÜFUNGSPLAN</b>ER</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
+
+            <!--  TODO: HEADER BEI ALLEN PAGES ANPASSEN -->
+
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -187,9 +190,6 @@ if(empty($usermail)){
                 </div>
             </nav>
         </header>
-
-
-        <!--  TODO: LINKS ANPASSEN ZU PHP -->
 
 
         <!-- Left side column. contains the logo and sidebar -->

@@ -34,38 +34,25 @@
     </div>
     <!-- /.login-logo -->
 
-    <!--  TODO: ANGEMELDET BLEIBEN IMPLEMENTIEREN ODER BOX ENTFERNEN -> SELBES FUER PASSWORT VERGESSEN -->
-
     <div class="login-box-body">
-        <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
+        <p class="login-box-msg">Passwort zurücksetzen</p>
 
-        <form action=logintodb.php method="post">
+        <form action=passwordresetmailtodb.php method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" id="password" required minlength="3" maxlength="45" placeholder="Passwort">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> Angemeldet bleiben
-                        </label>
-                    </div>
-                </div>
+                                    </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Anmelden</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-
-        <a href="#">Passwort vergessen</a><br>
 
     </div>
     <!-- /.login-box-body -->
