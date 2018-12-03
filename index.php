@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-if(empty($_SESSION['usermail'])){
+$usermail = $_SESSION['usermail'];
+$usersurname = $_SESSION['usersurname'];
+$userlastname = $_SESSION['userlastname'];
+
+if(empty($usermail)){
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=pages/productive/login.php\">";
 }ELSE {
-    $usersurname = $_SESSION['usersurname'];
-    $userlastname = $_SESSION['userlastname'];
 
 
     ?>

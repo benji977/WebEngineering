@@ -1,12 +1,9 @@
 <?PHP
 session_start();
 
-if(empty($_SESSION['usermail'])){
+if(empty($_POST['mail'])){
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
 }ELSE {
-    $usersurname = $_SESSION['usersurname'];
-    $userlastname = $_SESSION['userlastname'];
-
 
     $mail = $_POST['mail'];
     $password = $_POST['password'];
@@ -58,7 +55,5 @@ if(empty($_SESSION['usermail'])){
     mysqli_close($link);
 
 }
-
-
 
 ?>
