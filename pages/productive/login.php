@@ -39,7 +39,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
 
-        <form action=logintodb.php method="post">
+        <form action=./logintodb.php method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
