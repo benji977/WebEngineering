@@ -73,7 +73,9 @@ session_start();
             $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
 
             if (password_verify($password, $passworddb)) {
-
+                $_SESSION['usermail'] = $mail;
+                $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
+                $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
                 echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
             } else {
 
@@ -100,7 +102,7 @@ session_start();
 
         ?>
 
-        <form action="/../../index.php\" method="post">
+        <form action="/login.php\" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
