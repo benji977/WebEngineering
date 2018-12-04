@@ -1,7 +1,5 @@
 <?PHP
-/*
 session_start();
-*/
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +43,7 @@ session_start();
     <?PHP
 
 
-/*
+
     if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
 
        } ELSE {
@@ -89,22 +87,21 @@ session_start();
         mysqli_close($link);
 
     }
-*/
+
     ?>
 
     <div class="login-box-body">
         <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
-        <?php /*
-        if (!isset($string)) {
+        <?php  if (!isset($string)) {
             }else{
 
             echo "<p class='login-box-msg'>$string</p>";
 
         }
-        */
+
         ?>
 
-        <form action="/login.php" method="post">
+        <form action="pages/productive/login.php" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
