@@ -44,9 +44,10 @@ session_start();
 
 
 
-    if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
+    if (!isset($_POST['mail']) OR !isset ($_POST['password'])) {
 
        } ELSE {
+
 
         $mail = $_POST['mail'];
         $password = $_POST['password'];
@@ -101,7 +102,7 @@ session_start();
 
         ?>
 
-        <form action="/login.php" method="post">
+        <form action="/../../index.php\" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
