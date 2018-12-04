@@ -45,9 +45,9 @@ session_start();
 
 
     if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
-
+        echo "Test";
        } ELSE {
-
+        echo "Else";
         $mail = $_POST['mail'];
         $password = $_POST['password'];
         $benutzer = "root";
