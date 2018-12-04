@@ -1,9 +1,9 @@
 <?php
 session_start();
 
+$usermail = $_SESSION['usermail'];
 
-
-if(1==1){
+if(empty($usermail)){
     echo "Redirect Problem";
 }ELSE {
 
