@@ -44,10 +44,9 @@ session_start();
 
 
 
-    if (!isset($_POST['mail']) OR !isset ($_POST['password'])) {
+    if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
 
        } ELSE {
-
 
         $mail = $_POST['mail'];
         $password = $_POST['password'];
@@ -97,12 +96,14 @@ session_start();
             }else{
 
             echo "<p class='login-box-msg'>$string</p>";
-
         }
-
         ?>
 
+<<<<<<< HEAD
         <form action="/login.php\" method="post">
+=======
+        <form action="/login.php" method="post">
+>>>>>>> origin/master
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

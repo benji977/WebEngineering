@@ -308,36 +308,32 @@ if(empty($_SESSION['usermail'])){
         <!-- Main content -->
         <?php
         if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
-        echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
+
         }ELSE {
-        $usersurname = $_SESSION['usersurname'];
-        $userlastname = $_SESSION['userlastname'];
+            $usersurname = $_SESSION['usersurname'];
+            $userlastname = $_SESSION['userlastname'];
 
-        $feld1 = $_POST['email'];
-        $feld2 = $_POST['password'];
-        $feld3 = $_POST['surname'];
-        $feld4 = $_POST['lastname'];
-        $feld5 = $_POST['place'];
-        $benutzer = "root";
-        $passwort = "WebEng2018";
-        $dbname = "webengineering";
+            $feld1 = $_POST['email'];
+            $feld2 = $_POST['password'];
+            $feld3 = $_POST['surname'];
+            $feld4 = $_POST['lastname'];
+            $feld5 = $_POST['place'];
+            $benutzer = "root";
+            $passwort = "WebEng2018";
+            $dbname = "webengineering";
 
-        $hashed_password = password_hash($feld2, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($feld2, PASSWORD_DEFAULT);
 
-        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
-        mysqli_select_db($link, $dbname);
-        $insert = "INSERT INTO user (mail, password, surname, lastname, place) values ('$feld1', '$hashed_password', '$feld3', '$feld4', '$feld5')";
-        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-        mysqli_close($link);
-
-        echo "<meta http-equiv=\"refresh\" content=\"0; URL=userform.php\">";
+            $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+            mysqli_select_db($link, $dbname);
+            $insert = "INSERT INTO user (mail, password, surname, lastname, place) values ('$feld1', '$hashed_password', '$feld3', '$feld4', '$feld5')";
+            $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            mysqli_close($link);
 
 
-        if ($db1 == true) {
-        ?>
-        <script>alert("Eintrag war erfolgreich!");</script>
-        <?php
-        }
+            if ($db1 == true) {
+                $string = "Eintrag wurde erfasst";
+            }
         }
         ?>
         <section class="content">
@@ -348,10 +344,16 @@ if(empty($_SESSION['usermail'])){
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Persönliche Angaben</h3>
+                            <?php  if (!isset($string)) {
+                            }else{
+
+                                echo "<p class='login-box-msg'>$string</p>";
+                            }
+                            ?>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="userformtodb.php"
+                        <form role="form" action="userform.php"
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">

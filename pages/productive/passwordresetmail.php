@@ -1,3 +1,11 @@
+<?PHP
+session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+require_once('class.phpmailer.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,45 +42,137 @@
     </div>
     <!-- /.login-logo -->
 
-    <div class="login-box-body">
-        <p class="login-box-msg">Passwort zurücksetzen</p>
+    <?php
 
-        <form action=passwordresetmailtodb.php method="post">
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
-                                    </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
+    if(empty($_POST['mail'])){
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=passwordreset.php\">";
+}ELSE {
+
+        $usermail = $_POST['mail'];
+
+        $benutzer = "root";
+        $passwort = "WebEng2018";
+        $dbname = "webengineering";
+
+        function random_string()
+        {
+            if (function_exists('random_bytes')) {
+                $bytes = random_bytes(16);
+                $str = bin2hex($bytes);
+            } else if (function_exists('openssl_random_pseudo_bytes')) {
+                $bytes = openssl_random_pseudo_bytes(16);
+                $str = bin2hex($bytes);
+            } else if (function_exists('mcrypt_create_iv')) {
+                $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+                $str = bin2hex($bytes);
+            } else {
+                $str = md5(uniqid('NNFX?yupyN,6?dk', true));
+            }
+            return $str;
+        }
+
+        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+        mysqli_select_db($link, $dbname);
+        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
+        $db = mysqli_query($link, "$select") or die(mysqli_error($link));
+
+
+        $row = mysqli_fetch_assoc($db);
+        $sum = $row['sum'];
+
+
+    if ($sum == 0) {
+        $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+    } else {
+
+        $passwortcode = random_string();
+        $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+        $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
+
+
+        $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
+
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->CharSet = "UTF-8";
+        $mail->SMTPSecure = 'tls';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->Username = 'pruefungsplaner2018@gmail.com';
+        $mail->Password = 'WebEng2018';
+        $mail->SMTPAuth = true;
+
+        $mail->From = 'pruefungsplaner2018@gmail.com';
+        $mail->FromName = 'Prüfungsplaner';
+        $mail->AddAddress($usermail);
+        $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
+
+        $mail->IsHTML(true);
+        $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
+        $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+        $mail->Body = "Hello";
+
+        if (!$mail->Send()) {
+            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+        } else {
+            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+        }
+
+    }
+    ?>
+
+
+        <div class="login-box-body">
+            <p class="login-box-msg">Passwort zurücksetzen</p>
+
+            <form action=passwordreset.php method="post">
+                <div class="form-group has-feedback">
+                    <?php  if (!isset($string)) {
+                    }else{
+
+                        echo "<p class='login-box-msg'>$string</p>";
+                    }
+                    ?>
+                    <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
-                <!-- /.col -->
-            </div>
-        </form>
+                <div class="row">
+                    <div class="col-xs-8">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
 
 
-    </div>
-    <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+        </div>
+        <!-- /.login-box-body -->
+        </div>
+        <!-- /.login-box -->
 
-<!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
-    });
-</script>
-</body>
-</html>
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- iCheck -->
+        <script src="../../plugins/iCheck/icheck.min.js"></script>
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' /* optional */
+                });
+            });
+        </script>
+        </body>
+        </html>
+
+        <?php
+    }
+    ?>
