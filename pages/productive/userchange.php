@@ -312,14 +312,14 @@ if(empty($_SESSION['usermail'])){
                 <!-- left column -->
                 <div class="col-md-6">
                     <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Persönliche Angaben</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
 
-                        <?PHP
+                    <?PHP
+
+                    if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
+                        $string = "unvollständige Eingabe";
+
+                    }else {
+
                         $userid = $_POST['bearbeiten'];
                         $benutzer = "root";
                         $passwort = "WebEng2018";
@@ -334,8 +334,22 @@ if(empty($_SESSION['usermail'])){
                         $lastnamequery =$link->query("SELECT lastname FROM user WHERE id = $userid")->fetch_object()->lastname;
                         $placequery = $link->query("SELECT place FROM user WHERE id = $userid")->fetch_object()->place;
 
+                        $string = "Änderung erfolgreich";
+                    }
+                    ?>
 
-                        ?>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Persönliche Angaben</h3>
+                            <?php  if (!isset($string)) {
+                            }else{
+
+                                echo "<p class='login-box-msg'>$string</p>";
+                            }
+                            ?>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
 
                         <form role="form" action="changeusertodb.php"
                               method="post">

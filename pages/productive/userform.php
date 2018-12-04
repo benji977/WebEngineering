@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if(empty($_SESSION['usermail'])){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
-    }ELSE {
+if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname'])){
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
+}ELSE {
     $usersurname = $_SESSION['usersurname'];
     $userlastname = $_SESSION['userlastname'];
 
@@ -305,10 +305,12 @@ if(empty($_SESSION['usermail'])){
             </ol>
         </section>
 
+
+
         <!-- Main content -->
         <?php
         if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
-
+            echo "";
         }ELSE {
             $usersurname = $_SESSION['usersurname'];
             $userlastname = $_SESSION['userlastname'];
