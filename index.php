@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-$usermail = $_SESSION['usermail'];
 
-if(empty($usermail)){
-    echo "Redirect Problem";
+if(true){
+    echo $_SESSION['usermail'];
+    echo $_SESSION['usersurname'];
+    echo $_SESSION['userlastname'];
 }ELSE {
 
 
