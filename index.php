@@ -5,7 +5,7 @@ $usermail = $_SESSION['usermail'];
 $usersurname = $_SESSION['usersurname'];
 $userlastname = $_SESSION['userlastname'];
 
-if(empty($usermail)){
+if(1==1){
     echo "Redirect Problem";
 }ELSE {
 
