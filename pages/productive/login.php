@@ -42,7 +42,11 @@ session_start();
 
     <?PHP
 
+
+
     if (!isset($_POST['mail'])) {
+
+        echo "here we go";
     } ELSE {
 
         $mail = $_POST['mail'];
