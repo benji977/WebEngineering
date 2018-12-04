@@ -3,9 +3,7 @@ session_start();
 
 
 if(true){
-    echo $_SESSION['usermail'];
-    echo $_SESSION['usersurname'];
-    echo $_SESSION['userlastname'];
+    echo "test";
 }ELSE {
 
 
