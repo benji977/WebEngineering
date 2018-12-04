@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-
-
-if (!isset($_SESSION['usermail'])){
-    echo "test";
+if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname'])){
+    echo "Variablen nicht gesetzt";
 }ELSE {
 
+    $usermail = $_SESSION['usermail'];
+    $usersurname = $_SESSION['usersurname'];
+    $userlastname = $_SESSION['userlastname'];
 
     ?>
 
