@@ -44,7 +44,7 @@ session_start();
 
 
 
-    if (!isset($_POST['mail'])) {
+    if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
 
        } ELSE {
 
@@ -75,7 +75,7 @@ session_start();
                 $_SESSION['usermail'] = $mail;
                 $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
                 $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
-                echo "<meta http-equiv=\"refresh\" content=\"0; URL=/index.php\">";
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
             } else {
 
                 $string = "E-Mail oder Passwort sind falsch";
@@ -101,7 +101,7 @@ session_start();
 
         ?>
 
-        <form action="./login.php\" method="post">
+        <form action="/login.php" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
