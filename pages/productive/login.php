@@ -101,7 +101,7 @@ session_start();
 
         ?>
 
-        <form action="./login.php\" method="post">
+        <form action="login.php" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
