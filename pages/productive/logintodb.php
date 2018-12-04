@@ -24,9 +24,7 @@ if(empty($_POST['mail'])){
 
     if ($sum == 0) {
 
-        ?>
-        <script>alert("Nutzer nicht registriert");</script>
-        <?php
+        echo '<script>alert("Nutzer nicht registriert");</script>';
 
         echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
     }
