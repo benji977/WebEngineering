@@ -351,7 +351,7 @@ if(empty($_SESSION['usermail'])){
                         <!-- /.box-header -->
                         <!-- form start -->
 
-                        <form role="form" action="changeusertodb.php"
+                        <form role="form" action="userchange.php"
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">
