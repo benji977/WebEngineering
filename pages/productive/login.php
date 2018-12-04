@@ -1,3 +1,7 @@
+<?PHP
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +40,65 @@
 
     <!--  TODO: ANGEMELDET BLEIBEN IMPLEMENTIEREN ODER BOX ENTFERNEN -> SELBES FUER PASSWORT VERGESSEN -->
 
+    <?PHP
+
+    if (!isset($_POST['mail'])) {
+    } ELSE {
+
+        $mail = $_POST['mail'];
+        $password = $_POST['password'];
+        $benutzer = "root";
+        $passwort = "WebEng2018";
+        $dbname = "webengineering";
+
+
+        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+        mysqli_select_db($link, $dbname);
+        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$mail'";
+        $db = mysqli_query($link, "$select") or die(mysqli_error($link));
+
+
+        $row = mysqli_fetch_assoc($db);
+        $sum = $row['sum'];
+
+
+        if ($sum == 0) {
+            $string = "E-Mail oder Passwort sind falsch";
+        }else{
+
+            $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
+
+            if (password_verify($password, $passworddb)) {
+                $_SESSION['usermail'] = $mail;
+                $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
+                $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
+            } else {
+
+                $string = "E-Mail oder Passwort sind falsch";
+            }
+
+        }
+
+
+        mysqli_close($link);
+
+    }
+
+    ?>
+
     <div class="login-box-body">
         <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
+        <?php  if (!isset($string)) {
+            }else{
 
-        <form action=./logintodb.php method="post">
+            echo "<p class='login-box-msg'>$string</p>";
+
+        }
+
+        ?>
+
+        <form action=./login.php method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -67,7 +126,11 @@
 
         <a href="#">Passwort vergessen</a><br>
 
-    </div>
+        </div>
+
+
+
+
     <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
