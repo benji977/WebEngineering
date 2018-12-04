@@ -1,8 +1,8 @@
-<!--
 <?PHP
+/*
 session_start();
+*/
 ?>
--->
 
 <!DOCTYPE html>
 <html>
@@ -45,10 +45,10 @@ session_start();
     <?PHP
 
 
-
+/*
     if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
 
-       } /*ELSE {
+       } ELSE {
 
         $mail = $_POST['mail'];
         $password = $_POST['password'];
@@ -77,7 +77,7 @@ session_start();
                 $_SESSION['usermail'] = $mail;
                 $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
                 $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
-                echo "<meta http-equiv=\"refresh\" content=\"0; URL=/index.php\">";
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
             } else {
 
                 $string = "E-Mail oder Passwort sind falsch";
@@ -88,20 +88,21 @@ session_start();
 
         mysqli_close($link);
 
-    }*/
-
+    }
+*/
     ?>
 
     <div class="login-box-body">
         <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
-        <!--<?php  if (!isset($string)) {
+        <?php /*
+        if (!isset($string)) {
             }else{
 
             echo "<p class='login-box-msg'>$string</p>";
 
         }
-
-        ?>-->
+        */
+        ?>
 
         <form action="/login.php" method="post">
             <div class="form-group has-feedback">
