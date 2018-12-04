@@ -46,6 +46,7 @@ session_start();
 
     if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
         echo "Test";
+        echo $_POST['mail'];
        } ELSE {
         echo "Else";
         $mail = $_POST['mail'];
