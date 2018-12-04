@@ -48,7 +48,6 @@ session_start();
         echo "Test";
 
        } ELSE {
-        echo "Else";
         $mail = $_POST['mail'];
         $password = $_POST['password'];
         $benutzer = "root";
