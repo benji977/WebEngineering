@@ -2,7 +2,8 @@
 session_start();
 
 
-if(true){
+
+if (!isset($_SESSION['usermail'])){
     echo "test";
 }ELSE {
 
