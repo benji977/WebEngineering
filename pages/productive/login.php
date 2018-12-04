@@ -75,7 +75,7 @@ session_start();
                 $_SESSION['usermail'] = $mail;
                 $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
                 $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
-                echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=/index.php\">";
             } else {
 
                 $string = "E-Mail oder Passwort sind falsch";
