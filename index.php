@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-$usermail = $_SESSION['usermail'];
-$usersurname = $_SESSION['usersurname'];
-$userlastname = $_SESSION['userlastname'];
+
 
 if(1==1){
     echo "Redirect Problem";
