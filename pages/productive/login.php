@@ -1,6 +1,8 @@
+<!--
 <?PHP
 session_start();
 ?>
+-->
 
 <!DOCTYPE html>
 <html>
@@ -92,14 +94,14 @@ session_start();
 
     <div class="login-box-body">
         <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
-        <?php  if (!isset($string)) {
+        <!--<?php  if (!isset($string)) {
             }else{
 
             echo "<p class='login-box-msg'>$string</p>";
 
         }
 
-        ?>
+        ?>-->
 
         <form action="/login.php" method="post">
             <div class="form-group has-feedback">
