@@ -46,7 +46,7 @@ session_start();
 
     if (!isset($_POST['mail']) OR !isset ($_SESSION['usersurname'])) {
 
-       } ELSE {
+       } /*ELSE {
 
         $mail = $_POST['mail'];
         $password = $_POST['password'];
@@ -86,7 +86,7 @@ session_start();
 
         mysqli_close($link);
 
-    }
+    }*/
 
     ?>
 
