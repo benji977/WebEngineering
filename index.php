@@ -6,7 +6,7 @@ $usersurname = $_SESSION['usersurname'];
 $userlastname = $_SESSION['userlastname'];
 
 if(empty($usermail)){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=./pages/productive/login.php\">";
+    echo '<meta http-equiv="refresh" content="0; URL=pages/productive/login.php">';
 }ELSE {
 
 
