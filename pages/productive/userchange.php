@@ -316,10 +316,6 @@ if(empty($_SESSION['usermail'])){
                     <?PHP
 
                     if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
-                        $string = "unvollständige Eingabe";
-
-                    }else {
-
                         $userid = $_POST['bearbeiten'];
                         $benutzer = "root";
                         $passwort = "WebEng2018";
@@ -334,8 +330,28 @@ if(empty($_SESSION['usermail'])){
                         $lastnamequery =$link->query("SELECT lastname FROM user WHERE id = $userid")->fetch_object()->lastname;
                         $placequery = $link->query("SELECT place FROM user WHERE id = $userid")->fetch_object()->place;
 
-                        $string = "Änderung erfolgreich";
+                    }else {
+                        $feld1 = $_POST['email'];
+                        $feld2 = $_POST['surname'];
+                        $feld3 = $_POST['lastname'];
+                        $feld4 = $_POST['place'];
+                        $benutzer = "root";
+                        $passwort = "WebEng2018";
+                        $dbname = "webengineering";
+
+
+                        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+                        mysqli_select_db($link, $dbname);
+                        $insert = "INSERT INTO user (mail, surname, lastname, place) values ('$feld1', '$feld3', '$feld4', '$feld5')";
+                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                        mysqli_close($link);
+
+
+                        if ($db1 == true) {
+                            $string = "Eintrag wurde erfasst";
+                        }
                     }
+
                     ?>
 
                     <div class="box box-primary">
@@ -426,6 +442,7 @@ if(empty($_SESSION['usermail'])){
             </script>
 </body>
 </html>
+
     <?php
-}
-?>
+    }
+    ?>

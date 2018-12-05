@@ -318,7 +318,7 @@ if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset(
                         <div class="box-body">
 
                             <?PHP
-                            echo "<form role=\"form\" action=\"/pages/productive/userchange.php\" 
+                            echo "<form role=\"form\" action=\"userchange.php\" 
                               method=\"post\">";
                             ?>
                             <table id="example1" class="table table-bordered table-striped">
