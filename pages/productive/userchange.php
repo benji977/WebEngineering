@@ -315,7 +315,7 @@ if(empty($_SESSION['usermail'])){
 
                     <?PHP
 
-                    if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
+                    if (!isset($_POST['email']) OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
                         $userid = $_POST['bearbeiten'];
                         $benutzer = "root";
                         $passwort = "WebEng2018";
@@ -330,11 +330,16 @@ if(empty($_SESSION['usermail'])){
                         $lastnamequery =$link->query("SELECT lastname FROM user WHERE id = $userid")->fetch_object()->lastname;
                         $placequery = $link->query("SELECT place FROM user WHERE id = $userid")->fetch_object()->place;
 
+
+                         mysqli_close($link);
+
+
                     }else {
-                        $feld1 = $_POST['email'];
-                        $feld2 = $_POST['surname'];
-                        $feld3 = $_POST['lastname'];
-                        $feld4 = $_POST['place'];
+                        $userid = $_POST['id'];
+                        $mailquery = $_POST['email'];
+                        $surnamequery = $_POST['surname'];
+                        $lastnamequery = $_POST['lastname'];
+                        $placequery = $_POST['place'];
                         $benutzer = "root";
                         $passwort = "WebEng2018";
                         $dbname = "webengineering";
@@ -342,10 +347,9 @@ if(empty($_SESSION['usermail'])){
 
                         $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
                         mysqli_select_db($link, $dbname);
-                        $insert = "INSERT INTO user (mail, surname, lastname, place) values ('$feld1', '$feld3', '$feld4', '$feld5')";
+                        $insert = "UPDATE user SET mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , place = '$placequery'  WHERE id= '$userid'";
                         $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                         mysqli_close($link);
-
 
                         if ($db1 == true) {
                             $string = "Eintrag wurde erfasst";
@@ -371,9 +375,6 @@ if(empty($_SESSION['usermail'])){
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="id" id="id" value=<?php echo $userid; ?>>
-                                </div>
-                                <div class="form-group">
                                     <label for="email">Email Adresse</label>
                                     <input type="email" class="form-control" name="email" id="email" value=<?php echo $mailquery; ?>>
                                 </div>
@@ -389,6 +390,9 @@ if(empty($_SESSION['usermail'])){
                                     <label>Arbeitsort</label>
                                     <input type="text" class="form-control" name="place" id="Arbeitsort" value=<?php echo $placequery; ?>>
                                 </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="id" id="id" value=<?php echo $userid; ?>>
+                                </div>
                             </div>
 
 
@@ -403,9 +407,7 @@ if(empty($_SESSION['usermail'])){
                 </div>
             </div>
 
-            <?PHP
-            mysqli_close($link);
-            ?>
+
             <!-- /.box -->
 
 
