@@ -1,15 +1,20 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname'])){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
-}ELSE {
-
-    $usermail = $_SESSION['usermail'];
-    $usersurname = $_SESSION['usersurname'];
-    $userlastname = $_SESSION['userlastname'];
-
-    ?>
+if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
+    if ((!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname']))){
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL =./pages/productive/login.php\">";
+    }ELSE {
+        $usermail = $_SESSION['usermail'];
+        $usersurname = $_COOKIE['usersurname'];
+        $userlastname = $_COOKIE['userlastname'];
+    }
+} ELSE {
+    $usermail = $_COOKIE['usermail'];
+    $usersurname = $_COOKIE['usersurname'];
+    $userlastname = $_COOKIE['userlastname'];
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -318,8 +323,7 @@ if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset(
                         <div class="box-body">
 
                             <?PHP
-                            echo "<form role=\"form\" action=\"/pages/productive/userchange.php\" 
-                              method=\"post\">";
+                            echo "<form role=\"form\" action=\"userchange.php\" method=\"post\">";
                             ?>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -368,7 +372,7 @@ if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset(
                             </table>
 
                             <?PHP
-                            echo "</form>"
+                            echo "</form>";
                             ?>
 
                         </div>
@@ -419,6 +423,4 @@ if (!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset(
     </script>
 </body>
 </html>
-    <?php
-}
-?>
+
