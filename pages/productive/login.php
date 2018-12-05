@@ -60,6 +60,10 @@ session_start();
         }else{
             $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
             if (password_verify($password, $passworddb)) {
+                if (isset($_POST['rememberMe']) && $_POST['rememberMe']=="yes"){
+                    setcookie("usermail", $mail, time()+3600*24*30, "/");
+                    setcookie("password", $passworddb, time()+3600*24*30, "/");
+                }
                 $_SESSION['usermail'] = $mail;
                 $_SESSION['usersurname'] = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
                 $_SESSION['userlastname'] = $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
@@ -80,7 +84,7 @@ session_start();
         }
         ?>
 
-        <form action="/pages/productive/login.php" method="post">
+        <form action="login.php" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -93,7 +97,7 @@ session_start();
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> Angemeldet bleiben
+                            <input type="checkbox" name="rememberMe" value="yes"> Angemeldet bleiben
                         </label>
                     </div>
                 </div>
