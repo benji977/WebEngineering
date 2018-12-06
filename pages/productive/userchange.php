@@ -378,7 +378,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                         $surnamequery = $_POST['surname'];
                         $lastnamequery = $_POST['lastname'];
                         $placequery = $_POST['place'];
-                            include "..\\..\\includes\\db.inc.php";
+                        include "..\\..\\includes\\db.inc.php";
                         $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$mailquery'";
                         $userindb = $link->query("SELECT id FROM user WHERE mail = '$mailquery'")->fetch_object()->id;
                         $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));

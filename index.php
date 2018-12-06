@@ -1,15 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
+include "includes\\rememberme.inc.php";
 
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL =/pages/productive/login.php\">";
-
-} ELSE {
-    $usermail = $_COOKIE['usermail'];
-    $usersurname = $_COOKIE['usersurname'];
-    $userlastname = $_COOKIE['userlastname'];
-
+if (isset($usermail)){
     ?>
 
     <!DOCTYPE html>
