@@ -46,10 +46,7 @@ session_start();
     } ELSE {
         $mail = $_POST['mail'];
         $password = $_POST['password'];
-        $benutzer = "root";
-        $passwort = "WebEng2018";
-        $dbname = "webengineering";
-        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+        include "..\\..\\includes\\db.inc.php";
         mysqli_select_db($link, $dbname);
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$mail'";
         $db = mysqli_query($link, "$select") or die(mysqli_error($link));

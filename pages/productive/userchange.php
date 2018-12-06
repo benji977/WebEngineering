@@ -1,15 +1,19 @@
 <?php
 session_start();
 
-
-
-if(empty($_SESSION['usermail'])){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
-}ELSE {
-    $usersurname = $_SESSION['usersurname'];
-    $userlastname = $_SESSION['userlastname'];
-
-
+if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
+    if ((!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname']))){
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL =./pages/productive/login.php\">";
+    }ELSE {
+        $usermail = $_SESSION['usermail'];
+        $usersurname = $_COOKIE['usersurname'];
+        $userlastname = $_COOKIE['userlastname'];
+    }
+} ELSE {
+    $usermail = $_COOKIE['usermail'];
+    $usersurname = $_COOKIE['usersurname'];
+    $userlastname = $_COOKIE['userlastname'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -321,6 +325,7 @@ if(empty($_SESSION['usermail'])){
 
                     if(isset ($_POST['option'])){
                         $type = $_POST['option'];
+                        echo $type;
 
                     if ($type = "delete"){
 
@@ -512,6 +517,3 @@ if(empty($_SESSION['usermail'])){
 </body>
 </html>
 
-    <?php
-    }
-    ?>

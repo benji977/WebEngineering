@@ -319,8 +319,8 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
         if (!isset($_POST['email']) OR !isset ($_POST['password'])OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
             echo "";
         }ELSE {
-            $usersurname = $_SESSION['usersurname'];
-            $userlastname = $_SESSION['userlastname'];
+            $usersurname = $_COOKIE['usersurname'];
+            $userlastname = $_COOKIE['userlastname'];
 
             $feld1 = $_POST['email'];
             $feld2 = $_POST['password'];
