@@ -337,11 +337,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                                 </thead>
                                 <tbody>
                                 <?PHP
-                                $benutzer = "root";
-                                $passwort = "WebEng2018";
-                                $dbname = "webengineering";
-                                $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
-                                mysqli_select_db($link, $dbname);
+                                include "..\\..\\includes\\db.inc.php";
                                 $abfrage = "select surname, lastname, mail, id from user";
                                 $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 

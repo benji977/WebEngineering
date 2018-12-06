@@ -332,11 +332,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                         echo "delete";
 
                         $userid = $_POST['id'];
-                        $benutzer = "root";
-                        $passwort = "WebEng2018";
-                        $dbname = "webengineering";
-                        $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
-                        mysqli_select_db($link, $dbname);
+                        include "..\\..\\includes\\db.inc.php";
                         $insert = "DELETE FROM user  WHERE id= '$userid'";
                         $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
                         mysqli_close($link);
@@ -358,11 +354,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
 
                     if (!isset($_POST['email']) OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place']) OR !isset ($_POST['option'])){
                         $userid = $_POST['bearbeiten'];
-                        $benutzer = "root";
-                        $passwort = "WebEng2018";
-                        $dbname = "webengineering";
-                        $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
-                        mysqli_select_db($link, $dbname);
+                        include "..\\..\\includes\\db.inc.php";
                         $abfrage = "select surname, lastname, mail, id from user";
                         $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
@@ -386,11 +378,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                         $surnamequery = $_POST['surname'];
                         $lastnamequery = $_POST['lastname'];
                         $placequery = $_POST['place'];
-                        $benutzer = "root";
-                        $passwort = "WebEng2018";
-                        $dbname = "webengineering";
-                        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
-                        mysqli_select_db($link, $dbname);
+                            include "..\\..\\includes\\db.inc.php";
                         $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$mailquery'";
                         $userindb = $link->query("SELECT id FROM user WHERE mail = '$mailquery'")->fetch_object()->id;
                         $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
@@ -408,13 +396,9 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                             $surnamequery = $_POST['surname'];
                             $lastnamequery = $_POST['lastname'];
                             $placequery = $_POST['place'];
-                            $benutzer = "root";
-                            $passwort = "WebEng2018";
-                            $dbname = "webengineering";
 
+                            include "..\\..\\includes\\db.inc.php";
 
-                            $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
-                            mysqli_select_db($link, $dbname);
                             $insert = "UPDATE user SET mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , place = '$placequery'  WHERE id= '$userid'";
                             $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                             mysqli_close($link);

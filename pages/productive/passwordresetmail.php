@@ -50,10 +50,6 @@ require_once('class.phpmailer.php');
 
         $usermail = $_POST['mail'];
 
-        $benutzer = "root";
-        $passwort = "WebEng2018";
-        $dbname = "webengineering";
-
         function random_string()
         {
             if (function_exists('random_bytes')) {
@@ -71,8 +67,7 @@ require_once('class.phpmailer.php');
             return $str;
         }
 
-        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
-        mysqli_select_db($link, $dbname);
+        include "..\\..\\includes\\db.inc.php";
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
         $db = mysqli_query($link, "$select") or die(mysqli_error($link));
 

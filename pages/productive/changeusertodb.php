@@ -14,12 +14,8 @@ if(empty($_POST['option'])){
     $feld2 = $_POST['surname'];
     $feld3 = $_POST['lastname'];
     $feld4 = $_POST['place'];
-    $benutzer = "root";
-    $passwort = "WebEng2018";
-    $dbname = "webengineering";
 
-    $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
-    mysqli_select_db($link, $dbname);
+    include "..\\..\\includes\\db.inc.php";
 
 
     if ($type != "delete") {

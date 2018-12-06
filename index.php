@@ -5,7 +5,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
     if ((!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname']))){
         echo "<meta http-equiv=\"refresh\" content=\"0; URL =./pages/productive/login.php\">";
     }ELSE {
-        $usermail = $_SESSION['usermail'];
+        $usermail = $_COOKIE['usermail'];
         $usersurname = $_COOKIE['usersurname'];
         $userlastname = $_COOKIE['userlastname'];
     }
