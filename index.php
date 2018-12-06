@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-include "includes\\rememberme.inc.php";
-
+include "includes\\checklogin.inc.php";
 if (isset($usermail)){
     ?>
 
