@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
-    if (!isset($_COOKIE['usersurname']) OR !isset($_COOKIE['userlastname'])) {
-    }
-}
+
     ?>
 
     <!DOCTYPE html>
