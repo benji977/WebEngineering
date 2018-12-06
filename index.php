@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
+
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL =/pages/productive/login.php\">";
+
+} ELSE {
+    $usermail = $_COOKIE['usermail'];
+    $usersurname = $_COOKIE['usersurname'];
+    $userlastname = $_COOKIE['userlastname'];
 
     ?>
 
@@ -165,7 +175,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs"><?php echo $usersurname," ", $userlastname?></span>
+                                <span class="hidden-xs"><?php echo $usersurname, " ", $userlastname ?></span>
                             </a>
                             <ul class="dropdown-menu">
 
@@ -532,10 +542,10 @@
                                         </ul>
                                     </div>
                                     <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
+                                                class="fa fa-minus"></i>
                                     </button>
                                     <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i
-                                            class="fa fa-times"></i>
+                                                class="fa fa-times"></i>
                                     </button>
                                 </div>
                                 <!-- /. tools -->
@@ -641,3 +651,7 @@
         <script src="dist/js/demo.js"></script>
     </body>
     </html>
+
+    <?php
+}
+?>
