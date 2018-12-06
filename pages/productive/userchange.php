@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 if(empty($_SESSION['usermail'])){
     echo "<meta http-equiv=\"refresh\" content=\"0; URL=login.php\">";
 }ELSE {
@@ -315,7 +317,41 @@ if(empty($_SESSION['usermail'])){
 
                     <?PHP
 
-                    if (!isset($_POST['email']) OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place'])) {
+
+
+                    if(isset ($_POST['option'])){
+                        $type = $_POST['option'];
+
+                    if ($type = "delete"){
+
+                        echo "delete";
+
+                        $userid = $_POST['id'];
+                        $benutzer = "root";
+                        $passwort = "WebEng2018";
+                        $dbname = "webengineering";
+                        $link=mysqli_connect("probst.synology.me", $benutzer, $passwort);
+                        mysqli_select_db($link, $dbname);
+                        $insert = "DELETE FROM user  WHERE id= '$userid'";
+                        $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                        mysqli_close($link);
+
+                        $userid = "";
+                        $mailquery = "";
+                        $surnamequery = "";
+                        $lastnamequery = "";
+                        $placequery = "";
+
+                        if ($db == true) {
+                            $string = "Nutzer gelöscht";
+                        }else{
+                            $string = "Löschen nicht erfolgreich";
+                        }
+                        }
+                    }
+
+
+                    if (!isset($_POST['email']) OR !isset ($_POST['surname'])OR !isset ($_POST['lastname'])OR !isset ($_POST['place']) OR !isset ($_POST['option'])){
                         $userid = $_POST['bearbeiten'];
                         $benutzer = "root";
                         $passwort = "WebEng2018";
@@ -335,6 +371,11 @@ if(empty($_SESSION['usermail'])){
 
 
                     }else {
+                        $type = $_POST['option'];
+
+
+                        if($type != "delete"){
+
                         $userid = $_POST['id'];
                         $mailquery = $_POST['email'];
                         $surnamequery = $_POST['surname'];
@@ -343,17 +384,42 @@ if(empty($_SESSION['usermail'])){
                         $benutzer = "root";
                         $passwort = "WebEng2018";
                         $dbname = "webengineering";
-
-
                         $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
                         mysqli_select_db($link, $dbname);
-                        $insert = "UPDATE user SET mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , place = '$placequery'  WHERE id= '$userid'";
+                        $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$mailquery'";
+                        $userindb = $link->query("SELECT id FROM user WHERE mail = '$mailquery'")->fetch_object()->id;
                         $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
                         mysqli_close($link);
 
-                        if ($db1 == true) {
-                            $string = "Eintrag wurde erfasst";
+                        $row = $db1->fetch_object()->count;
+
+                        if ($row > 0 AND $userid != $userindb) {
+                            $string = "Email bereits vergeben";
+                        } else {
+
+                            $userid = $_POST['id'];
+                            $mailquery = $_POST['email'];
+                            $surnamequery = $_POST['surname'];
+                            $lastnamequery = $_POST['lastname'];
+                            $placequery = $_POST['place'];
+                            $benutzer = "root";
+                            $passwort = "WebEng2018";
+                            $dbname = "webengineering";
+
+
+                            $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+                            mysqli_select_db($link, $dbname);
+                            $insert = "UPDATE user SET mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , place = '$placequery'  WHERE id= '$userid'";
+                            $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                            mysqli_close($link);
+
+                            if ($db1 == true) {
+                                $string = "Eintrag wurde erfasst";
+                            }
                         }
+                    }
+
                     }
 
                     ?>
@@ -375,9 +441,13 @@ if(empty($_SESSION['usermail'])){
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <label >Mitarbeiternummer</label>
+                                    <input type="text" class="form-control" readonly="readonly" name="id" id="id" value=<?php echo $userid; ?>>
+                                </div>
                                     <label for="email">Email Adresse</label>
                                     <input type="email" class="form-control" name="email" id="email" value=<?php echo $mailquery; ?>>
-                                </div>
                                 <div class="form-group">
                                     <label>Vorname</label>
                                     <input type="surname" class="form-control" name="surname" id="surname" value=<?php echo $surnamequery; ?>>
@@ -389,11 +459,8 @@ if(empty($_SESSION['usermail'])){
                                 <div class="form-group">
                                     <label>Arbeitsort</label>
                                     <input type="text" class="form-control" name="place" id="Arbeitsort" value=<?php echo $placequery; ?>>
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="id" id="id" value=<?php echo $userid; ?>>
-                                </div>
                             </div>
+
 
 
                             <!-- /.box-body -->

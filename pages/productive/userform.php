@@ -335,6 +335,21 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
             $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
             mysqli_select_db($link, $dbname);
+            $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$feld1'";
+            $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            mysqli_close($link);
+
+            $row = $db1->fetch_object()->count;
+
+        if($row > 0)
+        {
+            $string = "Email bereits vergeben";
+        }
+        else
+        {
+
+            $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+            mysqli_select_db($link, $dbname);
             $insert = "INSERT INTO user (mail, password, surname, lastname, place) values ('$feld1', '$hashed_password', '$feld3', '$feld4', '$feld5')";
             $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
             mysqli_close($link);
@@ -343,6 +358,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
             if ($db1 == true) {
                 $string = "Eintrag wurde erfasst";
             }
+        }
         }
         ?>
         <section class="content">
