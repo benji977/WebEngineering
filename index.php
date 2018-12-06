@@ -2,13 +2,13 @@
 session_start();
 
 if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
-    if (!isset($_COOKIE['usersurname']) OR !isset($_COOKIE['userlastname'])){
+    #if (!isset($_COOKIE['usersurname']) OR !isset($_COOKIE['userlastname'])){
         #echo "<meta http-equiv=\"refresh\" content=\"0; URL =./pages/productive/login.php\">";
-    }ELSE {
+    #}ELSE {
         #$usermail = $_COOKIE['usermail'];
         #$usersurname = $_COOKIE['usersurname'];
         #$userlastname = $_COOKIE['userlastname'];
-    }
+    #}
 } ELSE {
     #$usermail = $_COOKIE['usermail'];
     #$usersurname = $_COOKIE['usersurname'];
