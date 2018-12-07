@@ -2,9 +2,11 @@
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require_once '..\\..\\PHPMailer\\src\\Exception.php';
 require_once '..\\..\\PHPMailer\\src\\PHPMailer.php';
-//require_once '..\\..\\PHPMailer\\src\\SMTP.php'
+require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
 ?>
 
@@ -112,7 +114,17 @@ require_once '..\\..\\PHPMailer\\src\\PHPMailer.php';
             $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
             $mail->Body = "$body";
 
-            $mail->send();
+            try{
+                $mail->send();
+            }
+            catch (Exception $e)
+            {
+                echo $e->errorMessage();
+            }
+            catch (\Exception $e)
+            {
+                echo $e->getMessage();
+            }
             /*
             if (!$mail->Send()) {
                 $string = "Wenn Mail erfasst, wurde Passwort verschickt Fehler";
