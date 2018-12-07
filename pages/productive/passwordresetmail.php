@@ -113,6 +113,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->Subject = "Prüfungsplaner Passwort reset";
             $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
             $mail->Body = "$body";
+            $mail->SMTPDebug = 4;
 
             try{
                 $mail->send();
