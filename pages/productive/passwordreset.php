@@ -1,6 +1,39 @@
 <?PHP
 session_start();
 
+if (isset($_POST['password']) AND isset($_GET['userid'])) {
+    $id = $_GET['userid'];
+    $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    include "..\\..\\includes\\db.inc.php";
+    $update = "UPDATE user SET password = '$hashed_password' WHERE id = '$id'";
+    $db = mysqli_query($link, $update) or die(mysqli_error($link));
+
+    mysqli_close($link);
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
+
+}elseif (isset($_GET['userid']) AND isset($_GET['code'])) {
+    $id = $_GET['userid'];
+    $passwortcodel = $_GET['code'];
+
+    include "..\\..\\includes\\db.inc.php";
+    $select = "SELECT COUNT(*) AS sum FROM user WHERE id = '$id'";
+    $db = mysqli_query($link, $select) or die(mysqli_error($link));
+
+    $row = mysqli_fetch_assoc($db);
+    $sum = $row['sum'];
+
+
+    if ($sum != 0) {
+        $passwortcodedb = $link->query("SELECT passwortcode FROM user WHERE id = '$id'")->fetch_object()->passwortcode;
+        $passwortcode_time = $link->query("SELECT passwortcode_time FROM user WHERE id = '$id'")->fetch_object()->passwortcode_time;
+        $datetime1 = strtotime($passwortcode_time);
+        $datetime2 = strtotime(date("Y-m-d H:i:s"));
+        $timecontrol = ($datetime2-$datetime1)/3600;
+        if ($passwortcodel == $passwortcodedb AND $timecontrol>=0 AND $timecontrol<=24){
+            mysqli_close($link);
+
 ?>
 
 <!DOCTYPE html>
@@ -39,42 +72,21 @@ session_start();
     </div>
     <!-- /.login-logo -->
 
-    <?php
-    include "..\\..\\includes\\db.inc.php";
-    $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
-    $db = mysqli_query($link, $select) or die(mysqli_error($link));
-
-    $row = mysqli_fetch_assoc($db);
-    $sum = $row['sum'];
-
-    if ($sum != 0) {
-        $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-        $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
-    }
-    ?>
-
-
         <div class="login-box-body">
             <p class="login-box-msg">Passwort zurücksetzen</p>
 
-            <form action=passwordresetmail.php method="post">
-                <div class="form-group has-feedback">
-                    <?php  if (!isset($string)) {
-                    }else{
-
-                        echo "<p class='login-box-msg'>$string</p>";
-                    }
-                    ?>
-                    <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <form action=<?php echo 'passwordreset.php?userid='.$id?> method="post">
+                <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" class="form-control" name="password" id="password"
+                           required minlength="3" maxlength="45" placeholder="Passwort">
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Passwort ändern</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -104,3 +116,17 @@ session_start();
         </body>
         </html>
 
+        <?php
+        }else{
+            /*TODO
+                Hinweis dass der Link abgelaufen ist und redirect zum login
+            */
+        }
+    }
+    }else{
+    /*TODO
+        Hinweis dass der Link ungültig ist und redirect zum Login (bereits vorhanden)
+    */
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
+}
+    ?>
