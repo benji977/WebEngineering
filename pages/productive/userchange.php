@@ -380,6 +380,13 @@ if (isset($usermail)) {
 
                                 $row = $db1->fetch_object()->count;
 
+                                if(row >0){
+                                    $userindb = $link->query("SELECT id FROM contact WHERE mail = '$mailquery'")->fetch_object()->id;
+                                }else{
+                                    $userindb = $userid;
+                                }
+
+
                                 if ($row > 0 AND $userid != $userindb) {
                                     $string = "Email bereits vergeben";
                                 } else {
