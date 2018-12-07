@@ -46,11 +46,9 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
     <?php
 
-    if(empty($_POST['mail'])){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=passwordreset.php\">";
-}ELSE {
+    if(isset($_POST['mail'])){
 
-        $usermail = $_POST['mail'];
+       $usermail = $_POST['mail'];
 
         function random_string()
         {
