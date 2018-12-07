@@ -113,29 +113,21 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->Subject = "Prüfungsplaner Passwort reset";
             $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
             $mail->Body = "$body";
-            $mail->SMTPDebug = 4;
+            //$mail->SMTPDebug = 4;
 
             try{
                 $mail->send();
+                echo 'Ein Email mit dem Passwort '.$passwortcode.' wurde an  verschickt.';
             }
             catch (Exception $e)
             {
-                echo $e;
                 echo $e->errorMessage();
             }
             catch (\Exception $e)
             {
-                echo $e;
                 echo $e->getMessage();
             }
-            /*
-            if (!$mail->Send()) {
-                $string = "Wenn Mail erfasst, wurde Passwort verschickt Fehler";
-            } else {
-                $string = "Wenn Mail erfasst, wurde Passwort verschickt Erfolgreichg";
-            }
-            */
-            echo 'Ein Email mit dem Passwort '.$passwortcode.' wurde an  verschickt.';
+
 
         }
     }
