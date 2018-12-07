@@ -301,18 +301,6 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Kontakt erfassen
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Kontakte</a></li>
-                <li class="active">Kontakt erfassen</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
         <section class="content">
             <div class="row">
                 <!-- left column -->
@@ -320,32 +308,40 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Kontaktangaben</h3>
+                            <h3 class="box-title">Persönliche Angaben</h3>
+                            <?php  if (!isset($string)) {
+                            }else{
+
+                                echo "<p class='login-box-msg'>$string</p>";
+                            }
+                            ?>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="userform.php"
+                              method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label>Firmenname</label>
-                                    <input type="text" class="form-control" id="Firmenname" placeholder="Firmenname">
+                                    <label>Firma</label>
+                                    <input type="text" class="form-control" name="company" id="company" required minlength="3" maxlength="45" placeholder="Firma">
                                 </div>
                                 <div class="form-group">
                                     <label>Anrede</label>
-                                    <input type="text" class="form-control" id="Anrede" placeholder="Anrede">
-                                </div>
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" id="FName" placeholder="Name">
-                                </div>
+                                    <select class="form-control select2" style="width: 100%;">
+                                        <option selected="selected">Herr</option>
+                                        <option>Frau</option>
+                                    </select>
                                 <div class="form-group">
                                     <label>Vorname</label>
-                                    <input type="text" class="form-control" id="FVorname" placeholder="Vorname">
+                                    <input type="surname" class="form-control" name="surname" id="surname" required minlength="3" maxlength="45" placeholder="Vorname">
                                 </div>
                                 <div class="form-group">
+                                    <label>Nachname</label>
+                                    <input type="text" class="form-control" name="lastname"id="Nachname" required minlength="3" maxlength="45" placeholder="Nachname">
+                                </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email Adresse</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                        <label for="email">Email Adresse</label>
+                                        <input type="email" class="form-control" name="email" id="email" required placeholder="Email">
                                     </div>
                             </div>
                             <!-- /.box-body -->
@@ -357,6 +353,8 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                     </div>
                 </div>
             </div>
+
+
             <!-- /.box -->
 
 
