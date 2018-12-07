@@ -46,9 +46,8 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
     <?php
 
-    if(empty($_POST['mail'])){
-    echo "<meta http-equiv=\"refresh\" content=\"0; URL=passwordreset.php\">";
-}ELSE {
+    if(isset($_POST['mail'])) {
+
 
         $usermail = $_POST['mail'];
 
@@ -78,53 +77,55 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
         $sum = $row['sum'];
 
 
-    if ($sum == 0) {
-        $string = "Wenn Mail erfasst, wurde Passwort verschickt";
-    } else {
-
-        $passwortcode = random_string();
-        $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-        $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
-
-
-        $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
-
-        $body = '<h3>Hallo '.'username'.'</h3><br>Ihr neues Kennwort lautet'.'password'.'.';
-
-        $mail = new PHPMailer(TRUE);
-        $mail->IsSMTP();
-        $mail->CharSet = "UTF-8";
-        $mail->SMTPSecure = 'tls';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->Username = 'pruefungsplaner2018@gmail.com';
-        $mail->Password = 'WebEng2018';
-        $mail->SMTPAuth = true;
-
-        $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-        $mail->AddAddress($usermail);
-        $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-
-        $mail->IsHTML(true);
-        $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
-        $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
-        $mail->Body = "$body";
-
-        if (!$mail->Send()) {
+        if ($sum == 0) {
             $string = "Wenn Mail erfasst, wurde Passwort verschickt";
         } else {
-            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
-        }
 
-    }
+            $passwortcode = random_string();
+            $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
+
+
+            #$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
+
+            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . 'password' . '.';
+
+            $mail = new PHPMailer(TRUE);
+            $mail->IsSMTP();
+            $mail->CharSet = "UTF-8";
+            $mail->SMTPSecure = 'tls';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->Username = 'pruefungsplaner2018@gmail.com';
+            $mail->Password = 'WebEng2018';
+            $mail->SMTPAuth = true;
+
+            $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
+            $mail->AddAddress($usermail);
+            $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
+
+            $mail->IsHTML(true);
+            $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
+            $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+            $mail->Body = "$body";
+
+            if (!$mail->Send()) {
+                $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+            } else {
+                $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+            }
+            echo 'Ein Email mit dem Kennwort wurde an  '.$usermail.' verschickt.';
+
+        }
+    } ELSE {
     ?>
 
 
         <div class="login-box-body">
             <p class="login-box-msg">Passwort zurücksetzen</p>
 
-            <form action=passwordreset.php method="post">
+            <form action=passwordresetmail.php method="post">
                 <div class="form-group has-feedback">
                     <?php  if (!isset($string)) {
                     }else{
