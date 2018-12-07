@@ -318,34 +318,34 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
         <?PHP
 
 
-        if (isset ($_POST['option'])) {
-            $type = $_POST['option'];
+        if (isset ($_POST['delete'])) {
 
-            if ($type = "delete") {
+            $userid = $_POST['id'];
+            include "..\\..\\includes\\db.inc.php";
+            $insert = "DELETE FROM contact  WHERE id= '$userid'";
+            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            mysqli_close($link);
 
-                $userid = $_POST['id'];
-                include "..\\..\\includes\\db.inc.php";
-                $insert = "DELETE FROM contact  WHERE id= '$userid'";
-                $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                mysqli_close($link);
+            $userid = "";
+            $mailquery = "";
+            $surnamequery = "";
+            $lastnamequery = "";
+            $salquery = "";
+            $companyquery = "";
 
-                $userid = "";
-                $mailquery = "";
-                $surnamequery = "";
-                $lastnamequery = "";
-                $salquery = "";
-                $companyquery ="";
+            if ($db == true) {
 
-                if ($db == true) {
-                    $string = "Nutzer gelöscht";
-                } else {
-                    $string = "Löschen nicht erfolgreich";
-                }
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+                ?>
+                <script>alert("Löschen war erfolgreich!");</script>
+                <?php
+            } else {
+                $string = "Löschen nicht erfolgreich";
             }
         }
 
 
-        if (!isset($_POST['company']) OR !isset ($_POST['sal']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname']) OR !isset ($_POST['option'])) {
+        if (!isset($_POST['company']) OR !isset ($_POST['sal']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname'])) {
             $userid = $_POST['bearbeiten'];
             include "..\\..\\includes\\db.inc.php";
             $abfrage = "select company, sal, surname, lastname, mail, id from contact";
@@ -362,10 +362,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
 
         } else {
-            $type = $_POST['option'];
-
-
-            if ($type != "delete") {
+            if (isset ($_POST['change'])) {
 
                 $userid = $_POST['id'];
                 $companyquery = $_POST['company'];
@@ -381,7 +378,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
                 $row = $db1->fetch_object()->count;
 
-                if(row >0){
+                if($row >0){
                     $userindb = $link->query("SELECT id FROM contact WHERE mail = '$mailquery'")->fetch_object()->id;
                 }else{
                     $userindb = $userid;
@@ -471,10 +468,10 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" name="option" value="change" class="btn btn-primary">
+                                <button type="submit" name="change" value="change" class="btn btn-primary">
                                     Speichern
                                 </button>
-                                <button type="submit" name="option" value="delete" class="btn btn-primary">
+                                <button type="submit" name="delete" value="delete" class="btn btn-primary">
                                     Löschen
                                 </button>
                             </div>
