@@ -103,7 +103,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->SMTPAuth = true;
 
             $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-            $mail->AddAddress("benjamin.probst@hispeed.ch");
+            $mail->AddAddress($usermail);
             $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
 
             $mail->IsHTML(true);
