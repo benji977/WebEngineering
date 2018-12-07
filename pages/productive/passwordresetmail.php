@@ -46,7 +46,11 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
     <?php
 
+echo "wassup";
+
     if(isset($_POST['mail'])){
+
+        echo "tuta";
 
        $usermail = $_POST['mail'];
 
