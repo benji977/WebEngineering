@@ -358,9 +358,16 @@ if (isset($usermail)) {
                                         <input type="text" class="form-control" id="Geräte" placeholder="Geräte">
                                     </div>
                                     <div class="form-group">
-                                        <label>Verantwortlicher</label>
-                                        <input type="text" class="form-control" id="Verantwortlicher"
-                                               placeholder="Verantwortlicher">
+                                        <label>Verantwortlicher extern</label>
+                                        <input type="text" class="form-control" id="VerantwortlicherEX"
+                                               placeholder="Verantwortlicher extern">
+                                               
+                                    </div>
+                                                                        <div class="form-group">
+                                        <label>Verantwortlicher intern</label>
+                                        <input type="text" class="form-control" id="VerantwortlicherIn"
+                                               placeholder="Verantwortlicher intern">
+                                               
                                     </div>
                                 </div>
                                 <!-- /.box-body -->
