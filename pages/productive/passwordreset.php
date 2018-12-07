@@ -1,13 +1,6 @@
 <?PHP
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require_once '..\\..\\PHPMailer\\src\\Exception.php';
-require_once '..\\..\\PHPMailer\\src\\PHPMailer.php';
-require_once '..\\..\\PHPMailer\\src\\SMTP.php'
-
 ?>
 
 <!DOCTYPE html>
@@ -47,86 +40,17 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
     <!-- /.login-logo -->
 
     <?php
+    include "..\\..\\includes\\db.inc.php";
+    $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
+    $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
-    if(isset($_POST['mail'])) {
+    $row = mysqli_fetch_assoc($db);
+    $sum = $row['sum'];
 
-
-        $usermail = $_POST['mail'];
-
-        function random_string()
-        {
-            if (function_exists('random_bytes')) {
-                $bytes = random_bytes(16);
-                $str = bin2hex($bytes);
-            } else if (function_exists('openssl_random_pseudo_bytes')) {
-                $bytes = openssl_random_pseudo_bytes(16);
-                $str = bin2hex($bytes);
-            } else if (function_exists('mcrypt_create_iv')) {
-                $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
-                $str = bin2hex($bytes);
-            } else {
-                $str = md5(uniqid('NNFX?yupyN,6?dk', true));
-            }
-            return $str;
-        }
-
-        include "..\\..\\includes\\db.inc.php";
-        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
-        $db = mysqli_query($link, $select) or die(mysqli_error($link));
-
-
-        $row = mysqli_fetch_assoc($db);
-        $sum = $row['sum'];
-
-        if ($sum == 0) {
-            $string = "Bitte geben Sie eine gültige Email Adresse ein.";
-        } else {
-
-            $passwortcode = random_string();
-            $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-            $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
-
-
-            $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $id . '&code=' . $passwortcode;
-
-            $body = '<h3>Hallo ' . $surnamequery . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode ;
-
-            $mail = new PHPMailer();
-            $mail->IsSMTP();
-            $mail->CharSet = "UTF-8";
-            $mail->SMTPSecure = 'tls';
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 587;
-            $mail->Username = 'pruefungsplaner2018@gmail.com';
-            $mail->Password = 'WebEng2018';
-            $mail->SMTPAuth = true;
-
-            $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-            $mail->AddAddress($usermail);
-            $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-
-            $mail->IsHTML(true);
-            $mail->Subject = "Prüfungsplaner Passwort reset";
-            $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
-            $mail->Body = "$body";
-            //$mail->SMTPDebug = 4;
-
-            try{
-                $mail->send();
-                echo 'Ein Email mit dem Passwort '.$passwortcode.' wurde an  verschickt.';
-            }
-            catch (Exception $e)
-            {
-                echo $e->errorMessage();
-            }
-            catch (\Exception $e)
-            {
-                echo $e->getMessage();
-            }
-
-
-        }
+    if ($sum != 0) {
+        $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+        $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
     }
     ?>
 
