@@ -1,19 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
-    if ((!isset($_SESSION['usermail']) OR !isset($_SESSION['usersurname']) OR !isset($_SESSION['userlastname']))){
-        echo "<meta http-equiv=\"refresh\" content=\"0; URL =./pages/productive/login.php\">";
-    }ELSE {
-        $usermail = $_SESSION['usermail'];
-        $usersurname = $_COOKIE['usersurname'];
-        $userlastname = $_COOKIE['userlastname'];
-    }
-} ELSE {
-    $usermail = $_COOKIE['usermail'];
-    $usersurname = $_COOKIE['usersurname'];
-    $userlastname = $_COOKIE['userlastname'];
-}
+include "includes\\checklogin.inc.php";
+if (isset($usermail)){
     ?>
 
     <!DOCTYPE html>
@@ -179,7 +168,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs"><?php echo $usersurname," ", $userlastname?></span>
+                                <span class="hidden-xs"><?php echo $usersurname, " ", $userlastname ?></span>
                             </a>
                             <ul class="dropdown-menu">
 
@@ -546,10 +535,10 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
                                         </ul>
                                     </div>
                                     <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
+                                                class="fa fa-minus"></i>
                                     </button>
                                     <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i
-                                            class="fa fa-times"></i>
+                                                class="fa fa-times"></i>
                                     </button>
                                 </div>
                                 <!-- /. tools -->
@@ -655,3 +644,7 @@ if (!isset($_COOKIE['password']) OR !isset($_COOKIE['usermail'])){
         <script src="dist/js/demo.js"></script>
     </body>
     </html>
+
+    <?php
+}
+?>

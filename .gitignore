@@ -7,5 +7,6 @@
 /nbproject/private/
 /node_modules/
 ad.js
+.env
 TODO
 test.html

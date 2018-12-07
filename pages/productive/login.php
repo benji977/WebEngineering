@@ -46,10 +46,7 @@ session_start();
     } ELSE {
         $mail = $_POST['mail'];
         $password = $_POST['password'];
-        $benutzer = "root";
-        $passwort = "WebEng2018";
-        $dbname = "webengineering";
-        $link = mysqli_connect("probst.synology.me", $benutzer, $passwort);
+        include "..\\..\\includes\\db.inc.php";
         mysqli_select_db($link, $dbname);
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$mail'";
         $db = mysqli_query($link, "$select") or die(mysqli_error($link));
@@ -60,17 +57,17 @@ session_start();
         }else{
             $passworddb = $link->query("SELECT password FROM user WHERE mail = '$mail'")->fetch_object()->password;
             if (password_verify($password, $passworddb)) {
+                $_SESSION['usermail'] = $mail;
+                $usersurname = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
+                $_SESSION['usersurname'] = $usersurname;
+                $userlastname= $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
+                $_SESSION['userlastname'] = $userlastname;
                 if (isset($_POST['rememberMe']) && $_POST['rememberMe']=="yes"){
                     setcookie("usermail", $mail, time()+3600*24*30, "/");
                     setcookie("password", $passworddb, time()+3600*24*30, "/");
+                    setcookie("userlastname", $userlastname, time()+3600*24*30, "/");
+                    setcookie("usersurname", $usersurname, time()+3600*24*30, "/");
                 }
-                $_SESSION['usermail'] = $mail;
-                #$_SESSION['usersurname']
-                $usersurname = $link->query("SELECT surname FROM user WHERE mail = '$mail'")->fetch_object()->surname;
-                setcookie("usersurname", $usersurname, time()+3600*24*30, "/");
-                #$_SESSION['userlastname']
-                $userlastname= $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
-                setcookie("userlastname", $userlastname, time()+3600*24*30, "/");
                 echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
             } else {
                 $string = "E-Mail oder Passwort sind falsch";
