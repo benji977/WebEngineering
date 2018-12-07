@@ -10,7 +10,7 @@ if (isset($usermail)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Raum erfassen</title>
+        <title>Raum bearbeiten</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -297,53 +297,105 @@ if (isset($usermail)) {
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Raum erfassen
+                    Raum bearbeiten
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="#">Räume</a></li>
-                    <li class="active">Raum erfassen</li>
+                    <li class="active">Raum bearbeiten</li>
                 </ol>
             </section>
 
-            <?php
-            if (!isset($_POST['number']) OR !isset ($_POST['place']) OR !isset ($_POST['part']) OR !isset ($_POST['contact'])) {
-                echo "";
-            } ELSE {
+            <?PHP
 
-                $usersurname = $_COOKIE['usersurname'];
-                $userlastname = $_COOKIE['userlastname'];
-
-                $feld1 = $_POST['number'];
-                $feld2 = $_POST['place'];
-                $feld3 = $_POST['part'];
-                $feld4 = $_POST['contact'];
+            if (isset ($_POST['delete'])) {
 
 
+                $roomid = $_POST['id'];
                 include "..\\..\\includes\\db.inc.php";
-                $insert = "SELECT COUNT(number) AS count FROM room WHERE number='$feld1'";
-                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                $insert = "DELETE FROM room  WHERE id= '$roomid'";
+                $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
                 mysqli_close($link);
 
-                $row = $db1->fetch_object()->count;
+                $roomid = "";
+                $numberquery = "";
+                $placequery = "";
+                $partquery = "";
+                $contactquery = "";
 
-                if ($row > 0) {
-                    $string = "Raum bereits erfasst";
+                if ($db == true) {
+
+                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
+                    ?>
+                    <script>alert("Löschen war erfolgreich!");</script>
+                    <?php
                 } else {
+                    $string = "Löschen nicht erfolgreich";
+                }
+            }
 
 
+
+            if (!isset($_POST['number']) OR !isset ($_POST['place']) OR !isset ($_POST['part']) OR !isset ($_POST['contact'])) {
+                $roomid = $_POST['bearbeiten'];
+                include "..\\..\\includes\\db.inc.php";
+                $abfrage = "select surname, lastname, mail, id from user";
+                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                $numberquery = $link->query("SELECT number FROM room WHERE id = $roomid")->fetch_object()->number;
+                $placequery = $link->query("SELECT place FROM room WHERE id = $roomid")->fetch_object()->place;
+                $partquery = $link->query("SELECT part FROM room WHERE id = $roomid")->fetch_object()->part;
+                $contactid = $link->query("SELECT contact_id FROM room WHERE id = $roomid")->fetch_object()->contact_id;
+                $contactquery = $link->query("SELECT mail FROM contact WHERE id = $contactid")->fetch_object()->mail;
+
+
+                mysqli_close($link);
+
+
+            } else {
+                if (isset ($_POST['change'])) {
+
+                    $roomid = $_POST['id'];
+                    $numberquery = $_POST['number'];
+                    $placequery = $_POST['place'];
+                    $partquery = $_POST['part'];
+                    $contactquery = $_POST['contact'];
                     include "..\\..\\includes\\db.inc.php";
-                    $contactid = $link->query("SELECT id FROM contact WHERE mail = '$feld4'")->fetch_object()->id;
-                    $insert = "INSERT INTO room (number, place, part, contact_id) values ('$feld1', '$feld2', '$feld3', '$contactid')";
+                    $insert = "SELECT COUNT(number) AS count FROM room WHERE number='$numberquery'";
+                    $contactid = $link->query("SELECT id FROM contact WHERE mail = '$contactquery'")->fetch_object()->id;
                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                    mysqli_close($link);
 
 
-                    if ($db1 == true) {
-                        $string = "Eintrag wurde erfasst";
+
+                    $row = $db1->fetch_object()->count;
+
+                    if ($row > 0) {
+                        $userindb = $link->query("SELECT id FROM room WHERE number = '$numberquery'")->fetch_object()->id;
+                    } else {
+                        $userindb = $roomid;
+                    }
+
+
+                    if ($row > 0 AND $roomid != $userindb) {
+                        $string = "Raum bereits vergeben";
+                    } else {
+
+
+                        include "..\\..\\includes\\db.inc.php";
+
+                        $insert = "UPDATE room SET id = '$roomid', number = '$numberquery', place = '$placequery' , part = '$partquery', contact_id = '$contactid'  WHERE id= '$roomid'";
+                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                        mysqli_close($link);
+
+                        if ($db1 == true) {
+                            $string = "Eintrag wurde erfasst";
+                        }
                     }
                 }
             }
+
+
+
             ?>
 
             <!-- Main content -->
@@ -364,28 +416,34 @@ if (isset($usermail)) {
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="roomform.php"
+                            <form role="form" action="roomchange.php"
                                   method="post">
                                 <div class="box-body">
                                     <div class="form-group">
+                                        <label>Kontaktnummer</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="id" id="id"
+                                               value=<?php echo $roomid; ?>>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Raumbezeichnung</label>
                                         <input type="text" class="form-control" name="number" id="number"  required minlength="3" maxlength="45" required
-                                               placeholder="Raumbezeichnung">
+                                               value=<?php echo $numberquery; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Ort</label>
-                                        <input type="text" class="form-control" name="place" id="place"   required minlength="3" maxlength="45" placeholder="Ort">
+                                        <input type="text" class="form-control" name="place" id="place"   required minlength="3" maxlength="45" value=<?php echo $placequery; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmerzahl</label>
-                                        <input type="number" class="form-control" name="part" id="part" required minlength="1" maxlength="4" placeholder="Teilnehmerzahl">
+                                        <input type="number" class="form-control" name="part" id="part" required minlength="1" maxlength="4" value=<?php echo $partquery; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Kontakt</label>
                                         <select class="form-control select2"  name="contact" required id="contact" style="width: 100%;">
                                             <?PHP
+                                            echo "<option selected=\"selected\" value ='" . $contactquery . "'>" . $contactquery . "</option>.";
                                             include "..\\..\\includes\\db.inc.php";
-                                            $abfrage = "select mail from contact";
+                                            $abfrage = "select mail from contact where mail != '$contactquery'";
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
@@ -401,8 +459,12 @@ if (isset($usermail)) {
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Speichern</button>
-                                </div>
+                                    <button type="submit" name="change" value="change" class="btn btn-primary">
+                                        Speichern
+                                    </button>
+                                    <button type="submit" name="delete" value="delete" class="btn btn-primary">
+                                        Löschen
+                                    </button>
                             </form>
                         </div>
                     </div>

@@ -389,12 +389,6 @@ if (isset($usermail)) {
                                     $string = "Email bereits vergeben";
                                 } else {
 
-                                    $userid = $_POST['id'];
-                                    $mailquery = $_POST['email'];
-                                    $surnamequery = $_POST['surname'];
-                                    $lastnamequery = $_POST['lastname'];
-                                    $placequery = $_POST['place'];
-
                                     include "..\\..\\includes\\db.inc.php";
 
                                     $insert = "UPDATE user SET mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , place = '$placequery'  WHERE id= '$userid'";
