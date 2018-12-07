@@ -69,8 +69,8 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
         }
 
         include "..\\..\\includes\\db.inc.php";
-        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
-        $db = mysqli_query($link, "$select") or die(mysqli_error($link));
+        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = ".$usermail;
+        $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
 
         $row = mysqli_fetch_assoc($db);
@@ -78,20 +78,20 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
 
         if ($sum == 0) {
-            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+            $string = "Bitte geben Sie eine gültige Email Adresse ein.";
         } else {
 
             $passwortcode = random_string();
-            $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-            $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
+            //$id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+            //$statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            //$surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
 
 
-            #$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
+            //$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
 
             $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode . '.';
 
-            $mail = new PHPMailer(TRUE);
+            $mail = new PHPMailer();
             $mail->IsSMTP();
             $mail->CharSet = "UTF-8";
             $mail->SMTPSecure = 'tls';
@@ -106,7 +106,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
 
             $mail->IsHTML(true);
-            $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
+            $mail->Subject = "Prüfungsplaner Passwort reset";
             $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
             $mail->Body = "$body";
 
