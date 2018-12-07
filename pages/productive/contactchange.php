@@ -21,7 +21,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Kontakt erfassen</title>
+    <title>Kontakt bearbeiten</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -303,7 +303,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Benutzer erfassen
+                Kontakt bearbeiten
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -388,12 +388,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                 if ($row > 0 AND $userid != $userindb) {
                     $string = "Email bereits vergeben";
                 } else {
-
-                    $userid = $_POST['id'];
-                    $mailquery = $_POST['email'];
-                    $surnamequery = $_POST['surname'];
-                    $lastnamequery = $_POST['lastname'];
-                    $sal = $_POST['sal'];
+                    
 
                     include "..\\..\\includes\\db.inc.php";
 

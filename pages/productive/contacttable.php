@@ -352,8 +352,9 @@ if (isset($usermail)) {
                                 </tbody>
                                 <tfoot>
                                 <tr>
+                                    <th>Firma</th>
                                     <th>Vorname</th>
-                                    <th>Name</th>
+                                    <th>Nachname</th>
                                     <th>Email</th>
                                     <th>Option</th>
                                 </tr>
