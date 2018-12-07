@@ -89,7 +89,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
             #$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
 
-            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . 'password' . '.';
+            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode . '.';
 
             $mail = new PHPMailer(TRUE);
             $mail->IsSMTP();
@@ -115,10 +115,10 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             } else {
                 $string = "Wenn Mail erfasst, wurde Passwort verschickt";
             }
-            echo 'Ein Email mit dem Kennwort wurde an  '.$usermail.' verschickt.';
+            echo 'Ein Email mit dem '.$passwortcode.' wurde an  '.$usermail.' verschickt.';
 
         }
-    } ELSE {
+    }
     ?>
 
 
@@ -171,6 +171,3 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
         </body>
         </html>
 
-        <?php
-    }
-    ?>
