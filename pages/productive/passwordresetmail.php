@@ -90,7 +90,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
             //$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
 
-            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode . '.';
+            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode ;
 
             $mail = new PHPMailer();
             $mail->IsSMTP();
