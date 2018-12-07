@@ -119,10 +119,12 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             }
             catch (Exception $e)
             {
+                echo $e;
                 echo $e->errorMessage();
             }
             catch (\Exception $e)
             {
+                echo $e;
                 echo $e->getMessage();
             }
             /*
