@@ -2,7 +2,9 @@
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require_once '..\\..\\PHPMailer\\src\\Exception.php';
 require_once '..\\..\\PHPMailer\\src\\PHPMailer.php';
 require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
@@ -46,13 +48,10 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
     <?php
 
-echo "wassup";
+    if(isset($_POST['mail'])) {
 
-    if(isset($_POST['mail'])){
 
-        echo "tuta";
-
-       $usermail = $_POST['mail'];
+        $usermail = $_POST['mail'];
 
         function random_string()
         {
@@ -73,71 +72,89 @@ echo "wassup";
 
         include "..\\..\\includes\\db.inc.php";
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
-        $db = mysqli_query($link, "$select") or die(mysqli_error($link));
+        $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
 
         $row = mysqli_fetch_assoc($db);
         $sum = $row['sum'];
 
-
-    if ($sum == 0) {
-        $string = "Wenn Mail erfasst, wurde Passwort verschickt";
-    } else {
-
-        $passwortcode = random_string();
-        $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-        $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-        $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
-
-
-        $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
-
-        $body = '<h3>Hallo '.'username'.'</h3><br>Ihr neues Kennwort lautet'.'password'.'.';
-
-        $mail = new PHPMailer(TRUE);
-        $mail->IsSMTP();
-        $mail->CharSet = "UTF-8";
-        $mail->SMTPSecure = 'tls';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->Username = 'pruefungsplaner2018@gmail.com';
-        $mail->Password = 'WebEng2018';
-        $mail->SMTPAuth = true;
-
-        $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-        $mail->AddAddress($usermail);
-        $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-
-        $mail->IsHTML(true);
-        $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
-        $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
-        $mail->Body = "$body";
-
-        if (!$mail->Send()) {
-            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+        if ($sum == 0) {
+            $string = "Bitte geben Sie eine gültige Email Adresse ein.";
         } else {
-            $string = "Wenn Mail erfasst, wurde Passwort verschickt";
-        }
 
+            $passwortcode = random_string();
+            $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
+
+
+            //$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
+
+            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode ;
+
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->CharSet = "UTF-8";
+            $mail->SMTPSecure = 'tls';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->Username = 'pruefungsplaner2018@gmail.com';
+            $mail->Password = 'WebEng2018';
+            $mail->SMTPAuth = true;
+
+            $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
+            $mail->AddAddress($usermail);
+            $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
+
+            $mail->IsHTML(true);
+            $mail->Subject = "Prüfungsplaner Passwort reset";
+            $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+            $mail->Body = "$body";
+            //$mail->SMTPDebug = 4;
+
+            try{
+                $mail->send();
+                echo 'Ein Email mit dem Passwort '.$passwortcode.' wurde an  verschickt.';
+            }
+            catch (Exception $e)
+            {
+                echo $e->errorMessage();
+            }
+            catch (\Exception $e)
+            {
+                echo $e->getMessage();
+            }
+
+
+        }
     }
     ?>
 
 
         <div class="login-box-body">
-            <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
-            <?php  if (!isset($string)) {
-            }else{
-                echo "<p class='login-box-msg'>$string</p>";
-            }
-            ?>
+            <p class="login-box-msg">Passwort zurücksetzen</p>
 
-            <form action="login.php" method="post">
+            <form action=passwordresetmail.php method="post">
                 <div class="form-group has-feedback">
+                    <?php  if (!isset($string)) {
+                    }else{
+
+                        echo "<p class='login-box-msg'>$string</p>";
+                    }
+                    ?>
                     <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
             </form>
-        </div>
 
 
         </div>
@@ -163,6 +180,3 @@ echo "wassup";
         </body>
         </html>
 
-        <?php
-    }
-    ?>
