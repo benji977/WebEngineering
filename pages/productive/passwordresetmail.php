@@ -2,7 +2,9 @@
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
-require_once('class.phpmailer.php');
+
+require_once '..\\..\\PHPMailer\\src\\PHPMailer.php';
+require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
 ?>
 
@@ -88,8 +90,9 @@ require_once('class.phpmailer.php');
 
         $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
 
+        $body = '<h3>Hallo '.'username'.'</h3><br>Ihr neues Kennwort lautet'.'password'.'.';
 
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(TRUE);
         $mail->IsSMTP();
         $mail->CharSet = "UTF-8";
         $mail->SMTPSecure = 'tls';
@@ -99,15 +102,14 @@ require_once('class.phpmailer.php');
         $mail->Password = 'WebEng2018';
         $mail->SMTPAuth = true;
 
-        $mail->From = 'pruefungsplaner2018@gmail.com';
-        $mail->FromName = 'Prüfungsplaner';
+        $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
         $mail->AddAddress($usermail);
         $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
 
         $mail->IsHTML(true);
         $mail->Subject = "PHPMailer Test Subject via Sendmail, basic";
         $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
-        $mail->Body = "Hello";
+        $mail->Body = "$body";
 
         if (!$mail->Send()) {
             $string = "Wenn Mail erfasst, wurde Passwort verschickt";
