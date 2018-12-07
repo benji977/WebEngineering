@@ -68,13 +68,15 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             return $str;
         }
 
-        include "..\\..\\includes\\db.inc.php";
+        /*include "..\\..\\includes\\db.inc.php";
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
         $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
 
         $row = mysqli_fetch_assoc($db);
         $sum = $row['sum'];
+        */
+        $sum = 1;
 
 
         if ($sum == 0) {
@@ -102,7 +104,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->SMTPAuth = true;
 
             $mail->setFrom('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
-            $mail->AddAddress($usermail);
+            $mail->AddAddress("benjamin.probst@hispeed.ch");
             $mail->AddReplyTo('pruefungsplaner2018@gmail.com', 'Prüfungsplaner');
 
             $mail->IsHTML(true);
@@ -111,11 +113,11 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->Body = "$body";
 
             if (!$mail->Send()) {
-                $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+                $string = "Wenn Mail erfasst, wurde Passwort verschickt Fehler";
             } else {
-                $string = "Wenn Mail erfasst, wurde Passwort verschickt";
+                $string = "Wenn Mail erfasst, wurde Passwort verschickt Erfolgreichg";
             }
-            echo 'Ein Email mit dem '.$passwortcode.' wurde an  '.$usermail.' verschickt.';
+            echo 'Ein Email mit dem '.$passwortcode.' wurde an  verschickt.';
 
         }
     }
