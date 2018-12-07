@@ -84,7 +84,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
             $passwortcode = random_string();
             $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            $statement = $link->query("UPDATE user SET passwortcode = '$passwortcode', passwortcode_time = NOW() WHERE id = '$id'");
             $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
 
 
