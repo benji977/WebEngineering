@@ -120,29 +120,20 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
 
         <div class="login-box-body">
-            <p class="login-box-msg">Passwort zurücksetzen</p>
+            <p class="login-box-msg">Anmelden um eine neue Session zu starten</p>
+            <?php  if (!isset($string)) {
+            }else{
+                echo "<p class='login-box-msg'>$string</p>";
+            }
+            ?>
 
-            <form action=passwordreset.php method="post">
+            <form action="login.php" method="post">
                 <div class="form-group has-feedback">
-                    <?php  if (!isset($string)) {
-                    }else{
-
-                        echo "<p class='login-box-msg'>$string</p>";
-                    }
-                    ?>
                     <input type="email" class="form-control" name="mail" id="mail" required placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Senden</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
             </form>
+        </div>
 
 
         </div>
