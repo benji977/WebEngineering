@@ -69,7 +69,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
         }
 
         include "..\\..\\includes\\db.inc.php";
-        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = ".$usermail;
+        $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
         $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
 
