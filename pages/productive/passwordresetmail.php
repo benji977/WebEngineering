@@ -88,7 +88,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
 
 
-            $url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $id . '&code=' . $passwortcode;
+            $url_passwortcode = 'https://probst.synology.me/pages/productive/passwordreset.php?userid=' . $id . '&code=' . $passwortcode;
 
             $body = '<h3>Hallo ' . $surnamequery . '</h3><br>Über den folgenden Link kannst du dein Kennwort neu setzen:<br>'.$url_passwortcode.'<br><br>Nicht vergessen, der Link ist nur 24 Stunden gültig.' ;
 
