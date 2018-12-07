@@ -111,7 +111,7 @@ session_start();
         </form>
 
 
-        <a href="#">Passwort vergessen</a><br>
+        <a href="passwordresetmail.php">Passwort vergessen</a><br>
 
     </div>
 
