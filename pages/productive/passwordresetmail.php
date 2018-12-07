@@ -112,6 +112,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
             $mail->Body = "$body";
 
+            $mail->send();
             /*
             if (!$mail->Send()) {
                 $string = "Wenn Mail erfasst, wurde Passwort verschickt Fehler";
@@ -119,7 +120,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
                 $string = "Wenn Mail erfasst, wurde Passwort verschickt Erfolgreichg";
             }
             */
-            echo 'Ein Email mit dem '.$passwortcode.' wurde an  verschickt.';
+            echo 'Ein Email mit dem Passwort '.$passwortcode.' wurde an  verschickt.';
 
         }
     }
