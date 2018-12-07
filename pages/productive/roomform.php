@@ -345,6 +345,13 @@ if (isset($usermail)) {
                                         <label>Kontakt</label>
                                         <input type="text" class="form-control" id="Kontakt" placeholder="Kontakt">
                                     </div>
+                                    <div class="form-group">
+										<label>Boden</label> <br><label class="radio-inline"> <input
+											type="radio" name="Boden">ansteigend
+										</label> <label class="radio-inline"> <input type="radio"
+											name="Boden">flach
+										</label>
+									</div>
                                 </div>
                                 <!-- /.box-body -->
 

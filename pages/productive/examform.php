@@ -327,16 +327,16 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Datum</label>
-                                        <input type="text" class="form-control" id="Datum" placeholder="Datum">
+                                        <input type="date" class="form-control" id="Datum" placeholder="Datum">
                                     </div>
                                     <div class="form-group">
                                         <label>Startzeitpunkt</label>
-                                        <input type="text" class="form-control" id="Startzeitpunkt"
+                                        <input type="time" class="form-control" id="Startzeitpunkt"
                                                placeholder="Startzeitpunkt">
                                     </div>
                                     <div class="form-group">
                                         <label>Endzeitpunkt</label>
-                                        <input type="text" class="form-control" id="Endzeitpunkt"
+                                        <input type="time" class="form-control" id="Endzeitpunkt"
                                                placeholder="Endzeitpunkt">
                                     </div>
                                     <div class="form-group">
@@ -358,9 +358,16 @@ if (isset($usermail)) {
                                         <input type="text" class="form-control" id="Geräte" placeholder="Geräte">
                                     </div>
                                     <div class="form-group">
-                                        <label>Verantwortlicher</label>
-                                        <input type="text" class="form-control" id="Verantwortlicher"
-                                               placeholder="Verantwortlicher">
+                                        <label>Verantwortlicher extern</label>
+                                        <input type="text" class="form-control" id="VerantwortlicherEX"
+                                               placeholder="Verantwortlicher extern">
+                                               
+                                    </div>
+                                                                        <div class="form-group">
+                                        <label>Verantwortlicher intern</label>
+                                        <input type="text" class="form-control" id="VerantwortlicherIn"
+                                               placeholder="Verantwortlicher intern">
+                                               
                                     </div>
                                 </div>
                                 <!-- /.box-body -->
@@ -371,11 +378,53 @@ if (isset($usermail)) {
                             </form>
                         </div>
                     </div>
-                </div>
                 <!-- /.box -->
+				<div class="col-md-6">
+					<!-- right column -->
+					<!-- Horizontal Form -->
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Transportinformationen</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
 
+							<div class="form-group">
+								<label>Benötigtes Fahrzeug</label> <select class="form-control"
+									id="Fahrzeug">
+									<option value="1">Kein Fahrzeug</option>
+									<option value="2">Transporter</option>
+									<option value="3">Kombi</option>
+									<option value="4">Kleinwagen</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Ausleihzeit</label> <input type="time"
+									class="form-control" name="Ausleihzeit">
 
-                <!-- ./wrapper -->
+							</div>
+							<div class="form-group">
+								<label>Rückgabezeit</label> <input type="time"
+									class="form-control" name="Rückgabezeit">
+							</div>
+
+							<div class="checkbox">
+								<label><input type="checkbox"> Bereits Reserviert</label>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+				</div>
+				<!-- /.box -->
+		
+		</div>
+		<!--/.col (right) -->
+
+	</div>
+	<!-- /.box-body -->
+
+	<!-- ./wrapper -->
 
                 <!-- jQuery 3 -->
                 <script src="../../bower_components/jquery/dist/jquery.min.js"></script>

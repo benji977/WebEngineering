@@ -315,43 +315,101 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
         <!-- Main content -->
 
-    <?php
-    if (!isset($_POST['company']) OR !isset ($_POST['sal']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname']) OR !isset ($_POST['email'])) {
-        echo "";
-    } ELSE {
-        $usersurname = $_COOKIE['usersurname'];
-        $userlastname = $_COOKIE['userlastname'];
-
-        $feld1 = $_POST['company'];
-        $feld2 = $_POST['sal'];
-        $feld3 = $_POST['surname'];
-        $feld4 = $_POST['lastname'];
-        $feld5 = $_POST['email'];
+        <?PHP
 
 
-        include "..\\..\\includes\\db.inc.php";
-        $insert = "SELECT COUNT(mail) AS count FROM contact WHERE mail='$feld5'";
-        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-        mysqli_close($link);
+        if (isset ($_POST['delete'])) {
 
-        $row = $db1->fetch_object()->count;
-
-        if ($row > 0) {
-            $string = "Email bereits vergeben";
-        } else {
-
+            $userid = $_POST['id'];
             include "..\\..\\includes\\db.inc.php";
-            $insert = "INSERT INTO contact (company, sal, surname, lastname, mail) values ('$feld1', '$feld2', '$feld3', '$feld4', '$feld5')";
-            $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            $insert = "DELETE FROM contact  WHERE id= '$userid'";
+            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            mysqli_close($link);
+
+            $userid = "";
+            $mailquery = "";
+            $surnamequery = "";
+            $lastnamequery = "";
+            $salquery = "";
+            $companyquery = "";
+
+            if ($db == true) {
+
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+                ?>
+                <script>alert("Löschen war erfolgreich!");</script>
+                <?php
+            } else {
+                $string = "Löschen nicht erfolgreich";
+            }
+        }
+
+
+        if (!isset($_POST['company']) OR !isset ($_POST['sal']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname'])) {
+            $userid = $_POST['bearbeiten'];
+            include "..\\..\\includes\\db.inc.php";
+            $abfrage = "select company, sal, surname, lastname, mail, id from contact";
+            $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+            $mailquery = $link->query("SELECT mail FROM contact WHERE id = $userid")->fetch_object()->mail;
+            $surnamequery = $link->query("SELECT surname FROM contact WHERE id = $userid")->fetch_object()->surname;
+            $lastnamequery = $link->query("SELECT lastname FROM contact WHERE id = $userid")->fetch_object()->lastname;
+            $salquery = $link->query("SELECT sal FROM contact WHERE id = $userid")->fetch_object()->sal;
+            $companyquery = $link->query("SELECT company FROM contact WHERE id = $userid")->fetch_object()->company;
+
+
             mysqli_close($link);
 
 
-            if ($db1 == true) {
-                $string = "Eintrag wurde erfasst";
+        } else {
+            if (isset ($_POST['change'])) {
+
+                $userid = $_POST['id'];
+                $companyquery = $_POST['company'];
+                $mailquery = $_POST['email'];
+                $surnamequery = $_POST['surname'];
+                $lastnamequery = $_POST['lastname'];
+                $salquery = $_POST['sal'];
+                include "..\\..\\includes\\db.inc.php";
+                $insert = "SELECT COUNT(mail) AS count FROM contact WHERE mail='$mailquery'";
+                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                mysqli_close($link);
+
+                $row = $db1->fetch_object()->count;
+
+                if($row >0){
+                    $userindb = $link->query("SELECT id FROM contact WHERE mail = '$mailquery'")->fetch_object()->id;
+                }else{
+                    $userindb = $userid;
+                }
+
+
+                if ($row > 0 AND $userid != $userindb) {
+                    $string = "Email bereits vergeben";
+                } else {
+
+                    $userid = $_POST['id'];
+                    $mailquery = $_POST['email'];
+                    $surnamequery = $_POST['surname'];
+                    $lastnamequery = $_POST['lastname'];
+                    $sal = $_POST['sal'];
+
+                    include "..\\..\\includes\\db.inc.php";
+
+                    $insert = "UPDATE contact SET company ='$companyquery', mail = '$mailquery' , surname = '$surnamequery', lastname = '$lastnamequery' , sal = '$salquery'  WHERE id= '$userid'";
+                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                    mysqli_close($link);
+
+                    if ($db1 == true) {
+                        $string = "Eintrag wurde erfasst";
+                    }
+                }
             }
+
         }
-    }
-    ?>
+
+        ?>
 
         <section class="content">
             <div class="row">
@@ -370,41 +428,52 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="contactform.php"
+                        <form role="form" action="contactchange.php"
                               method="post">
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label>Kontaktnummer</label>
+                                    <input type="text" class="form-control" readonly="readonly" name="id" id="id"
+                                           value=<?php echo $userid; ?>>
+                                </div>
+                                <div class="form-group">
                                     <label>Firma</label>
                                     <input type="text" class="form-control" name="company" id="company"
-                                           required minlength="3" maxlength="45" placeholder="Firma">
+                                           required minlength="3" maxlength="45" value=<?php echo $companyquery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label>Anrede</label>
                                     <select class="form-control select2"  name="sal" id="sal" style="width: 100%;">
-                                        <option value ="Herr" selected="selected">Herr</option>
+                                        <option value=<?php echo $salquery; ?> selected="selected">Herr</option>
                                         <option value ="Frau">Frau</option>
+                                        <option value ="Herr">Frau</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Vorname</label>
-                                    <input type="text" class="form-control" name="surname" id="surname" required
-                                           minlength="3" maxlength="45" placeholder="Vorname">
+                                    <input type="surname" class="form-control" name="surname" id="surname"
+                                           value=<?php echo $surnamequery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label>Nachname</label>
                                     <input type="text" class="form-control" name="lastname" id="Nachname" required
-                                           minlength="3" maxlength="45" placeholder="Nachname">
+                                           minlength="3" maxlength="45" value=<?php echo $lastnamequery; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email Adresse</label>
                                     <input type="email" class="form-control" name="email" id="email" required
-                                           placeholder="Email">
+                                           value=<?php echo $mailquery; ?>>
                                 </div>
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Speichern</button>
+                                <button type="submit" name="change" value="change" class="btn btn-primary">
+                                    Speichern
+                                </button>
+                                <button type="submit" name="delete" value="delete" class="btn btn-primary">
+                                    Löschen
+                                </button>
                             </div>
                         </form>
                     </div>

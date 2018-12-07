@@ -315,37 +315,39 @@ if (isset($usermail)) {
 
                         <?PHP
 
+                        if (isset ($_POST['delete'])) {
 
-                        if (isset ($_POST['option'])) {
-                            $type = $_POST['option'];
-                            echo $type;
 
-                            if ($type = "delete") {
+                            $userid = $_POST['id'];
+                            include "..\\..\\includes\\db.inc.php";
+                            $insert = "DELETE FROM user  WHERE id= '$userid'";
+                            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                            mysqli_close($link);
 
-                                echo "delete";
+                            $userid = "";
+                            $mailquery = "";
+                            $surnamequery = "";
+                            $lastnamequery = "";
+                            $placequery = "";
 
-                                $userid = $_POST['id'];
-                                include "..\\..\\includes\\db.inc.php";
-                                $insert = "DELETE FROM user  WHERE id= '$userid'";
-                                $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                                mysqli_close($link);
+                            if ($db == true) {
 
-                                $userid = "";
-                                $mailquery = "";
-                                $surnamequery = "";
-                                $lastnamequery = "";
-                                $placequery = "";
-
-                                if ($db == true) {
-                                    $string = "Nutzer gelöscht";
-                                } else {
-                                    $string = "Löschen nicht erfolgreich";
-                                }
+                                echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
+                                ?>
+                                <script>alert("Löschen war erfolgreich!");</script>
+                                <?php
+                            } else {
+                                $string = "Löschen nicht erfolgreich";
                             }
                         }
 
 
-                        if (!isset($_POST['email']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname']) OR !isset ($_POST['place']) OR !isset ($_POST['option'])) {
+
+
+
+
+
+                        if (!isset($_POST['email']) OR !isset ($_POST['surname']) OR !isset ($_POST['lastname']) OR !isset ($_POST['place'])) {
                             $userid = $_POST['bearbeiten'];
                             include "..\\..\\includes\\db.inc.php";
                             $abfrage = "select surname, lastname, mail, id from user";
@@ -361,10 +363,7 @@ if (isset($usermail)) {
 
 
                         } else {
-                            $type = $_POST['option'];
-
-
-                            if ($type != "delete") {
+                            if (isset ($_POST['change'])) {
 
                                 $userid = $_POST['id'];
                                 $mailquery = $_POST['email'];
@@ -373,12 +372,18 @@ if (isset($usermail)) {
                                 $placequery = $_POST['place'];
                                 include "..\\..\\includes\\db.inc.php";
                                 $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$mailquery'";
-                                $userindb = $link->query("SELECT id FROM user WHERE mail = '$mailquery'")->fetch_object()->id;
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-                                mysqli_close($link);
+
 
                                 $row = $db1->fetch_object()->count;
+
+                                if ($row > 0) {
+                                    $userindb = $link->query("SELECT id FROM user WHERE mail = '$mailquery'")->fetch_object()->id;
+                                } else {
+                                    $userindb = $userid;
+                                }
+
 
                                 if ($row > 0 AND $userid != $userindb) {
                                     $string = "Email bereits vergeben";
@@ -401,8 +406,9 @@ if (isset($usermail)) {
                                     }
                                 }
                             }
-
                         }
+
+
 
                         ?>
 
@@ -452,10 +458,10 @@ if (isset($usermail)) {
                                     <!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <button type="submit" name="option" value="change" class="btn btn-primary">
+                                        <button type="submit" name="change" value="change" class="btn btn-primary">
                                             Speichern
                                         </button>
-                                        <button type="submit" name="option" value="delete" class="btn btn-primary">
+                                        <button type="submit" name="delete" value="delete" class="btn btn-primary">
                                             Löschen
                                         </button>
                                     </div>
