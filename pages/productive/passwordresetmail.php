@@ -70,25 +70,22 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
             return $str;
         }
 
-        /*include "..\\..\\includes\\db.inc.php";
+        include "..\\..\\includes\\db.inc.php";
         $select = "SELECT COUNT(*) AS sum FROM user WHERE mail = '$usermail'";
         $db = mysqli_query($link, $select) or die(mysqli_error($link));
 
 
         $row = mysqli_fetch_assoc($db);
         $sum = $row['sum'];
-        */
-        $sum = 1;
-
 
         if ($sum == 0) {
             $string = "Bitte geben Sie eine gültige Email Adresse ein.";
         } else {
 
             $passwortcode = random_string();
-            //$id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-            //$statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
-            //$surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
+            $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
+            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
 
 
             //$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
