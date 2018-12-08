@@ -392,7 +392,6 @@ if (isset($usermail)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
-                                                mysqli_close($link);
                                             }
                                             ?>
                                         </select>
@@ -444,5 +443,6 @@ if (isset($usermail)) {
     </body>
     </html>
     <?php
+    mysqli_close($link);
 }
 ?>
