@@ -335,14 +335,25 @@ if (isset($usermail)){
                         <!-- small box -->
                         <div class="small-box bg-aqua">
                             <div class="inner">
-                                <h3>150</h3>
+                                <?php
+
+                                include "..\\..\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(mail) AS count FROM contact WHERE mail='$mailquery'";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                echo"<h3>".$row."</h3>"
+                                ?>
 
                                 <p>Erfasste Prüfungen</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="pages/productive/usertable.php" class="small-box-footer">Weitere Informationen<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
