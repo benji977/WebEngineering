@@ -10,7 +10,7 @@ if (isset($usermail)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Benutzer erfassen</title>
+        <title>Prüfung erfassen</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -328,11 +328,7 @@ if (isset($usermail)) {
                                         <input type="text" class="form-control" name="name" required id="name"
                                                placeholder="Prüfungsname">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Teilnehmer</label>
-                                        <input type="part" class="form-control" required id="part"
-                                               placeholder="Teilnehmer">
-                                    </div>
+                                    
                                     <div class="form-group">
                                         <label>Datum</label>
                                         <input type="date" class="form-control" id="date" name="date" required  placeholder="Datum">
@@ -404,7 +400,7 @@ if (isset($usermail)) {
 
 				</div>
 				<!-- /.box -->
-		
+
 		</div>
 		<!--/.col (right) -->
 

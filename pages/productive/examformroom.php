@@ -357,11 +357,13 @@ if (isset($usermail)) {
                                     $string = "Prüfung bereits erstellt";
                                 } else {
 
-                                    $contact_id =
-                                    $room_id =
 
 
                                     include "..\\..\\includes\\db.inc.php";
+
+                                    $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
+                                    $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
+
                                     $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
                                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
