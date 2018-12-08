@@ -328,7 +328,11 @@ if (isset($usermail)) {
                                         <input type="text" class="form-control" name="name" required id="name"
                                                placeholder="Prüfungsname">
                                     </div>
-                                    
+                                    <div class="form-group">
+                                        <label>Teilnehmer</label>
+                                        <input type="number" class="form-control" name="part" required id="part"
+                                               placeholder="Anzahl Teilnehmer">
+                                    </div>
                                     <div class="form-group">
                                         <label>Datum</label>
                                         <input type="date" class="form-control" id="date" name="date" required  placeholder="Datum">
@@ -348,11 +352,12 @@ if (isset($usermail)) {
                                             $abfrage = "select place from room";
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
+
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
-                                                mysqli_close($link);
+
                                             }
                                             ?>
                                         </select>
@@ -377,7 +382,7 @@ if (isset($usermail)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
-                                                mysqli_close($link);
+
                                             }
                                             ?>
                                         </select>
@@ -441,5 +446,6 @@ if (isset($usermail)) {
     </body>
     </html>
     <?php
+
 }
 ?>
