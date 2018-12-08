@@ -84,13 +84,13 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 
             $passwortcode = random_string();
             $id = $link->query("SELECT id FROM user WHERE mail = '$usermail'")->fetch_object()->id;
-            $statement = $link->query("UPDATE user SET passwortcode = $passwortcode, passwortcode_time = NOW() WHERE id = $id");
+            $statement = $link->query("UPDATE user SET passwortcode = '$passwortcode', passwortcode_time = NOW() WHERE id = '$id'");
             $surnamequery = $link->query("SELECT surname FROM user WHERE id = $id")->fetch_object()->surname;
 
 
-            //$url_passwortcode = 'https://probst.synology.me/passwordreset.php?userid=' . $user['id'] . '&code=' . $passwortcode;
+            $url_passwortcode = 'https://probst.synology.me/pages/productive/passwordreset.php?userid=' . $id . '&code=' . $passwortcode;
 
-            $body = '<h3>Hallo ' . 'username' . '</h3><br>Ihr neues Kennwort lautet ' . $passwortcode ;
+            $body = '<h3>Hallo ' . $surnamequery . '</h3><br>Über den folgenden Link kannst du dein Kennwort neu setzen:<br>'.$url_passwortcode.'<br><br>Nicht vergessen, der Link ist nur 24 Stunden gültig.' ;
 
             $mail = new PHPMailer();
             $mail->IsSMTP();
