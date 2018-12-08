@@ -449,6 +449,8 @@ if (isset($usermail)) {
                                         <select class="form-control select2"  name="room" required id="room" style="width: 100%;">
                                             <?PHP
 
+                                            if (!isset($_POST['room'])){
+
                                             include "..\\..\\includes\\db.inc.php";
                                             $insert = "SELECT COUNT(room.number) AS count from room  where room.id not in
                                           (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
@@ -474,8 +476,11 @@ if (isset($usermail)) {
                                                 }
                                             }else {
                                                 $redirect = "true";
+                                            }
+                                            }else{
 
-
+                                                $room = $_POST['room'];
+                                                echo "<option value ='" . $room . "'>" . $room . "</option>.";
                                             }
                                             ?>
                                         </select>
