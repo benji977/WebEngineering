@@ -320,71 +320,77 @@ if (isset($usermail)) {
 
                             <?php
 
-
-                            if (!isset($_POST['room']) ) {
-                            $name = $_POST['name'];
-                            $part = $_POST['part'];
-                            $date = $_POST['date'];
-                            $time = $_POST['time'];
-                            $place = $_POST['place'];
-                            $type = $_POST['type'];
-                            $contact = $_POST['contcat'];
-
-
-                            } ELSE {
-                                $usersurname = $_COOKIE['usersurname'];
-                                $userlastname = $_COOKIE['userlastname'];
-
-                                $name = $_POST['name'];
-                                $part = $_POST['part'];
-                                $date = $_POST['date'];
-                                $time = $_POST['time'];
-                                $place = $_POST['place'];
-                                $type = $_POST['type'];
-                                $contact = $_POST['contcat'];
-                                $room = $_POST['room'];
+                            if (!isset($_POST['name']) OR !isset($_POST['part']) OR !isset($_POST['date']) OR !isset($_POST['time']) OR !isset($_POST['place']) OR !isset($_POST['type'])OR !isset($_POST['contact']) ) {
+                                $name = "";
+                                $part = "";
+                                $date = "";
+                                $time = "";
+                                $place = "";
+                                $type = "";
+                                $contact = "";
 
 
+                            } elseif (!isset($_POST['room'])) {
 
-                                include "..\\..\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(name) AS count FROM exam WHERE name='$name'";
-                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                                mysqli_close($link);
+                                    $name = $_POST['name'];
+                                    $part = $_POST['part'];
+                                    $date = $_POST['date'];
+                                    $time = $_POST['time'];
+                                    $place = $_POST['place'];
+                                    $type = $_POST['type'];
+                                    $contact = $_POST['contact'];
 
-                                $row = $db1->fetch_object()->count;
 
-                                if ($row > 0) {
-                                    $string = "Prüfung bereits erstellt";
-                                } else {
+                                } ELSE {
+                                    $usersurname = $_COOKIE['usersurname'];
+                                    $userlastname = $_COOKIE['userlastname'];
 
+                                    $name = $_POST['name'];
+                                    $part = $_POST['part'];
+                                    $date = $_POST['date'];
+                                    $time = $_POST['time'];
+                                    $place = $_POST['place'];
+                                    $type = $_POST['type'];
+                                    $contact = $_POST['contcat'];
+                                    $room = $_POST['room'];
 
 
                                     include "..\\..\\includes\\db.inc.php";
-
-                                    $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
-                                    $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
-
-                                    $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
-                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-
-                                    $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
-                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-
-                                    $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
-                                    $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
-
-
-                                    $insert = "INSERT INTO exam (name, part, date, time, place, type, contact_id, room_id, reservation_id, todo_id) values ('$name', '$part', '$date', '$time', '$place', '$type', '$contact_id', '$room_id', '$reservation_id', '$todo_id')";
+                                    $insert = "SELECT COUNT(name) AS count FROM exam WHERE name='$name'";
                                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                                     mysqli_close($link);
 
+                                    $row = $db1->fetch_object()->count;
+
+                                    if ($row > 0) {
+                                        $string = "Prüfung bereits erstellt";
+                                    } else {
 
 
+                                        include "..\\..\\includes\\db.inc.php";
 
-                                    if ($db1 == true) {
-                                        $string = "Eintrag wurde erfasst";
+                                        $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
+                                        $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
+
+                                        $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
+                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                        $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
+                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                        $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
+                                        $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
+
+
+                                        $insert = "INSERT INTO exam (name, part, date, time, place, type, contact_id, room_id, reservation_id, todo_id) values ('$name', '$part', '$date', '$time', '$place', '$type', '$contact_id', '$room_id', '$reservation_id', '$todo_id')";
+                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                        mysqli_close($link);
+
+
+                                        if ($db1 == true) {
+                                            $string = "Eintrag wurde erfasst";
+                                        }
                                     }
-                                }
                             }
                             ?>
 
@@ -408,19 +414,19 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
-                                        <input type="date" class="form-control" id="time" name="time" readonly="readonly"  value=<?php echo $time; ?>>
+                                        <input type="text" class="form-control" id="time" name="time" readonly="readonly"  value=<?php echo $time; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Ort</label>
-                                        <input type="date" class="form-control" id="place" name="place" readonly="readonly"  value=<?php echo $place; ?>>
+                                        <input type="text" class="form-control" id="place" name="place" readonly="readonly"  value=<?php echo $place; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
-                                        <input type="date" class="form-control" id="type" name="type" readonly="readonly"  value=<?php echo $type; ?>>
+                                        <input type="text" class="form-control" id="type" name="type" readonly="readonly"  value=<?php echo $type; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Verantwortlicher intern</label>
-                                        <input type="date" class="form-control" id="contact" name="contact" readonly="readonly"  value=<?php echo $contact; ?>>
+                                        <input type="text" class="form-control" id="contact" name="contact" readonly="readonly"  value=<?php echo $contact; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Raum</label>
@@ -445,7 +451,6 @@ if (isset($usermail)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
-                                                mysqli_close($link);
                                             }
                                 }else {
                                     echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
@@ -517,6 +522,7 @@ if (isset($usermail)) {
         </script>
     </body>
     </html>
-    <?php
+<?php
+    mysqli_close($link);
 }
 ?>

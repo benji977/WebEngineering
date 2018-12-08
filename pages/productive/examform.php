@@ -353,12 +353,14 @@ if (isset($usermail)) {
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
 
+
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
 
                                             }
+
                                             ?>
                                         </select>
                                     </div>
@@ -384,6 +386,8 @@ if (isset($usermail)) {
                                                 }
 
                                             }
+
+
                                             ?>
                                         </select>
                                     </div>
