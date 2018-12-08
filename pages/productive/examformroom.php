@@ -320,6 +320,8 @@ if (isset($usermail)) {
 
                             <?php
 
+                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+
                             if (!isset($_POST['name']) OR !isset($_POST['part']) OR !isset($_POST['date']) OR !isset($_POST['time']) OR !isset($_POST['place']) OR !isset($_POST['type'])OR !isset($_POST['contact']) ) {
                                 $name = "";
                                 $part = "";
@@ -443,10 +445,6 @@ if (isset($usermail)) {
 
                                             $row = $db1->fetch_object()->count;
 
-                                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
-
-                                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=devicetable.php\">";
-                                            
 
 
                                             if ($row > 0) {
