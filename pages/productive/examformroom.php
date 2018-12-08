@@ -438,7 +438,8 @@ if (isset($usermail)) {
                                           (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
                                           and reservation.time = '$time' or room.part < $part  or room.place != '$place' )";
                                             $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                                            
+                                            mysqli_close($link);
+
 
                                             $row = $db1->fetch_object()->count;
 
@@ -455,6 +456,7 @@ if (isset($usermail)) {
                                           (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
                                           and reservation.time = '$time' or room.part < $part or room.place != '$place') ";
                                                 $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+                                                mysqli_close($link);
 
                                                 while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
                                                     while (list($schluessel, $wert) = each($zeile)) {
@@ -531,6 +533,6 @@ if (isset($usermail)) {
     </body>
     </html>
 <?php
-    mysqli_close($link);
+
 }
 ?>
