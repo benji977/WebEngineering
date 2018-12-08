@@ -340,8 +340,8 @@ if (isset($usermail)) {
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
                                         <select class="form-control select2"  name="time" required id="time" style="width: 100%;">
-                                            <option value ="morning" selected="selected">Morgens</option>
-                                            <option value ="afternoon">Nachmittags</option>
+                                            <option value ="Morgen" selected="selected">Morgens</option>
+                                            <option value ="Nachmittag">Nachmittags</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -367,9 +367,9 @@ if (isset($usermail)) {
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
                                         <select class="form-control select2"  name="type" required id="type" style="width: 100%;">
-                                            <option value ="write" selected="selected">Schriftlich</option>
-                                            <option value ="ipad">iPad</option>
-                                            <option value ="galaxy">Galaxy Tab</option>
+                                            <option value ="Schriftlich" selected="selected">Schriftlich</option>
+                                            <option value ="iPad">iPad</option>
+                                            <option value ="Galaxy Tab">Galaxy Tab</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
