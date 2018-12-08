@@ -361,7 +361,6 @@ if (isset($usermail)) {
 
                     include "..\\..\\includes\\db.inc.php";
 
-                    echo $contact;
 
                     $contact_id = $link->query("SELECT id FROM user WHERE mail = '$contact'")->fetch_object()->id;
                     $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
@@ -374,8 +373,9 @@ if (isset($usermail)) {
 
                     $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
 
-                    if($type != "Schriftlich") {
-                        $insert = "INSERT INTO todo (type, contact, amount, date) values ('$type', '$contact_id','$part', '$date')";
+                    echo $type;
+                    if($type == "iPad" or $type == "Galaxy Tab") {
+                        $insert = "INSERT INTO todo (type, contact_id, amount, date) values ('$type', '$contact_id','$part', '$date')";
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
 
 
@@ -405,6 +405,8 @@ if (isset($usermail)) {
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Prüfungsinformationen</h3>
+
+
                                 <?php if (!isset($string)) {
                                 } else {
 
@@ -422,7 +424,7 @@ if (isset($usermail)) {
                                     <div class="form-group">
                                         <label>Prüfungsname</label>
                                         <input type="text" class="form-control" name="name" readonly="readonly" id="name"
-                                               value=<?php echo $name; ?>>
+                                               value=<?php echo $name, $type; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
