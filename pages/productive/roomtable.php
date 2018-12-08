@@ -189,7 +189,7 @@ if (isset($usermail)) {
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../../indexppa.html"><i class="fa fa-circle-o"></i> Übersicht</a></li>
+                        <li><a href="../../index.php"><i class="fa fa-circle-o"></i> Übersicht</a></li>
                     </ul>
 
                 <li class="treeview">
