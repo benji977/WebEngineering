@@ -323,21 +323,21 @@ if (isset($usermail)) {
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Prüfungsname</label>
-                                        <input type="text" class="form-control" name="name" required id="name"
+                                        <input type="text" class="form-control" name="name" readonly="readonly" id="name"
                                                placeholder="Prüfungsname">
                                     </div>
                                     <div class="form-group">
                                         <label>Datum</label>
-                                        <input type="date" class="form-control" id="date" name="date" required  placeholder="Datum">
+                                        <input type="date" class="form-control" id="date" name="date" readonly="readonly"  placeholder="Datum">
                                     </div>
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
-                                        <input type="date" class="form-control" name="time" required  id="time"
+                                        <input type="time" class="form-control" name="time" readonly="readonly"  id="time"
                                                placeholder="Startzeitpunkt">
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungsort</label>
-                                        <select class="form-control select2"  name="place" required id="place" style="width: 100%;">
+                                        <select class="form-control select2"  name="place" readonly="readonly" id="place" style="width: 100%;">
                                             <?PHP
                                             include "..\\..\\includes\\db.inc.php";
                                             $abfrage = "select place from room";
@@ -354,7 +354,7 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
-                                        <select class="form-control select2"  name="type" required id="type" style="width: 100%;">
+                                        <select class="form-control select2"  name="type" readonly="readonly" id="type" style="width: 100%;">
                                             <option value ="write" selected="selected">Schriftlich</option>
                                             <option value ="ipad">iPad</option>
                                             <option value ="galaxy">Galaxy Tab</option>
@@ -362,12 +362,12 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="number" class="form-control" required id="Teilnehmer"
+                                        <input type="number" class="form-control" readonly="readonly" id="Teilnehmer"
                                                placeholder="Teilnehmer">
                                     </div>
                                     <div class="form-group">
                                         <label>Verantwortlicher intern</label>
-                                        <select class="form-control select2"  name="contact" required id="contact" style="width: 100%;">
+                                        <select class="form-control select2"  name="contact" readonly="readonly" id="contact" style="width: 100%;">
                                             <?PHP
                                             include "..\\..\\includes\\db.inc.php";
                                             $abfrage = "select mail from user";
@@ -382,62 +382,80 @@ if (isset($usermail)) {
                                             ?>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Raum</label>
+                                        <select class="form-control select2"  name="room" required id="room" style="width: 100%;">
+                                            <?PHP
+                                            include "..\\..\\includes\\db.inc.php";
+                                            $abfrage = "select room.number from room where not exists(select null from reservation join room on room.id = reservation.room_id where room.number = 'jdjdbbdd' and reservation.date = NULL and reservation.time = NULL) ";
+                                            $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                            while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
+                                                while (list($schluessel, $wert) = each($zeile)) {
+                                                    echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
+                                                }
+                                                mysqli_close($link);
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
                                 </div>
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Weiter</button>
+                                    <button type="submit" class="btn btn-primary">Speichern</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                <!-- /.box -->
-				<div class="col-md-6">
-					<!-- right column -->
-					<!-- Horizontal Form -->
+                    <!-- /.box -->
+                    <div class="col-md-6">
+                        <!-- right column -->
+                        <!-- Horizontal Form -->
 
-					<!-- /.box-body -->
+                        <!-- /.box-body -->
 
-				</div>
-				<!-- /.box -->
-		
-		</div>
-		<!--/.col (right) -->
+                    </div>
+                    <!-- /.box -->
 
-	</div>
-	<!-- /.box-body -->
+                </div>
+                <!--/.col (right) -->
 
-	<!-- ./wrapper -->
+        </div>
+        <!-- /.box-body -->
 
-                <!-- jQuery 3 -->
-                <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-                <!-- Bootstrap 3.3.7 -->
-                <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-                <!-- DataTables -->
-                <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-                <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-                <!-- SlimScroll -->
-                <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-                <!-- FastClick -->
-                <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-                <!-- AdminLTE App -->
-                <script src="../../dist/js/adminlte.min.js"></script>
-                <!-- AdminLTE for demo purposes -->
-                <script src="../../dist/js/demo.js"></script>
-                <!-- page script -->
-                <script>
-                    $(function () {
-                        $('#example1').DataTable()
-                        $('#example2').DataTable({
-                            'paging': true,
-                            'lengthChange': false,
-                            'searching': false,
-                            'ordering': true,
-                            'info': true,
-                            'autoWidth': false
-                        })
-                    })
-                </script>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+            $(function () {
+                $('#example1').DataTable()
+                $('#example2').DataTable({
+                    'paging': true,
+                    'lengthChange': false,
+                    'searching': false,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+            })
+        </script>
     </body>
     </html>
     <?php
