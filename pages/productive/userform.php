@@ -63,16 +63,6 @@ if (isset($usermail)) {
                     <ul class="nav navbar-nav">
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->
                         <li class="dropdown tasks-menu">
@@ -99,8 +89,15 @@ if (isset($usermail)) {
                                 <!-- User image -->
                                 <!-- Menu Body -->
                                 <li class="user-body">
-                                    <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
-                                    <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
+
+                                    <div class="box-footer">
+                                        <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
+                                    </div>
+                                    <div class="box-footer">
+                                        <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
+                                    </div>
+                                   
+
                                     <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
