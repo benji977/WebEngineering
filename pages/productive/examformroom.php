@@ -458,7 +458,7 @@ if (isset($usermail)) {
                                                 }
                                             }
                                 }else {
-                                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
+                                    
                                     ?>
                                     <script>alert("Kein Raum mit den gewünschten spezifikationen verfügbar");</script>
                                     <?php
