@@ -84,27 +84,6 @@ if (isset($usermail)) {
                                         <li><!-- Task item -->
                                         </li>
                                         <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <div class="progress xs">
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <div class="progress xs">
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <div class="progress xs">
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
                                     </ul>
                                 </li>
                                 <li class="footer">
@@ -120,7 +99,8 @@ if (isset($usermail)) {
                                 <!-- User image -->
                                 <!-- Menu Body -->
                                 <li class="user-body">
-                                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
+                                    <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
                                     <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
