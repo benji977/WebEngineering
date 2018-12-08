@@ -317,6 +317,47 @@ if (isset($usermail)) {
                                 <h3 class="box-title">Prüfungsinformationen</h3>
                             </div>
                             <!-- /.box-header -->
+
+                            <?php
+                            if (!isset($_POST['room']) ) {
+
+                            } ELSE {
+                                $usersurname = $_COOKIE['usersurname'];
+                                $userlastname = $_COOKIE['userlastname'];
+
+                                $feld1 = $_POST['email'];
+                                $feld2 = $_POST['password'];
+                                $feld3 = $_POST['surname'];
+                                $feld4 = $_POST['lastname'];
+                                $feld5 = $_POST['place'];
+
+
+                                $hashed_password = password_hash($feld2, PASSWORD_DEFAULT);
+
+                                include "..\\..\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(mail) AS count FROM user WHERE mail='$feld1'";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                if ($row > 0) {
+                                    $string = "Email bereits vergeben";
+                                } else {
+
+                                    include "..\\..\\includes\\db.inc.php";
+                                    $insert = "INSERT INTO user (mail, password, surname, lastname, place) values ('$feld1', '$hashed_password', '$feld3', '$feld4', '$feld5')";
+                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                    mysqli_close($link);
+
+
+                                    if ($db1 == true) {
+                                        $string = "Eintrag wurde erfasst";
+                                    }
+                                }
+                            }
+                            ?>
+
                             <!-- form start -->
                             <form role="form" action="examformroom.php"
                                   method="post">

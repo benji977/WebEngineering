@@ -307,6 +307,8 @@ if (isset($usermail)) {
             </section>
 
             <!-- Main content -->
+
+
             <section class="content">
                 <div class="row">
                     <!-- left column -->
@@ -327,13 +329,20 @@ if (isset($usermail)) {
                                                placeholder="Prüfungsname">
                                     </div>
                                     <div class="form-group">
+                                        <label>Teilnehmer</label>
+                                        <input type="number" class="form-control" required id="Teilnehmer"
+                                               placeholder="Teilnehmer">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Datum</label>
                                         <input type="date" class="form-control" id="date" name="date" required  placeholder="Datum">
                                     </div>
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
-                                        <input type="date" class="form-control" name="time" required  id="time"
-                                               placeholder="Startzeitpunkt">
+                                        <select class="form-control select2"  name="time" required id="time" style="width: 100%;">
+                                            <option value ="morning" selected="selected">Morgens</option>
+                                            <option value ="afternoon">Nachmittags</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungsort</label>
@@ -359,11 +368,6 @@ if (isset($usermail)) {
                                             <option value ="ipad">iPad</option>
                                             <option value ="galaxy">Galaxy Tab</option>
                                         </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Teilnehmer</label>
-                                        <input type="number" class="form-control" required id="Teilnehmer"
-                                               placeholder="Teilnehmer">
                                     </div>
                                     <div class="form-group">
                                         <label>Verantwortlicher intern</label>
