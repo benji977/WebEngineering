@@ -160,14 +160,33 @@ if (isset($usermail)) {
                                 <span class="hidden-xs">Alexander Pierce</span>
                             </a>
                             <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
+                                    <p>
+                                        Alexander Pierce - Web Developer
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
 
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
                             </ul>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="./logout.php" class="btn btn-default btn-flat"<i class="fa  fa-power-off"></i></a>
-                        </li>
                     </ul>
                 </div>
             </nav>
