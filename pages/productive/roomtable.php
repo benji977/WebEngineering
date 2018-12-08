@@ -324,6 +324,7 @@ if (isset($usermail)) {
                                 <tr>
                                     <th>Raumbezeichnung</th>
                                     <th>Ort</th>
+                                    <th>Option</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -351,6 +352,7 @@ if (isset($usermail)) {
                                 <tr>
                                     <th>Raumbezeichnung</th>
                                     <th>Ort</th>
+                                    <th>Option</th>
                                 </tr>
                                 </tfoot>
                             </table>
