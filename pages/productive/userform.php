@@ -161,18 +161,9 @@ if (isset($usermail)) {
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <p>
-                                        Alexander Pierce - Web Developer
-                                    </p>
-
-                                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
-                                    <div class="row">
-
-                                    </div>
+                                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                                     <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
