@@ -330,7 +330,7 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="number" class="form-control" required id="Teilnehmer"
+                                        <input type="part" class="form-control" required id="part"
                                                placeholder="Teilnehmer">
                                     </div>
                                     <div class="form-group">
