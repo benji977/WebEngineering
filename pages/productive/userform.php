@@ -166,7 +166,7 @@ if (isset($usermail)) {
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa  fa-power-off"></i></a>
+                            <a href="./logout.php" data-toggle="control-sidebar"><i class="fa  fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>

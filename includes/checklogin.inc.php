@@ -19,6 +19,14 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
     $usermail = $_COOKIE['usermail'];
     $usersurname = $_COOKIE['usersurname'];
     $userlastname = $_COOKIE['userlastname'];
+    $password = $_COOKIE['password'];
+    include "db.inc.php";
+    $passworddb = $link->query("SELECT password FROM user WHERE mail = '$usermail'")->fetch_object()->password;
+    if ($password === $passworddb) {
+
+    } else {
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL =/pages/productive/logout.php\">";
+    }
 }
 
 ?>
