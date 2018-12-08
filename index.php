@@ -337,8 +337,8 @@ if (isset($usermail)){
                             <div class="inner">
                                 <?php
 
-                                include "..\\..\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(mail) AS count FROM contact WHERE mail='$mailquery'";
+                                include ".\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(mail) AS count FROM contact";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                                 mysqli_close($link);
@@ -348,12 +348,12 @@ if (isset($usermail)){
                                 echo"<h3>".$row."</h3>"
                                 ?>
 
-                                <p>Erfasste Prüfungen</p>
+                                <p>Anzahl Prüfungen</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="pages/productive/usertable.php" class="small-box-footer">Weitere Informationen<i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="pages/productive/examtable.php" class="small-box-footer">Weitere Informationen<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -361,14 +361,25 @@ if (isset($usermail)){
                         <!-- small box -->
                         <div class="small-box bg-green">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                <?php
+
+                                include ".\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(mail) AS count FROM user";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                echo"<h3>".$row."</h3>"
+                                ?>
 
                                 <p>Anzahl Mitarbeiter</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="pages/productive/usertable.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -376,14 +387,25 @@ if (isset($usermail)){
                         <!-- small box -->
                         <div class="small-box bg-yellow">
                             <div class="inner">
-                                <h3>44</h3>
+                                <?php
 
-                                <p>Geräte</p>
+                                include ".\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(number) AS count FROM room";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                echo"<h3>".$row."</h3>"
+                                ?>
+
+                                <p>Anzahl Räume</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="pages/productive/roomtable.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -391,9 +413,20 @@ if (isset($usermail)){
                         <!-- small box -->
                         <div class="small-box bg-red">
                             <div class="inner">
-                                <h3>65</h3>
+                                <?php
 
-                                <p>Offene Aufgaben</p>
+                                include ".\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(type) AS count FROM todo join user on user.id = todo.contact_id where user.mail = '$usermail' ";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                echo"<h3>".$row."</h3>"
+                                ?>
+
+                                <p>Deine offenen Aufgaben</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>

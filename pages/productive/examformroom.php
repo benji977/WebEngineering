@@ -376,6 +376,7 @@ if (isset($usermail)) {
 
                     if($type == "iPad" or $type == "Galaxy Tab") {
                         $insert = "INSERT INTO todo (type, contact_id, amount, date) values ('$type', '$contact_id','$part', '$date')";
+                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
 
 
@@ -390,7 +391,11 @@ if (isset($usermail)) {
 
 
                     if ($db1 == true) {
-                        $string = "Eintrag wurde erfasst";
+                        echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
+
+                        ?>
+                        <script>alert("Prüfung wurde erfasst");</script>
+                        <?php
                     }
                 }
             }
