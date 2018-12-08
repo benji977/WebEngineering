@@ -162,11 +162,11 @@ if (isset($usermail)) {
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                     <p>
                                         Alexander Pierce - Web Developer
                                     </p>
+
+                                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
@@ -176,14 +176,7 @@ if (isset($usermail)) {
                                     <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
+
                             </ul>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
