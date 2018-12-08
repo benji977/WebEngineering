@@ -369,12 +369,13 @@ if (isset($usermail)) {
                     $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-                    $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
+
                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                     $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
 
                     if($type != "Schriftlich") {
+                        $insert = "INSERT INTO todo (type, contact, amount, date) values ('$type', '$contact_id','$part', '$date')";
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
                     }else{
                         $todo_id = Null;
