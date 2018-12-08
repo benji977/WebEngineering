@@ -343,7 +343,7 @@ if (isset($usermail)) {
                 $time = $_POST['time'];
                 $place = $_POST['place'];
                 $type = $_POST['type'];
-                $contact = $_POST['contcat'];
+                $contact = $_POST['contact'];
                 $room = $_POST['room'];
 
 
@@ -361,7 +361,9 @@ if (isset($usermail)) {
 
                     include "..\\..\\includes\\db.inc.php";
 
-                    $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
+                    echo $contact;
+
+                    $contact_id = $link->query("SELECT id FROM user WHERE mail = '$contact'")->fetch_object()->id;
                     $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
 
                     $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
@@ -372,7 +374,7 @@ if (isset($usermail)) {
 
                     $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
 
-                    if(type != "Schriftlich") {
+                    if($type != "Schriftlich") {
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
                     }else{
                         $todo_id = Null;
