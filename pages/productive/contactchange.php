@@ -388,7 +388,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                 if ($row > 0 AND $userid != $userindb) {
                     $string = "Email bereits vergeben";
                 } else {
-                    
+
 
                     include "..\\..\\includes\\db.inc.php";
 

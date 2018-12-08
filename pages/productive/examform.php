@@ -330,14 +330,9 @@ if (isset($usermail)) {
                                         <input type="date" class="form-control" id="Datum" placeholder="Datum">
                                     </div>
                                     <div class="form-group">
-                                        <label>Startzeitpunkt</label>
+                                        <label>Zeitpinkt</label>
                                         <input type="time" class="form-control" id="Startzeitpunkt"
                                                placeholder="Startzeitpunkt">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Endzeitpunkt</label>
-                                        <input type="time" class="form-control" id="Endzeitpunkt"
-                                               placeholder="Endzeitpunkt">
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
@@ -346,24 +341,10 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="text" class="form-control" id="Teilnehmer"
+                                        <input type="number" class="form-control" id="Teilnehmer"
                                                placeholder="Teilnehmer">
                                     </div>
                                     <div class="form-group">
-                                        <label>Raum</label>
-                                        <input type="text" class="form-control" id="Raum" placeholder="Raum">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Geräte</label>
-                                        <input type="text" class="form-control" id="Geräte" placeholder="Geräte">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Verantwortlicher extern</label>
-                                        <input type="text" class="form-control" id="VerantwortlicherEX"
-                                               placeholder="Verantwortlicher extern">
-                                               
-                                    </div>
-                                                                        <div class="form-group">
                                         <label>Verantwortlicher intern</label>
                                         <input type="text" class="form-control" id="VerantwortlicherIn"
                                                placeholder="Verantwortlicher intern">
@@ -373,7 +354,7 @@ if (isset($usermail)) {
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Speichern</button>
+                                    <button type="submit" class="btn btn-primary">Weiter</button>
                                 </div>
                             </form>
                         </div>
@@ -382,37 +363,7 @@ if (isset($usermail)) {
 				<div class="col-md-6">
 					<!-- right column -->
 					<!-- Horizontal Form -->
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">Transportinformationen</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
 
-							<div class="form-group">
-								<label>Benötigtes Fahrzeug</label> <select class="form-control"
-									id="Fahrzeug">
-									<option value="1">Kein Fahrzeug</option>
-									<option value="2">Transporter</option>
-									<option value="3">Kombi</option>
-									<option value="4">Kleinwagen</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>Ausleihzeit</label> <input type="time"
-									class="form-control" name="Ausleihzeit">
-
-							</div>
-							<div class="form-group">
-								<label>Rückgabezeit</label> <input type="time"
-									class="form-control" name="Rückgabezeit">
-							</div>
-
-							<div class="checkbox">
-								<label><input type="checkbox"> Bereits Reserviert</label>
-							</div>
-						</div>
-					</div>
 					<!-- /.box-body -->
 
 				</div>
