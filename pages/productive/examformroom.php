@@ -434,7 +434,9 @@ if (isset($usermail)) {
                                             <?PHP
 
                                              include "..\\..\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(room.number) AS count from room where room.part >= $part and where not exists(select null from reservation join room on room.id = reservation.room_id where reservation.date = '$date' and reservation.time = '$time')";
+                                $insert = "SELECT COUNT(room.number) AS count from room  where room.id not in
+                                          (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
+                                          and reservation.time = '$time' or room.part < $part ) )";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                                 mysqli_close($link);
 
@@ -442,9 +444,10 @@ if (isset($usermail)) {
 
                                 if ($row > 0) {
 
-
                                             include "..\\..\\includes\\db.inc.php";
-                                            $abfrage = "select room.number from room where room.part >= $part and where not exists(select null from reservation join room on room.id = reservation.room_id where reservation.date = '$date' and reservation.time = '$time') ";
+                                            $abfrage = "SELECT room.number from room  where room.id not in
+                                          (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
+                                          and reservation.time = '$time' or room.part < $part ) ) ";
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
