@@ -320,7 +320,7 @@ if (isset($usermail)) {
 
                             <?php
 
-                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
+                            $redirect = "false";
 
                             if (!isset($_POST['name']) OR !isset($_POST['part']) OR !isset($_POST['date']) OR !isset($_POST['time']) OR !isset($_POST['place']) OR !isset($_POST['type'])OR !isset($_POST['contact']) ) {
                                 $name = "";
@@ -462,11 +462,8 @@ if (isset($usermail)) {
                                                     }
                                                 }
                                             }else {
-                                                echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
-                                                ?>
-                                                <script>alert("Kein Raum mit den gewünschten spezifikationen verfügbar");</script>
-                                                <?php
 
+                                                $redirect = "true";
                                             }
                                             ?>
                                         </select>
@@ -481,6 +478,20 @@ if (isset($usermail)) {
                             </form>
                         </div>
                     </div>
+
+                    <?php
+
+                    if($redirect = "true"){
+
+                        echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
+
+                        ?>
+                        <script>alert("Kein Raum mit den gewünschten spezifikationen verfügbar");</script>
+                        <?php
+
+                    }
+
+                    ?>
                     <!-- /.box -->
                     <div class="col-md-6">
                         <!-- right column -->
