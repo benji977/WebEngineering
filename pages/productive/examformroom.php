@@ -10,7 +10,7 @@ if (isset($usermail)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Benutzer erfassen</title>
+        <title>Prüfung erfassen</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -307,8 +307,6 @@ if (isset($usermail)) {
             </section>
 
             <!-- Main content -->
-
-
             <section class="content">
                 <div class="row">
                     <!-- left column -->
@@ -319,62 +317,126 @@ if (isset($usermail)) {
                                 <h3 class="box-title">Prüfungsinformationen</h3>
                             </div>
                             <!-- /.box-header -->
+
+                            <?php
+
+
+                            if (!isset($_POST['room']) ) {
+                            $name = $_POST['name'];
+                            $part = $_POST['part'];
+                            $date = $_POST['date'];
+                            $time = $_POST['time'];
+                            $place = $_POST['place'];
+                            $type = $_POST['type'];
+                            $contact = $_POST['contcat'];
+
+
+                            } ELSE {
+                                $usersurname = $_COOKIE['usersurname'];
+                                $userlastname = $_COOKIE['userlastname'];
+
+                                $name = $_POST['name'];
+                                $part = $_POST['part'];
+                                $date = $_POST['date'];
+                                $time = $_POST['time'];
+                                $place = $_POST['place'];
+                                $type = $_POST['type'];
+                                $contact = $_POST['contcat'];
+                                $room = $_POST['room'];
+
+
+
+                                include "..\\..\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(name) AS count FROM exam WHERE name='$name'";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                if ($row > 0) {
+                                    $string = "Prüfung bereits erstellt";
+                                } else {
+
+                                    $contact_id =
+                                    $room_id =
+
+
+                                    include "..\\..\\includes\\db.inc.php";
+                                    $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
+                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                    $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
+                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                                    $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
+                                    $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
+
+
+                                    $insert = "INSERT INTO exam (name, part, date, time, place, type, contact_id, room_id, reservation_id, todo_id) values ('$name', '$part', '$date', '$time', '$place', '$type', '$contact_id', '$room_id', '$reservation_id', '$todo_id')";
+                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                    mysqli_close($link);
+
+
+
+
+                                    if ($db1 == true) {
+                                        $string = "Eintrag wurde erfasst";
+                                    }
+                                }
+                            }
+                            ?>
+
                             <!-- form start -->
                             <form role="form" action="examformroom.php"
                                   method="post">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Prüfungsname</label>
-                                        <input type="text" class="form-control" name="name" required id="name"
-                                               placeholder="Prüfungsname">
+                                        <input type="text" class="form-control" name="name" readonly="readonly" id="name"
+                                               value=<?php echo $name; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="part" class="form-control" required id="part"
-                                               placeholder="Teilnehmer">
+                                        <input type="part" class="form-control" readonly="readonly" id="part"
+                                               value=<?php echo $part; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Datum</label>
-                                        <input type="date" class="form-control" id="date" name="date" required  placeholder="Datum">
+                                        <input type="date" class="form-control" id="date" name="date" readonly="readonly"  value=<?php echo $date; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
-                                        <select class="form-control select2"  name="time" required id="time" style="width: 100%;">
-                                            <option value ="morning" selected="selected">Morgens</option>
-                                            <option value ="afternoon">Nachmittags</option>
-                                        </select>
+                                        <input type="date" class="form-control" id="time" name="time" readonly="readonly"  value=<?php echo $time; ?>>
                                     </div>
                                     <div class="form-group">
-                                        <label>Prüfungsort</label>
-                                        <select class="form-control select2"  name="place" required id="place" style="width: 100%;">
-                                            <?PHP
-                                            include "..\\..\\includes\\db.inc.php";
-                                            $abfrage = "select place from room";
-                                            $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
-
-                                            while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
-                                                while (list($schluessel, $wert) = each($zeile)) {
-                                                    echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
-                                                }
-                                                mysqli_close($link);
-                                            }
-                                            ?>
-                                        </select>
+                                        <label>Ort</label>
+                                        <input type="date" class="form-control" id="place" name="place" readonly="readonly"  value=<?php echo $place; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
-                                        <select class="form-control select2"  name="type" required id="type" style="width: 100%;">
-                                            <option value ="write" selected="selected">Schriftlich</option>
-                                            <option value ="ipad">iPad</option>
-                                            <option value ="galaxy">Galaxy Tab</option>
-                                        </select>
+                                        <input type="date" class="form-control" id="type" name="type" readonly="readonly"  value=<?php echo $type; ?>>
                                     </div>
                                     <div class="form-group">
                                         <label>Verantwortlicher intern</label>
-                                        <select class="form-control select2"  name="contact" required id="contact" style="width: 100%;">
+                                        <input type="date" class="form-control" id="contact" name="contact" readonly="readonly"  value=<?php echo $contact; ?>>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Raum</label>
+                                        <select class="form-control select2"  name="room" required id="room" style="width: 100%;">
                                             <?PHP
+
+                                             include "..\\..\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(room.number) AS count from room where room.part >= $part and where not exists(select null from reservation join room on room.id = reservation.room_id where reservation.date = '$date' and reservation.time = '$time')";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                mysqli_close($link);
+
+                                $row = $db1->fetch_object()->count;
+
+                                if ($row > 0) {
+
+
                                             include "..\\..\\includes\\db.inc.php";
-                                            $abfrage = "select mail from user";
+                                            $abfrage = "select room.number from room where room.part >= $part and where not exists(select null from reservation join room on room.id = reservation.room_id where reservation.date = '$date' and reservation.time = '$time') ";
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
@@ -383,65 +445,74 @@ if (isset($usermail)) {
                                                 }
                                                 mysqli_close($link);
                                             }
+                                }else {
+                                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
+                                    ?>
+                                    <script>alert("Kein Raum mit den gewünschten spezifikationen verfügbar");</script>
+                                    <?php
+
+                                }
+
                                             ?>
                                         </select>
                                     </div>
+
                                 </div>
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Weiter</button>
+                                    <button type="submit" class="btn btn-primary">Speichern</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                <!-- /.box -->
-				<div class="col-md-6">
-					<!-- right column -->
-					<!-- Horizontal Form -->
+                    <!-- /.box -->
+                    <div class="col-md-6">
+                        <!-- right column -->
+                        <!-- Horizontal Form -->
 
-					<!-- /.box-body -->
+                        <!-- /.box-body -->
 
-				</div>
-				<!-- /.box -->
-		
-		</div>
-		<!--/.col (right) -->
+                    </div>
+                    <!-- /.box -->
 
-	</div>
-	<!-- /.box-body -->
+                </div>
+                <!--/.col (right) -->
 
-	<!-- ./wrapper -->
+        </div>
+        <!-- /.box-body -->
 
-                <!-- jQuery 3 -->
-                <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-                <!-- Bootstrap 3.3.7 -->
-                <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-                <!-- DataTables -->
-                <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-                <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-                <!-- SlimScroll -->
-                <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-                <!-- FastClick -->
-                <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-                <!-- AdminLTE App -->
-                <script src="../../dist/js/adminlte.min.js"></script>
-                <!-- AdminLTE for demo purposes -->
-                <script src="../../dist/js/demo.js"></script>
-                <!-- page script -->
-                <script>
-                    $(function () {
-                        $('#example1').DataTable()
-                        $('#example2').DataTable({
-                            'paging': true,
-                            'lengthChange': false,
-                            'searching': false,
-                            'ordering': true,
-                            'info': true,
-                            'autoWidth': false
-                        })
-                    })
-                </script>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
+        <!-- page script -->
+        <script>
+            $(function () {
+                $('#example1').DataTable()
+                $('#example2').DataTable({
+                    'paging': true,
+                    'lengthChange': false,
+                    'searching': false,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+            })
+        </script>
     </body>
     </html>
     <?php
