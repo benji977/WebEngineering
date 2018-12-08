@@ -325,12 +325,12 @@ if (isset($usermail)) {
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Prüfungsname</label>
-                                        <input type="text" class="form-control" name="name" required id="name"
+                                        <input type="text" class="form-control" name="name"  minlength="3" maxlength="45" required id="name"
                                                placeholder="Prüfungsname">
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="number" class="form-control" name="part" required id="part"
+                                        <input type="number" class="form-control" name="part"  minlength="1" maxlength="3" required id="part"
                                                placeholder="Anzahl Teilnehmer">
                                     </div>
                                     <div class="form-group">
@@ -340,8 +340,8 @@ if (isset($usermail)) {
                                     <div class="form-group">
                                         <label>Zeitpunkt</label>
                                         <select class="form-control select2"  name="time" required id="time" style="width: 100%;">
-                                            <option value ="morning" selected="selected">Morgens</option>
-                                            <option value ="afternoon">Nachmittags</option>
+                                            <option value ="Morgen" selected="selected">Morgens</option>
+                                            <option value ="Nachmittag">Nachmittags</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -353,21 +353,23 @@ if (isset($usermail)) {
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
 
+
                                             while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
                                                 while (list($schluessel, $wert) = each($zeile)) {
                                                     echo "<option value ='" . $wert . "'>" . $wert . "</option>.";
                                                 }
 
                                             }
+
                                             ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Prüfungstyp</label>
                                         <select class="form-control select2"  name="type" required id="type" style="width: 100%;">
-                                            <option value ="write" selected="selected">Schriftlich</option>
-                                            <option value ="ipad">iPad</option>
-                                            <option value ="galaxy">Galaxy Tab</option>
+                                            <option value ="Schriftlich" selected="selected">Schriftlich</option>
+                                            <option value ="iPad">iPad</option>
+                                            <option value ="Galaxy Tab">Galaxy Tab</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -384,6 +386,8 @@ if (isset($usermail)) {
                                                 }
 
                                             }
+
+
                                             ?>
                                         </select>
                                     </div>
