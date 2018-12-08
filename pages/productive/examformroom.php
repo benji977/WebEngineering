@@ -421,7 +421,7 @@ if (isset($usermail)) {
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="part" class="form-control" readonly="readonly" id="part"
+                                        <input type="part" class="form-control" readonly="readonly" name= "part" id="part"
                                                value=<?php echo $part; ?>>
                                     </div>
                                     <div class="form-group">
