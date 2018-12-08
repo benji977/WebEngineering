@@ -420,7 +420,7 @@ if (isset($usermail)) {
                                   method="post">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label>Kontaktnummer</label>
+                                        <label>Raumnummer</label>
                                         <input type="text" class="form-control" readonly="readonly" name="id" id="id"
                                                value=<?php echo $roomid; ?>>
                                     </div>

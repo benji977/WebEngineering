@@ -349,7 +349,7 @@ if (isset($usermail)) {
                                         <select class="form-control select2"  name="place" required id="place" style="width: 100%;">
                                             <?PHP
                                             include "..\\..\\includes\\db.inc.php";
-                                            $abfrage = "select place from room";
+                                            $abfrage = "select DISTINCT (place) from room";
                                             $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
 
 
