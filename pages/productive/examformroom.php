@@ -474,7 +474,7 @@ if (isset($usermail)) {
                                                 }
                                             }else {
 
-                                                $redirect = "true";
+                                                
                                             }
                                             ?>
                                         </select>
