@@ -307,6 +307,91 @@ if (isset($usermail)) {
             </section>
 
             <!-- Main content -->
+
+            <?php
+
+            $redirect = "false";
+
+            if (!isset($_POST['name']) OR !isset($_POST['part']) OR !isset($_POST['date']) OR !isset($_POST['time']) OR !isset($_POST['place']) OR !isset($_POST['type'])OR !isset($_POST['contact']) ) {
+                $name = "";
+                $part = "";
+                $date = "";
+                $time = "";
+                $place = "";
+                $type = "";
+                $contact = "";
+
+
+            } elseif (!isset($_POST['room'])) {
+
+                $name = $_POST['name'];
+                $part = $_POST['part'];
+                $date = $_POST['date'];
+                $time = $_POST['time'];
+                $place = $_POST['place'];
+                $type = $_POST['type'];
+                $contact = $_POST['contact'];
+
+
+            } ELSE {
+                $usersurname = $_COOKIE['usersurname'];
+                $userlastname = $_COOKIE['userlastname'];
+
+                $name = $_POST['name'];
+                $part = $_POST['part'];
+                $date = $_POST['date'];
+                $time = $_POST['time'];
+                $place = $_POST['place'];
+                $type = $_POST['type'];
+                $contact = $_POST['contcat'];
+                $room = $_POST['room'];
+
+
+                include "..\\..\\includes\\db.inc.php";
+                $insert = "SELECT COUNT(name) AS count FROM exam WHERE name='$name'";
+                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                mysqli_close($link);
+
+                $row = $db1->fetch_object()->count;
+
+                if ($row > 0) {
+                    $string = "Prüfung bereits erstellt";
+                } else {
+
+
+                    include "..\\..\\includes\\db.inc.php";
+
+                    $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
+                    $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
+
+                    $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
+                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                    $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
+                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+
+                    $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
+
+                    if(type != "Schriftlich") {
+                        $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
+                    }else{
+                        $todo_id = Null;
+                    }
+
+
+                    $insert = "INSERT INTO exam (name, part, date, time, place, type, contact_id, room_id, reservation_id, todo_id) values ('$name', '$part', '$date', '$time', '$place', '$type', '$contact_id', '$room_id', '$reservation_id', '$todo_id')";
+                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                    mysqli_close($link);
+
+
+                    if ($db1 == true) {
+                        $string = "Eintrag wurde erfasst";
+                    }
+                }
+            }
+            ?>
+
+
             <section class="content">
                 <div class="row">
                     <!-- left column -->
@@ -315,86 +400,15 @@ if (isset($usermail)) {
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Prüfungsinformationen</h3>
+                                <?php if (!isset($string)) {
+                                } else {
+
+                                    echo "<p class='login-box-msg'>$string</p>";
+                                }
+                                ?>
                             </div>
                             <!-- /.box-header -->
 
-                            <?php
-
-                            $redirect = "false";
-
-                            if (!isset($_POST['name']) OR !isset($_POST['part']) OR !isset($_POST['date']) OR !isset($_POST['time']) OR !isset($_POST['place']) OR !isset($_POST['type'])OR !isset($_POST['contact']) ) {
-                                $name = "";
-                                $part = "";
-                                $date = "";
-                                $time = "";
-                                $place = "";
-                                $type = "";
-                                $contact = "";
-
-
-                            } elseif (!isset($_POST['room'])) {
-
-                                    $name = $_POST['name'];
-                                    $part = $_POST['part'];
-                                    $date = $_POST['date'];
-                                    $time = $_POST['time'];
-                                    $place = $_POST['place'];
-                                    $type = $_POST['type'];
-                                    $contact = $_POST['contact'];
-
-
-                                } ELSE {
-                                    $usersurname = $_COOKIE['usersurname'];
-                                    $userlastname = $_COOKIE['userlastname'];
-
-                                    $name = $_POST['name'];
-                                    $part = $_POST['part'];
-                                    $date = $_POST['date'];
-                                    $time = $_POST['time'];
-                                    $place = $_POST['place'];
-                                    $type = $_POST['type'];
-                                    $contact = $_POST['contcat'];
-                                    $room = $_POST['room'];
-
-
-                                    include "..\\..\\includes\\db.inc.php";
-                                    $insert = "SELECT COUNT(name) AS count FROM exam WHERE name='$name'";
-                                    $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                                    mysqli_close($link);
-
-                                    $row = $db1->fetch_object()->count;
-
-                                    if ($row > 0) {
-                                        $string = "Prüfung bereits erstellt";
-                                    } else {
-
-
-                                        include "..\\..\\includes\\db.inc.php";
-
-                                        $contact_id = $link->query("SELECT id FROM contact WHERE mail = '$contact'")->fetch_object()->id;
-                                        $room_id = $link->query("SELECT id FROM room WHERE number = '$room'")->fetch_object()->id;
-
-                                        $insert = "INSERT INTO reservation (room_id, date, time) values ('$room_id', '$date', '$time')";
-                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-
-                                        $insert = "INSERT INTO todo (type, amount, date) values ('$type', '$part', '$date')";
-                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-
-                                        $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
-                                        $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
-
-
-                                        $insert = "INSERT INTO exam (name, part, date, time, place, type, contact_id, room_id, reservation_id, todo_id) values ('$name', '$part', '$date', '$time', '$place', '$type', '$contact_id', '$room_id', '$reservation_id', '$todo_id')";
-                                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                                        mysqli_close($link);
-
-
-                                        if ($db1 == true) {
-                                            $string = "Eintrag wurde erfasst";
-                                        }
-                                    }
-                            }
-                            ?>
 
                             <!-- form start -->
                             <form role="form" action="examformroom.php"
@@ -438,21 +452,18 @@ if (isset($usermail)) {
                                             include "..\\..\\includes\\db.inc.php";
                                             $insert = "SELECT COUNT(room.number) AS count from room  where room.id not in
                                           (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
-                                          and reservation.time = '$time' or room.part < $part  or room.place != '$place' )";
+                                          and reservation.time = '$time' or room.part < $part  or room.place = '$place' )";
                                             $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                                             mysqli_close($link);
 
-
                                             $row = $db1->fetch_object()->count;
-
-
 
                                             if ($row > 0) {
 
                                                 include "..\\..\\includes\\db.inc.php";
                                                 $abfrage = "SELECT room.number from room  where room.id not in
                                           (select room.id from reservation right join room on room.id = reservation.room_id where reservation.date = '$date' 
-                                          and reservation.time = '$time' or room.part < $part or room.place != '$place') ";
+                                          and reservation.time = '$time' or room.part < $part or room.place = '$place') ";
                                                 $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
                                                 mysqli_close($link);
 

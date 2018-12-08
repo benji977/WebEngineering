@@ -325,12 +325,12 @@ if (isset($usermail)) {
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Prüfungsname</label>
-                                        <input type="text" class="form-control" name="name" required id="name"
+                                        <input type="text" class="form-control" name="name"  minlength="3" maxlength="45" required id="name"
                                                placeholder="Prüfungsname">
                                     </div>
                                     <div class="form-group">
                                         <label>Teilnehmer</label>
-                                        <input type="number" class="form-control" name="part" required id="part"
+                                        <input type="number" class="form-control" name="part"  minlength="1" maxlength="3" required id="part"
                                                placeholder="Anzahl Teilnehmer">
                                     </div>
                                     <div class="form-group">
