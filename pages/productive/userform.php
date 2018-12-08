@@ -87,19 +87,26 @@ if (isset($usermail)) {
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <!-- Menu Body -->
-                                <li class="user-body">
+                                <li class="user-header">
+                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                    <div class="box-footer">
+                                    <p>
+                                        <?php echo $usersurname, " ", $userlastname ?>
+                                        <small><?php echo $usermail ?></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
                                         <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
                                     </div>
-                                    <div class="box-footer">
+                                    <div class="pull-right">
                                         <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
                                     </div>
-
-
-                                    <!-- /.row -->
                                 </li>
+                                <!-- Menu Body -->
+
                                 <!-- Menu Footer-->
 
                             </ul>
