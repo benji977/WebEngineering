@@ -446,6 +446,6 @@ if (isset($usermail)) {
     </body>
     </html>
     <?php
-
+mysqli_close($link);
 }
 ?>
