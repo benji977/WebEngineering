@@ -442,7 +442,11 @@ if (isset($usermail)) {
 
                                 $row = $db1->fetch_object()->count;
 
-                                echo $row;
+                                            ?>
+                                            <script>alert("ich bin hier");</script>
+                                            <?php
+
+                                            echo $row;
 
                                 if ($row > 0) {
 
@@ -458,7 +462,7 @@ if (isset($usermail)) {
                                                 }
                                             }
                                 }else {
-                                    
+                                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
                                     ?>
                                     <script>alert("Kein Raum mit den gewünschten spezifikationen verfügbar");</script>
                                     <?php
