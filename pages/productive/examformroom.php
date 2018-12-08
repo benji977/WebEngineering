@@ -373,14 +373,14 @@ if (isset($usermail)) {
 
                     $reservation_id = $link->query("SELECT id FROM reservation WHERE room_id = '$room_id' and  date = '$date' and  time = '$time'")->fetch_object()->id;
 
-                    echo $type;
+
                     if($type == "iPad" or $type == "Galaxy Tab") {
                         $insert = "INSERT INTO todo (type, contact_id, amount, date) values ('$type', '$contact_id','$part', '$date')";
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
 
 
                     }else{
-                        $todo_id = Null;
+                        $todo_id = 11;
                     }
 
 
