@@ -377,6 +377,8 @@ if (isset($usermail)) {
                     if($type != "Schriftlich") {
                         $insert = "INSERT INTO todo (type, contact, amount, date) values ('$type', '$contact_id','$part', '$date')";
                         $todo_id = $link->query("SELECT id FROM todo WHERE type = '$type' and  amount = '$part' and date = '$date'")->fetch_object()->id;
+
+
                     }else{
                         $todo_id = Null;
                     }
