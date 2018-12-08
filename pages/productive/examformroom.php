@@ -443,11 +443,11 @@ if (isset($usermail)) {
 
                                             $row = $db1->fetch_object()->count;
 
-                                            ?>
-                                            <script>alert("ich bin hier");</script>
-                                            <?php
+                                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
 
-                                            echo $row;
+                                            echo "<meta http-equiv=\"refresh\" content=\"0; URL=devicetable.php\">";
+                                            
+
 
                                             if ($row > 0) {
 
