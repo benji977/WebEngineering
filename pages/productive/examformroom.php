@@ -473,8 +473,9 @@ if (isset($usermail)) {
                                                     }
                                                 }
                                             }else {
+                                                $redirect = "true";
 
-                                                
+
                                             }
                                             ?>
                                         </select>
@@ -492,7 +493,7 @@ if (isset($usermail)) {
 
                     <?php
 
-                    if($redirect = "true"){
+                    if($redirect == "true"){
 
                         echo "<meta http-equiv=\"refresh\" content=\"0; URL=examform.php\">";
 
