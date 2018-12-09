@@ -81,32 +81,15 @@ if (isset($usermail)) {
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="/pages/productive/usertable.php">
                                 <span class="hidden-xs"><?php echo $usersurname, " ", $userlastname ?></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <p>
-                                        <?php echo $usersurname, " ", $userlastname ?>
-                                        <small><?php echo $usermail ?></small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
-                                    </div>
-                                </li>
-                                <!-- Menu Body -->
-
-                                <!-- Menu Footer-->
 
                             </ul>
+                        </li>
+                        <li>
+                            <a href="/pages/productive/logout.php"><i class="fa  fa-power-off"></i></a>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                     </ul>
