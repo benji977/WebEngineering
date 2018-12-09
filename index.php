@@ -58,9 +58,6 @@ if (isset($usermail)){
                 <span class="logo-lg"><b>PRÜFUNGSPLAN</b>ER</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-
-            <!--  TODO: HEADER BEI ALLEN PAGES ANPASSEN -->
-
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -74,94 +71,19 @@ if (isset($usermail)){
                     <ul class="nav navbar-nav">
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->
                         <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            </a>
+
                             <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                         role="progressbar"
-                                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    <small class="pull-right">40%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-green" style="width: 40%"
-                                                         role="progressbar"
-                                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">40% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Some task I need to do
-                                                    <small class="pull-right">60%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-red" style="width: 60%"
-                                                         role="progressbar"
-                                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">60% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Make beautiful transitions
-                                                    <small class="pull-right">80%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%"
-                                                         role="progressbar"
-                                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">80% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li><!-- Task item -->
+                                    </li>
+                                    <!-- end task item -->
+                                </ul>
                                 </li>
                                 <li class="footer">
-                                    <a href="#">View all tasks</a>
                                 </li>
                             </ul>
                         </li>
@@ -171,18 +93,35 @@ if (isset($usermail)){
                                 <span class="hidden-xs"><?php echo $usersurname, " ", $userlastname ?></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <p>
+                                        <?php echo $usersurname, " ", $userlastname ?>
+                                        <small><?php echo $usermail ?></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
+                                    </div>
+                                </li>
+                                <!-- Menu Body -->
 
+                                <!-- Menu Footer-->
 
                             </ul>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa  fa-power-off"></i></a>
-                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
+
 
 
         <!-- Left side column. contains the logo and sidebar -->
@@ -234,25 +173,6 @@ if (isset($usermail)){
                                     Benutzerübersicht</a></li>
                             <li><a href="pages/productive/userform.php"><i class="fa fa-circle-o"></i> Benutzer
                                     erfassen</a></li>
-
-                        </ul>
-                    </li>
-
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>Hardware</span>
-                            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/productive/devicetable.php"><i class="fa fa-circle-o"></i>
-                                    Gerätübersicht</a></li>
-                            <li><a href="pages/productive/deviceform.php"><i class="fa fa-circle-o"></i> Gerät erfassen</a>
-                            </li>
-
 
                         </ul>
                     </li>
@@ -338,7 +258,7 @@ if (isset($usermail)){
                                 <?php
 
                                 include ".\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(mail) AS count FROM contact";
+                                $insert = "SELECT COUNT(name) AS count FROM exam";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                                 mysqli_close($link);

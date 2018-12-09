@@ -66,15 +66,14 @@ if (isset($usermail)) {
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->
                         <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            </a>
+
                             <ul class="dropdown-menu">
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li><!-- Task item -->
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li><!-- Task item -->
+                                    </li>
+                                    <!-- end task item -->
+                                </ul>
                                 </li>
                                 <li class="footer">
                                 </li>
@@ -114,6 +113,7 @@ if (isset($usermail)) {
                 </div>
             </nav>
         </header>
+
 
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
@@ -161,23 +161,6 @@ if (isset($usermail)) {
                             <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
                             <li class="active"><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer
                                     erfassen</a></li>
-
-                        </ul>
-                    </li>
-
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>Hardware</span>
-                            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="devicetable.php"><i class="fa fa-circle-o"></i> Gerätübersicht</a></li>
-                            <li><a href="deviceform.php"><i class="fa fa-circle-o"></i> Gerät erfassen</a></li>
-
 
                         </ul>
                     </li>
