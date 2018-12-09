@@ -117,9 +117,14 @@ if (isset($_POST['password']) AND isset($_GET['userid'])) {
         </html>
 
         <?php
-        }else{
+        }elseif ($timecontrol>=0 AND $timecontrol<=24){
             ?>
             <script>alert("Der Link ist abgelaufen. Sie werden zum Login weitergeleitet.")</script>
+            <?php
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
+        }else{
+            ?>
+            <script>alert("Der Link ist ungültig. Sie werden zum Login weitergeleitet.")</script>
             <?php
             echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
         }
