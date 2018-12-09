@@ -2,7 +2,7 @@
 session_start();
 
 include "..\\..\\includes\\checklogin.inc.php";
-if (isset($usermail)){
+if (isset($usermail)) {
     ?>
 
     <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($usermail)){
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Statistiken</title>
+        <title>Statistik</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -113,144 +113,276 @@ if (isset($usermail)){
                 </div>
             </nav>
         </header>
+    </div>
 
-
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">Navigation</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Navigation</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../../index.php"><i class="fa fa-circle-o"></i> Übersicht</a></li>
-                        </ul>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="../../index.php"><i class="fa fa-circle-o"></i> Übersicht</a></li>
+                    </ul>
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-mortar-board "></i>
-                            <span>Prüfungen</span>
-                            <span class="pull-right-container">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-mortar-board "></i>
+                        <span>Prüfungen</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="examtable.php"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
-                            <li><a href="examform.php"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="examtable.php"><i class="fa fa-circle-o"></i> Prüfungsübersicht</a></li>
+                        <li><a href="examform.php"><i class="fa fa-circle-o"></i> Prüfung erfassen</a></li>
 
-                        </ul>
-                    </li>
+                    </ul>
+                </li>
 
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-users"></i>
-                            <span>Benutzer</span>
-                            <span class="pull-right-container">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>Benutzer</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
-                            <li><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
+                        <li><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
 
-                        </ul>
-                    </li>
+                    </ul>
+                </li>
 
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-mortar-board "></i>
-                            <span>Räume</span>
-                            <span class="pull-right-container">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-mortar-board "></i>
+                        <span>Räume</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="roomtable.php"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
-                            <li><a href="roomform.php"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="roomtable.php"><i class="fa fa-circle-o"></i> Raumübersicht</a></li>
+                        <li><a href="roomform.php"><i class="fa fa-circle-o"></i> Raum erfassen</a></li>
 
-                        </ul>
-                    </li>
+                    </ul>
+                </li>
 
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-suitcase"></i>
-                            <span>Kontakte</span>
-                            <span class="pull-right-container">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-suitcase"></i>
+                        <span>Kontakte</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="contacttable.php"><i class="fa fa-circle-o"></i> Kontaktübersicht</a></li>
-                            <li><a href="contactform.php"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="contacttable.php"><i class="fa fa-circle-o"></i>
+                                Kontaktübersicht</a></li>
+                        <li><a href="contactform.php"><i class="fa fa-circle-o"></i> Kontakt erfassen</a></li>
 
-                        </ul>
-                    </li>
+                    </ul>
+                </li>
 
-                    <li class="active treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Statistik</span>
-                            <span class="pull-right-container">
+                <li class=" active treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Statistik</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="active"><a href="charts.php"><i class="fa fa-circle-o"></i> Statistiken</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="charts.php"><i class="fa fa-circle-o"></i> Statistiken</a></li>
 
-                        </ul>
-                    </li>
-
-
-                    <!-- /.sidebar -->
-
-        </aside>
-
-        <!-- Content Wrapper. Contains page content -->
+                    </ul>
+                </li>
 
 
-        <!-- Head-->
+                <!-- /.sidebar -->
 
-        <!-- ./wrapper -->
+    </aside>
 
-        <!-- jQuery 3 -->
-        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap 3.3.7 -->
-        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        <!-- SlimScroll -->
-        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <!-- FastClick -->
-        <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function () {
-                $('#example1').DataTable()
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                })
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                3 Meistgenutze Räume und Anzahl je Prüfungstype
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Statistik</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <?PHP
+                            echo "<form role=\"form\" 
+                              method=\"post\">";
+                            ?>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Raumname</th>
+                                    <th>Reservationen</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?PHP
+                                include "..\\..\\includes\\db.inc.php";
+                                $abfrage = "SELECT room.number, count(reservation.room_id) as reservationen FROM room join reservation on reservation.room_id = room.id group by reservation.room_id ORDER BY MAX(reservation.room_id) DESC LIMIT 3";
+                                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
+                                    echo "<tr>";
+                                    while (list($schluessel, $wert) = each($zeile)) {
+                                            echo "<td>" . $wert . "</td>";
+
+                                        }
+
+                                    echo "</tr>";
+                                }
+                                mysqli_close($link);
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Raumname</th>
+                                    <th>Reservationen</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                            <?PHP
+                            echo "</form>"
+                            ?>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+                    <div class="box">
+                        <div class="box-header">
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <?PHP
+                            echo "<form role=\"form\" 
+                              method=\"post\">";
+                            ?>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Prüfungstyp</th>
+                                    <th>Anzahl</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?PHP
+                                include "..\\..\\includes\\db.inc.php";
+                                $abfrage = "SELECT exam.type, count(exam.name) FROM exam group by exam.type";
+                                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
+                                    echo "<tr>";
+                                    while (list($schluessel, $wert) = each($zeile)) {
+                                        echo "<td>" . $wert . "</td>";
+
+                                    }
+
+                                    echo "</tr>";
+                                }
+                                mysqli_close($link);
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Prüfungstyp</th>
+                                    <th>Anzahl</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                            <?PHP
+                            echo "</form>"
+                            ?>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <!-- /.box -->
+
+    </div>
+    <!-- /.col (LEFT) -->
+    <div class="col-md-6">
+
+        </section>
+
+
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer
+    </footer>
+
+    <!-- ./wrapper -->
+
+    <!-- jQuery 3 -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
             })
-        </script>
+        })
+    </script>
     </body>
     </html>
     <?php
