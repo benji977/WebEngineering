@@ -443,8 +443,18 @@ if (isset($usermail)){
                     <section class="col-lg-7 connectedSortable">
 
                         <!-- TO DO List -->
+                        <?php
+                        if (isset($_POST['bearbeiten'])) {
+                        $id= $_POST['bearbeiten'];
+                        include ".\\includes\\db.inc.php";
 
+                        $insert = "UPDATE todo SET todo.done = 2 where todo.id =$id";
+                        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                        mysqli_close($link);
 
+                        }
+
+                        ?>
 
                         <section class="content">
 
@@ -452,14 +462,18 @@ if (isset($usermail)){
                                 <div class="col-xs-12">
                                     <div class="box">
                                         <div class="box-header">
-                                            <h3>
-                                                Todo Liste
-                                            </h3>
+                                            <h3 class="box-title">TodoListe</h3>
+                                            <?php if (!isset($string)) {
+                                            } else {
+
+                                                echo "<p class='login-box-msg'>$string</p>";
+                                            }
+                                            ?>
                                         </div>
                                         <!-- /.box-header -->
                                         <div class="box-body">
                                             <?PHP
-                                            echo "<form role=\"form\" action=\"todochange.php\" 
+                                            echo "<form role=\"form\" action=\"index.php\" 
                               method=\"post\">";
                                             ?>
                                             <table id="example1" class="table table-bordered table-striped">

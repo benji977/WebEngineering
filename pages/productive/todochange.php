@@ -19,8 +19,7 @@ if (!isset($_POST['bearbeiten'])) {
     ?>
     <script>alert("Löschen war erfolgreich!");</script>
     <?php
-
+    echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
 }
 
-echo "<meta http-equiv=\"refresh\" content=\"0; URL=../../index.php\">";
 ?>
