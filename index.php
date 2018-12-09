@@ -429,13 +429,6 @@ if (isset($usermail)){
                                                 ?>
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>Datum</th>
-                                                    <th>Typ</th>
-                                                    <th>Anzahl</th>
-                                                    <th>Prüfung</th>
-                                                    <th>Option</th>
-                                                </tr>
                                                 </tfoot>
                                             </table>
 
@@ -444,6 +437,8 @@ if (isset($usermail)){
                                             ?>
 
                                         </div>
+
+
                         <!-- /.box -->
 
 
@@ -451,6 +446,77 @@ if (isset($usermail)){
                         <!-- /.box -->
 
                     </section>
+
+                        <section class="content">
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Prüfungen heute</h3>
+                                            <?php if (!isset($string)) {
+                                            } else {
+
+                                                echo "<p class='login-box-msg'>$string</p>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <?PHP
+                                            echo "<form role=\"form\" action=\"index.php\" 
+                              method=\"post\">";
+                                            ?>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Ort</th>
+                                                    <th>Teilnehmer</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?PHP
+                                                include ".\\includes\\db.inc.php";
+                                                $abfrage = "SELECT exam.name, exam.place, exam.part from exam where exam.date = CURDATE()";
+                                                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                                while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
+                                                    echo "<tr>";
+
+                                                    echo "<td>". $zeile['date'] . "</td>";
+                                                    echo "<td>". $zeile['type'] . "</td>";
+                                                    echo "<td>". $zeile['amount'] . "</td>";
+                                                    echo "<td>". $zeile['name'] . "</td>";
+                                                    echo "<td><button type='submit' name='bearbeiten' value='" . $zeile['id'] . "' class='btn btn-primary'>Erledigt</button>";
+
+
+
+                                                    echo "</tr>";
+                                                }
+                                                mysqli_close($link);
+                                                ?>
+                                                </tbody>
+                                                <tfoot>
+
+                                                </tfoot>
+                                            </table>
+
+                                            <?PHP
+                                            echo "</form>"
+                                            ?>
+
+                                        </div>
+
+
+                                        <!-- /.box -->
+
+
+
+                                        <!-- /.box -->
+
+                        </section>
+
                     <!-- right col -->
                 </div>
                 <!-- /.row (main row) -->

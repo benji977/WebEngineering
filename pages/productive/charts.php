@@ -267,10 +267,6 @@ if (isset($usermail)) {
                                 ?>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>Raumname</th>
-                                    <th>Reservationen</th>
-                                </tr>
                                 </tfoot>
                             </table>
 
@@ -317,10 +313,7 @@ if (isset($usermail)) {
                                 ?>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>Prüfungstyp</th>
-                                    <th>Anzahl</th>
-                                </tr>
+
                                 </tfoot>
                             </table>
 
