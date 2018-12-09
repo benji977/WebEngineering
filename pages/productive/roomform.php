@@ -334,7 +334,7 @@ if (isset($usermail)) {
 
                     include "..\\..\\includes\\db.inc.php";
                     $contactid = $link->query("SELECT id FROM contact WHERE mail = '$feld4'")->fetch_object()->id;
-                    $insert = "INSERT INTO room (number, place, part, contact_id) values ('$feld1', '$feld2', '$feld3', '$contactid')";
+                    $insert = "INSERT INTO room (number, place, part, contact_id) values ('$feld1 ($feld3)', '$feld2', '$feld3', '$contactid')";
                     $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
                     mysqli_close($link);
 

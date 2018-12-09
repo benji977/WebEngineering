@@ -351,7 +351,7 @@ if (isset($usermail)){
                                 <p>Anzahl Prüfungen</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-stats-bars "></i>
                             </div>
                             <a href="pages/productive/examtable.php" class="small-box-footer">Weitere Informationen<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -377,7 +377,7 @@ if (isset($usermail)){
                                 <p>Anzahl Mitarbeiter</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="ion ion-person-add"></i>
                             </div>
                             <a href="pages/productive/usertable.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -403,7 +403,7 @@ if (isset($usermail)){
                                 <p>Anzahl Räume</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-pie-graph"></i>
                             </div>
                             <a href="pages/productive/roomtable.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -429,9 +429,9 @@ if (isset($usermail)){
                                 <p>Deine offenen Aufgaben</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="index.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -443,199 +443,77 @@ if (isset($usermail)){
                     <section class="col-lg-7 connectedSortable">
 
                         <!-- TO DO List -->
-                        <div class="box box-primary">
-                            <div class="box-header">
-                                <i class="ion ion-clipboard"></i>
 
-                                <h3 class="box-title">To Do List</h3>
 
-                                <div class="box-tools pull-right">
-                                    <ul class="pagination pagination-sm inline">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-                                <ul class="todo-list">
-                                    <li>
-                                        <!-- drag handle -->
-                                        <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <!-- checkbox -->
-                                        <input type="checkbox" value="">
-                                        <!-- todo text -->
-                                        <span class="text">Design a nice theme</span>
-                                        <!-- Emphasis label -->
-                                        <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                                        <!-- General tools such as edit or delete-->
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
+
+                        <section class="content">
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h3>
+                                                Todo Liste
+                                            </h3>
                                         </div>
-                                    </li>
-                                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <input type="checkbox" value="">
-                                        <span class="text">Make the theme responsive</span>
-                                        <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <?PHP
+                                            echo "<form role=\"form\" action=\"todochange.php\" 
+                              method=\"post\">";
+                                            ?>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Datum</th>
+                                                    <th>Typ</th>
+                                                    <th>Anzahl</th>
+                                                    <th>Prüfung</th>
+                                                    <th>Option</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?PHP
+                                                include ".\\includes\\db.inc.php";
+                                                $abfrage = "SELECT todo.date, todo.type, todo.amount, exam.name, todo.id from todo join exam on exam.todo_id = todo.id join user on user.id=todo.contact_id where todo.date >= CURDATE() and todo.done = 1 and user.mail = '$usermail' group by todo.date";
+                                                $ergebnis = mysqli_query($link, $abfrage) or die(mysqli_error($link));
+
+                                                while ($zeile = mysqli_fetch_array($ergebnis, MYSQLI_ASSOC)) {
+                                                    echo "<tr>";
+
+                                                    echo "<td>". $zeile['date'] . "</td>";
+                                                    echo "<td>". $zeile['type'] . "</td>";
+                                                    echo "<td>". $zeile['amount'] . "</td>";
+                                                    echo "<td>". $zeile['name'] . "</td>";
+                                                    echo "<td><button type='submit' name='bearbeiten' value='" . $zeile['id'] . "' class='btn btn-primary'>Erledigt</button>";
+
+
+
+                                                    echo "</tr>";
+                                                }
+                                                mysqli_close($link);
+                                                ?>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <th>Datum</th>
+                                                    <th>Typ</th>
+                                                    <th>Anzahl</th>
+                                                    <th>Prüfung</th>
+                                                    <th>Option</th>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+
+                                            <?PHP
+                                            echo "</form>"
+                                            ?>
+
                                         </div>
-                                    </li>
-                                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <input type="checkbox" value="">
-                                        <span class="text">Let theme shine like a star</span>
-                                        <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <input type="checkbox" value="">
-                                        <span class="text">Let theme shine like a star</span>
-                                        <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <input type="checkbox" value="">
-                                        <span class="text">Check your messages and notifications</span>
-                                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                        <input type="checkbox" value="">
-                                        <span class="text">Let theme shine like a star</span>
-                                        <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer clearfix no-border">
-                                <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add
-                                    item
-                                </button>
-                            </div>
-                        </div>
                         <!-- /.box -->
 
 
-                        <!-- Calendar -->
-                        <div class="box box-solid bg-green-gradient">
-                            <div class="box-header">
-                                <i class="fa fa-calendar"></i>
 
-                                <h3 class="box-title">Calendar</h3>
-                                <!-- tools box -->
-                                <div class="pull-right box-tools">
-                                    <!-- button with a dropdown -->
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-success btn-sm dropdown-toggle"
-                                                data-toggle="dropdown">
-                                            <i class="fa fa-bars"></i></button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i
-                                                class="fa fa-times"></i>
-                                    </button>
-                                </div>
-                                <!-- /. tools -->
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body no-padding">
-                                <!--The calendar -->
-                                <div id="calendar" style="width: 100%"></div>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer text-black">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <!-- Progress bars -->
-                                        <div class="clearfix">
-                                            <span class="pull-left">Task #1</span>
-                                            <small class="pull-right">90%</small>
-                                        </div>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                                        </div>
-
-                                        <div class="clearfix">
-                                            <span class="pull-left">Task #2</span>
-                                            <small class="pull-right">70%</small>
-                                        </div>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-6">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Task #3</span>
-                                            <small class="pull-right">60%</small>
-                                        </div>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                                        </div>
-
-                                        <div class="clearfix">
-                                            <span class="pull-left">Task #4</span>
-                                            <small class="pull-right">40%</small>
-                                        </div>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                        </div>
                         <!-- /.box -->
 
                     </section>

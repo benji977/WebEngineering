@@ -369,7 +369,7 @@ if (isset($usermail)) {
                                         <select class="form-control select2"  name="type" required id="type" style="width: 100%;">
                                             <option value ="Schriftlich" selected="selected">Schriftlich</option>
                                             <option value ="iPad">iPad</option>
-                                            <option value ="Galaxy Tab">Galaxy Tab</option>
+                                            <option value ="SamungTab">SamsungTab</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
