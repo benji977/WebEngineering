@@ -416,7 +416,7 @@ if (isset($usermail)){
                                 <?php
 
                                 include ".\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(type) AS count FROM todo join user on user.id = todo.contact_id where user.mail = '$usermail' ";
+                                $insert = "SELECT COUNT(type) AS count FROM todo join user on user.id = todo.contact_id where user.mail = '$usermail' and todo.done=1 ";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                                 mysqli_close($link);
