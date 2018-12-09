@@ -98,7 +98,7 @@ session_start();
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox" name="rememberMe" value="yes"> Angemeldet bleiben
+                            <input type="checkbox" name="rememberMe" value="yes"> Angemeldet bleiben (30 Tage)
                         </label>
                     </div>
                 </div>

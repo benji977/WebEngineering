@@ -104,10 +104,10 @@ if (isset($usermail)){
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
+                                        <a href="/pages/productive/usertable.php" class="btn btn-default btn-flat">Profil bearbeiten</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="logout.php" class="btn btn-default btn-flat">Ausloggen</a>
+                                        <a href="/pages/productive/logout.php" class="btn btn-default btn-flat">Ausloggen</a>
                                     </div>
                                 </li>
                                 <!-- Menu Body -->
