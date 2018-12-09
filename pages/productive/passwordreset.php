@@ -118,15 +118,16 @@ if (isset($_POST['password']) AND isset($_GET['userid'])) {
 
         <?php
         }else{
-            /*TODO
-                Hinweis dass der Link abgelaufen ist und redirect zum login
-            */
+            ?>
+            <script>alert("Der Link ist abgelaufen. Sie werden zum Login weitergeleitet.")</script>
+            <?php
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
         }
     }
     }else{
-    /*TODO
-        Hinweis dass der Link ungültig ist und redirect zum Login (bereits vorhanden)
-    */
+    ?>
+    <script>alert("Der Link ist ungültig. Sie werden zum Login weitergeleitet.")</script>
+    <?php
     echo "<meta http-equiv=\"refresh\" content=\"0; URL =login.php\">";
 }
     ?>
