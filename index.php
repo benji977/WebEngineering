@@ -319,7 +319,7 @@ if (isset($usermail)){
                                 <?php
 
                                 include ".\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(type) AS count FROM todo join user on user.id = todo.contact_id where user.mail = '$usermail' and todo.done=1 ";
+                                $insert = "SELECT COUNT(type) AS count FROM todo join user on user.id = todo.contact_id where todo.date >= CURDATE() and todo.done = 1 and user.mail = '$usermail'";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                                 mysqli_close($link);
