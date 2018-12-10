@@ -244,6 +244,13 @@ if (isset($usermail)) {
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
+                <div class="pull-right dropdown">
+                 <a class="dropdown-toggle" data-toggle="dropdown">Export <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="menu"><a role="menuitem" tabindex="1" href="ics.php">Pr&uuml;fungsplan ICS</a></li>
+
+                </ul>
+              </div
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
