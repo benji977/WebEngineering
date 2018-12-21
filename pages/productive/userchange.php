@@ -224,28 +224,48 @@ if (isset($usermail)) {
 
                         if (isset ($_POST['delete'])) {
 
-
                             $userid = $_POST['id'];
-                            include "..\\..\\includes\\db.inc.php";
-                            $insert = "DELETE FROM user  WHERE id= '$userid'";
-                            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                            mysqli_close($link);
 
-                            $userid = "";
-                            $mailquery = "";
-                            $surnamequery = "";
-                            $lastnamequery = "";
-                            $placequery = "";
+                             include "..\\..\\includes\\db.inc.php";
+                                $insert = "SELECT COUNT(contact_id) AS count FROM room WHERE contact_id='$userid'";
+                                $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-                            if ($db == true) {
+                                $row = $db1->fetch_object()->count;
 
-                                echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
-                                ?>
-                                <script>alert("Löschen war erfolgreich!");</script>
+
+                                if ($row > 0 ) {
+                                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
+                                    ?>
+                                    <script>alert("Ist einem Raum zugeordnet!");</script>
                                 <?php
-                            } else {
-                                $string = "Löschen nicht erfolgreich";
-                            }
+                                    mysqli_close($link);
+
+                                } else {
+
+                                    include "..\\..\\includes\\db.inc.php";
+                                    $insert = "DELETE FROM user  WHERE id= '$userid'";
+                                    $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+                                    mysqli_close($link);
+
+                                    $userid = "";
+                                    $mailquery = "";
+                                    $surnamequery = "";
+                                    $lastnamequery = "";
+                                    $placequery = "";
+
+                                    if ($db == true) {
+
+                                        echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
+                                        ?>
+                                        <script>alert("Löschen war erfolgreich!");</script>
+                                        <?php
+                                    } else {
+                                        echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
+                                        ?>
+                                        <script>alert("Löschen war nicht erfolgreich!");</script>
+                                        <?php
+                                    }
+                                }
                         }
 
 
@@ -294,6 +314,8 @@ if (isset($usermail)) {
 
                                 if ($row > 0 AND $userid != $userindb) {
                                     $string = "Email bereits vergeben";
+                                    mysqli_close($link);
+
                                 } else {
 
                                     include "..\\..\\includes\\db.inc.php";

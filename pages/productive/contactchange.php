@@ -284,7 +284,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
                 $insert = "SELECT COUNT(mail) AS count FROM contact WHERE mail='$mailquery'";
                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-                mysqli_close($link);
+
 
                 $row = $db1->fetch_object()->count;
 
@@ -297,6 +297,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
                 if ($row > 0 AND $userid != $userindb) {
                     $string = "Email bereits vergeben";
+                    mysqli_close($link);
                 } else {
 
 
