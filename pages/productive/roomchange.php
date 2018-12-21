@@ -3,7 +3,8 @@ session_start();
 
 include "..\\..\\includes\\checklogin.inc.php";
 if (isset($usermail)) {
-    ?>
+?>
+
 
     <!DOCTYPE html>
     <html>
@@ -226,6 +227,11 @@ if (isset($usermail)) {
 
             $row = $db1->fetch_object()->count;
 
+                
+                $numberquery = "";
+                $placequery = "";
+                $partquery = "";
+                $contactquery = "";
 
             if ($row > 0 ) {
                 echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
