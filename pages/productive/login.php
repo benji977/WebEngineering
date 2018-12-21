@@ -62,6 +62,8 @@ session_start();
                 $_SESSION['usersurname'] = $usersurname;
                 $userlastname= $link->query("SELECT lastname FROM user WHERE mail = '$mail'")->fetch_object()->lastname;
                 $_SESSION['userlastname'] = $userlastname;
+                setcookie("userlastname", $userlastname, time()+3600*24*30, "/");
+                setcookie("usersurname", $usersurname, time()+3600*24*30, "/");
                 if (isset($_POST['rememberMe']) && $_POST['rememberMe']=="yes"){
                     setcookie("usermail", $mail, time()+3600*24*30, "/");
                     setcookie("password", $passworddb, time()+3600*24*30, "/");
