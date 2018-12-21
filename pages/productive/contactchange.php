@@ -248,7 +248,7 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
         } else {
 
-        
+
         $companyquery = "";
         $mailquery = "";
         $surnamequery = "";
