@@ -248,6 +248,13 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
         } else {
 
+        
+        $companyquery = "";
+        $mailquery = "";
+        $surnamequery = "";
+        $lastnamequery = "";
+        $salquery = "";
+
 
         include "..\\..\\includes\\db.inc.php";
         $insert = "DELETE FROM contact  WHERE id= '$userid'";
