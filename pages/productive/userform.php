@@ -43,7 +43,7 @@ if (isset($usermail)) {
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../indexppa.html" class="logo">
+            <a href="../../index.php" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>P</b>P</span>
                 <!-- logo for regular state and mobile devices -->

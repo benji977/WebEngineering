@@ -42,7 +42,7 @@ require_once '..\\..\\PHPMailer\\src\\SMTP.php'
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>PRÜFUNGSPLAN</b>ER</a>
+        <a href="../../index.php"><b>PRÜFUNGSPLAN</b>ER</a>
     </div>
     <!-- /.login-logo -->
 
