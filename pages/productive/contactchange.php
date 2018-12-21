@@ -260,11 +260,11 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
         echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
         ?>
             <script>alert("Löschen war erfolgreich!");</script>
-            <?php
+        <?php
         } else {
-            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
-            ?>
-            <script>alert("Löschen nicht erfolgreich!");</script>
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+        ?>
+            <script>alert("Löschen war nicht erfolgreich!");</script>
             <?php
         }
         }
