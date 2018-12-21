@@ -218,28 +218,44 @@ if (isset($usermail)) {
 
             if (isset ($_POST['delete'])) {
 
-
                 $roomid = $_POST['id'];
-                include "..\\..\\includes\\db.inc.php";
-                $insert = "DELETE FROM room  WHERE id= '$roomid'";
-                $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
-                mysqli_close($link);
 
-                $roomid = "";
-                $numberquery = "";
-                $placequery = "";
-                $partquery = "";
-                $contactquery = "";
+            include "..\\..\\includes\\db.inc.php";
+            $insert = "SELECT COUNT(contact_id) AS count FROM exam WHERE room_id='$roomid'";
+            $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-                if ($db == true) {
+            $row = $db1->fetch_object()->count;
 
-                    echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
-                    ?>
-                    <script>alert("Löschen war erfolgreich!");</script>
-                    <?php
-                } else {
-                    $string = "Löschen nicht erfolgreich";
-                }
+
+            if ($row > 0 ) {
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
+                ?>
+                <script>alert("Ist einer Prüfung zugeordnet!");</script>
+            <?php
+            mysqli_close($link);
+
+            } else {
+
+
+
+            include "..\\..\\includes\\db.inc.php";
+            $insert = "DELETE FROM room  WHERE id= '$roomid'";
+            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+            mysqli_close($link);
+
+            if ($db == true) {
+
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
+            ?>
+                <script>alert("Löschen war erfolgreich!");</script>
+                <?php
+            } else {
+                echo "<meta http-equiv=\"refresh\" content=\"0; URL=roomtable.php\">";
+                ?>
+                <script>alert("Löschen nicht erfolgreich!");</script>
+                <?php
+            }
+            }
             }
 
 

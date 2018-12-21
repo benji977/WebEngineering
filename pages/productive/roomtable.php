@@ -141,7 +141,7 @@ if (isset($usermail)) {
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="usertable.php/"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
+                        <li><a href="usertable.php"><i class="fa fa-circle-o"></i> Benutzerübersicht</a></li>
                         <li><a href="userform.php"><i class="fa fa-circle-o"></i> Benutzer erfassen</a></li>
 
                     </ul>

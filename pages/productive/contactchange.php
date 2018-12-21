@@ -230,28 +230,44 @@ if (!isset($_COOKIE['password']) AND !isset($_COOKIE['usermail'])){
 
         if (isset ($_POST['delete'])) {
 
-            $userid = $_POST['id'];
-            include "..\\..\\includes\\db.inc.php";
-            $insert = "DELETE FROM contact  WHERE id= '$userid'";
-            $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
-            mysqli_close($link);
+        $userid = $_POST['id'];
 
-            $userid = "";
-            $mailquery = "";
-            $surnamequery = "";
-            $lastnamequery = "";
-            $salquery = "";
-            $companyquery = "";
+        include "..\\..\\includes\\db.inc.php";
+        $insert = "SELECT COUNT(contact_id) AS count FROM room WHERE contact_id='$userid'";
+        $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
-            if ($db == true) {
+        $row = $db1->fetch_object()->count;
 
-                echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
-                ?>
-                <script>alert("Löschen war erfolgreich!");</script>
-                <?php
-            } else {
-                $string = "Löschen nicht erfolgreich";
-            }
+
+        if ($row > 0 ) {
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+            ?>
+            <script>alert("Ist einem Raum zugeordnet!");</script>
+        <?php
+        mysqli_close($link);
+
+        } else {
+
+
+        include "..\\..\\includes\\db.inc.php";
+        $insert = "DELETE FROM contact  WHERE id= '$userid'";
+        $db = mysqli_query($link, "$insert") or die(mysqli_error($link));
+        mysqli_close($link);
+
+
+        if ($db == true) {
+
+        echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+        ?>
+            <script>alert("Löschen war erfolgreich!");</script>
+            <?php
+        } else {
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL=contacttable.php\">";
+            ?>
+            <script>alert("Löschen nicht erfolgreich!");</script>
+            <?php
+        }
+        }
         }
 
 

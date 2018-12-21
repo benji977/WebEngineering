@@ -227,7 +227,7 @@ if (isset($usermail)) {
                             $userid = $_POST['id'];
 
                              include "..\\..\\includes\\db.inc.php";
-                                $insert = "SELECT COUNT(contact_id) AS count FROM room WHERE contact_id='$userid'";
+                                $insert = "SELECT COUNT(contact_id) AS count FROM exam WHERE contact_id='$userid'";
                                 $db1 = mysqli_query($link, "$insert") or die(mysqli_error($link));
 
                                 $row = $db1->fetch_object()->count;
@@ -236,7 +236,7 @@ if (isset($usermail)) {
                                 if ($row > 0 ) {
                                     echo "<meta http-equiv=\"refresh\" content=\"0; URL=usertable.php\">";
                                     ?>
-                                    <script>alert("Ist einem Raum zugeordnet!");</script>
+                                    <script>alert("Ist einer Prüfung zugeordnet!");</script>
                                 <?php
                                     mysqli_close($link);
 
